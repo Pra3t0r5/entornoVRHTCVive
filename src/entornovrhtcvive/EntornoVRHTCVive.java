@@ -59,7 +59,8 @@ public class EntornoVRHTCVive {
             System.out.println("Detected Borders: " + dm.getWidth() + " x " + dm.getHeight());
             System.out.println("Detected Dimensions: " + screenSize);
         }
-
+        
+        //Seleccion de dimensiones iniciales dependiente del monitor seleccionado
         switch (screen) {
             case 0:
                 x0 = 0;
@@ -75,22 +76,22 @@ public class EntornoVRHTCVive {
                 y1 = y0 / 2;
                 System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
                 break;
-            default: System.out.println("Warning: No hay una configuracion disponible para mas de dos pantallas!\nN° de pantallas seleccionadas: "+screen);
+            default:
+                System.out.println("Warning: No hay una configuracion disponible para mas de dos pantallas!\nN° de pantallas seleccionadas: " + screen);
                 break;
         }
-
+        
+        //Fijacion final de las dimensiones de acuerdo a la configuracion de pantallas presente
         if (screen > -1 && screen < gd.length) {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
 
             frame.setBounds(x0 / gd.length, y0 + y0 / 2, x1, y1);
             frame.setSize(x1 / gd.length, y1);
-            //frame.setSize((screenSize.width / 4) / gd.length, screenSize.height);
         } else if (gd.length > 0) {
             frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
 
             frame.setBounds(x0, y0, x1, y1);
             frame.setSize(screenSize.width - screenSize.width / 4, screenSize.height);
-            //frame.setSize(screenSize.width / 4, screenSize.height);
         } else {
             throw new RuntimeException("No Screens Found");
         }
