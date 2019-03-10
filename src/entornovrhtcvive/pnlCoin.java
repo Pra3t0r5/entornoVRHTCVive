@@ -30,7 +30,6 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public static int CREDITOS_DISPONIBLES = 0;
     private final Date HORA_APAGADO;
-    private final long MIN_DE_JUEGO_MILISEC = 600000; //10 Minutos
     private int CANT_VECES_PULSADO_APAGAR = 0;
     private final ArrayList<Jugador> jugadores;
 

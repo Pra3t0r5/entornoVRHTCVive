@@ -17,6 +17,11 @@ import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
  * @author ernes
  */
 public class PlayerCover extends javax.swing.JFrame {
+    //Estimado basado en botones ready y dimensiones de pantalla original, formato: x0, y0, x1, y1
+    public static final int[] READYPLAYER1_COVER = {1000 , 205, 1200 , 285};
+    public static final int[] READYPLAYER2_COVER = {1000 , 276, 1200 , 356};
+    public static final int[] READYPLAYER3_COVER = {1000 , 355, 1200 , 435};
+    public static final int[] READYPLAYER4_COVER = {1000 , 433, 1200 , 513};
 
     private int player;
 
@@ -75,23 +80,35 @@ public class PlayerCover extends javax.swing.JFrame {
         int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 
         switch (player) {
-            case 0: // Dimensions&Bounds of big pannel
-                x0 = screenSize.width;
-                y0 = 0;
-                x1 = screenSize.width / 4;
-                y1 = screenSize.height;
+            case 0: // Dimensions&Bounds of big pannel               
                 break;
             case 1: //Dimensions&Bounds of READYPLAYER1 blqPanel
                 jLabel1.setText("Jugador 1");
+                x0 = READYPLAYER1_COVER[0];
+                y0 = READYPLAYER1_COVER[1];
+                x1 = READYPLAYER1_COVER[2];
+                y1 = READYPLAYER1_COVER[3];
                 break;
             case 2: //Dimensions&Bounds of READYPLAYER2 blqPanel
                 jLabel1.setText("Jugador 2");
+                x0 = READYPLAYER2_COVER[0];
+                y0 = READYPLAYER2_COVER[1];
+                x1 = READYPLAYER2_COVER[2];
+                y1 = READYPLAYER2_COVER[3];
                 break;
             case 3: //Dimensions&Bounds of READYPLAYER3 blqPanel
                 jLabel1.setText("Jugador 3");
+                x0 = READYPLAYER3_COVER[0];
+                y0 = READYPLAYER3_COVER[1];
+                x1 = READYPLAYER3_COVER[2];
+                y1 = READYPLAYER3_COVER[3];
                 break;
             case 4: //Dimensions&Bounds of READYPLAYER4 blqPanel
                 jLabel1.setText("Jugador 4");
+                x0 = READYPLAYER4_COVER[0];
+                y0 = READYPLAYER4_COVER[1];
+                x1 = READYPLAYER4_COVER[2];
+                y1 = READYPLAYER4_COVER[3];
                 break;
             default:
                 System.out.println("Error: Numero de jugadores incorrecto. Numero ingresado: " + player);
