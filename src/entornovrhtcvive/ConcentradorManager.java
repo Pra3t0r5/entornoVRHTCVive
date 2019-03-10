@@ -5,7 +5,6 @@
  */
 package entornovrhtcvive;
 
-import static entornovrhtcvive.pnlCoin.creditosDisponibles;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class ConcentradorManager implements Runnable {
 
     private Socket clientSocket;
     public boolean conectadoPlacaDeTarjetas = false;
-
+    
     public ConcentradorManager() {
 
     }
@@ -54,8 +53,8 @@ public class ConcentradorManager implements Runnable {
                 BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 modifiedSentence = inFromServer.readLine();
                 if (modifiedSentence.equals("COIN")) {
-                    creditosDisponibles++;
-                    pnlCoin.lblPaseTarjeta.setText("CREDITOS: " + creditosDisponibles);
+                    pnlCoin.addCREDITOS_DISPONIBLES();
+                    pnlCoin.lblPaseTarjeta.setText("CREDITOS: " + pnlCoin.CREDITOS_DISPONIBLES);
                 }
             }
         } catch (SocketException se) {

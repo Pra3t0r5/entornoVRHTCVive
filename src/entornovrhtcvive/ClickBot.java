@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  *
  * @author fernando
  */
-public class clickBot {
+public class ClickBot {
+    //Coordenadas hardcodeadas para pantalla original
     public static final int[] START = {446 , 711};
     public static final int[] STOP = {594 , 712};
     public static final int[] READYPLAYER1 = {1091 , 245};
@@ -30,7 +31,7 @@ public class clickBot {
         try {
             Thread.sleep(10);
         } catch (InterruptedException ex) {
-            Logger.getLogger(clickBot.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClickBot.class.getName()).log(Level.SEVERE, null, ex);
         }
         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }

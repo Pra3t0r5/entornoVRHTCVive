@@ -5,11 +5,17 @@
  */
 package entornovrhtcvive;
 
+import java.awt.Dimension;
+import java.awt.DisplayMode;
 import java.awt.Frame;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,14 +24,22 @@ import javax.swing.JOptionPane;
  */
 public class pnlCoin extends javax.swing.JFrame {
 
-    public static int creditosDisponibles = 0;
-    private final Date horaApagado;
-    private final long minutosDeJuegoMilisec = 600000; //10 Minutos
-    private int cantidadVecesPuslsadoBotonApagado = 0;
+    public static int CREDITOS_DISPONIBLES = 0;
+    private final Date HORA_APAGADO;
+    private final long MIN_DE_JUEGO_MILISEC = 600000; //10 Minutos
+    private int CANT_VECES_PULSADO_APAGAR = 0;
+    
+    public int getCREDITOS_DISPONIBLES() {
+        return CREDITOS_DISPONIBLES;
+    }
+
+    public static void addCREDITOS_DISPONIBLES() {
+        CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;        
+    }
 
     public pnlCoin() {
         initComponents();
-        horaApagado = getFechaHoraApagado();
+        HORA_APAGADO = getFechaHoraApagado();
     }
 
     @SuppressWarnings("unchecked")
@@ -119,12 +133,12 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
         try {
-            if (new Date().after(horaApagado)) {
+            if (new Date().after(HORA_APAGADO)) {
                 Runtime.getRuntime().exec("cmd.exe /K shutdown /f /s /t 00");
-            } else if (cantidadVecesPuslsadoBotonApagado > 100) {
+            } else if (CANT_VECES_PULSADO_APAGAR > 100) {
                 JOptionPane.showMessageDialog(this, "SACA LA MANO DE AHI CARAJO!.", "ISABEL!", JOptionPane.ERROR_MESSAGE);
             } else {
-                cantidadVecesPuslsadoBotonApagado++;
+                CANT_VECES_PULSADO_APAGAR++;
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "OCURRIO UN ERROR AL INTENTAR APAGAR EL EQUIPO:\n" + ex + "\nPOR FAVOR DESCONECTE LA TERMINAL.", "ERROR EN APAGADO AUTOMATICO", JOptionPane.ERROR_MESSAGE);
@@ -133,7 +147,9 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            creditosDisponibles++;
+            this.lblValorJuego.setText("CREDITOS DISPONIBLES = "+CREDITOS_DISPONIBLES);
+            this.addCREDITOS_DISPONIBLES();            
+            this.jugar();
         }
     }//GEN-LAST:event_btnServicioActionPerformed
 
@@ -153,8 +169,8 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void jugar() {
         //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
-        if (creditosDisponibles <= 0) {
-            creditosDisponibles = 0;
+        if (CREDITOS_DISPONIBLES <= 0) {
+            CREDITOS_DISPONIBLES = 0;
             lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
             JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -171,10 +187,71 @@ public class pnlCoin extends javax.swing.JFrame {
                             System.out.println(ex);
                         }
                     }
-                }, minutosDeJuegoMilisec);
+                }, MIN_DE_JUEGO_MILISEC);
             } catch (IOException ex) {
                 System.out.println(ex);
             }
+        }
+    }
+    
+    
+    
+    /**
+     * Permite elegir en que monitor mostrar la interfaz y ajusta
+     * automaticamente las dimensiones en relacion a la cantidad de monitores
+     * TESTING: Esta hardcodeado a segundo monitor
+     *
+     * @author fernando
+     * @param screen
+     * @param frame
+     */
+    public static void showOnScreen(int screen, JFrame frame) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] gd = ge.getScreenDevices();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
+
+        //TESTING: Obtiene tamaños de monitor
+        for (GraphicsDevice curGs : gd) {
+            DisplayMode dm = curGs.getDisplayMode();
+            System.out.println("Detected Borders: " + dm.getWidth() + " x " + dm.getHeight());
+            System.out.println("Detected Dimensions: " + screenSize);
+        }
+        
+        //Seleccion de dimensiones iniciales dependiente del monitor seleccionado
+        switch (screen) {
+            case 0:
+                x0 = 0;
+                y0 = screenSize.height - screenSize.height / 2;
+                x1 = screenSize.width - screenSize.width / 4;
+                y1 = y0 / 2;
+                System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+                break;
+            case 1:
+                x0 = screenSize.width;
+                y0 = screenSize.height - screenSize.height / 2;
+                x1 = screenSize.width - screenSize.width / 4;
+                y1 = y0 / 2;
+                System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+                break;
+            default:
+                System.out.println("Warning: No hay una configuracion disponible para mas de dos pantallas!\nN° de pantallas seleccionadas: " + screen);
+                break;
+        }
+        
+        //Fijacion final de las dimensiones de acuerdo a la configuracion de pantallas presente
+        if (screen > -1 && screen < gd.length) {
+            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
+
+            frame.setBounds(x0 / gd.length, y0 + y0 / 2, x1, y1);
+            frame.setSize(x1 / gd.length, y1);
+        } else if (gd.length > 0) {
+            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
+
+            frame.setBounds(x0, y0, x1, y1);
+            frame.setSize(screenSize.width - screenSize.width / 4, screenSize.height);
+        } else {
+            throw new RuntimeException("No se encontraron pantallas!");
         }
     }
 
@@ -186,4 +263,6 @@ public class pnlCoin extends javax.swing.JFrame {
     private javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
+
+   
 }
