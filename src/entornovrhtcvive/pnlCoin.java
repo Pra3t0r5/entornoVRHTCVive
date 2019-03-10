@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -220,17 +221,13 @@ public class pnlCoin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
         } else {
             while (CREDITOS_DISPONIBLES != 0) {
-                for (Jugador jugador : jugadores) {
-                    if (!jugador.isJugando()) {
-                        try {
-                            jugador.temporizarJuego();
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (AWTException ex) {
-                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                jugadores.stream().filter((jugador) -> (!jugador.isJugando())).forEachOrdered((jugador) -> {
+                    try {
+                        jugador.temporizarJuego();
+                    } catch (InterruptedException | AWTException ex) {
+                        Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
+                });
                 System.out.println("Status: Todos los jugadores estan jugando, esperando 10 segundos antes de reintentar");
                 try {
                     TimeUnit.SECONDS.sleep(10);
