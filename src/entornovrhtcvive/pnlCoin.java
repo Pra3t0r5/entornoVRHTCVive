@@ -8,7 +8,6 @@ package entornovrhtcvive;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
-import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -207,6 +205,7 @@ public class pnlCoin extends javax.swing.JFrame {
             Jugador jugador = new Jugador(player);
             jugador.start();
             jugadores.add(jugador);
+
             if (player == numeroDeJugadores) {
                 break;
             }

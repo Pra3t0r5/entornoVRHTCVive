@@ -21,7 +21,7 @@ public class EntornoVRHTCVive {
         //Inicio el entorno grafico
         pnlCoin panelCoin = new pnlCoin();
         panelCoin.setLocationRelativeTo(null);
-        panelCoin.showOnScreen(PANTALLAS_CONECTADAS, panelCoin);
+        pnlCoin.showOnScreen(PANTALLAS_CONECTADAS, panelCoin);
         panelCoin.setVisible(true);
 
         //Instancio el Manager del Concentrador de la Placa de Tarjetas
