@@ -32,7 +32,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private final Date HORA_APAGADO;
     private final long MIN_DE_JUEGO_MILISEC = 600000; //10 Minutos
     private int CANT_VECES_PULSADO_APAGAR = 0;
-    private ArrayList<Jugador> jugadores = null;
+    private final ArrayList<Jugador> jugadores;
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
@@ -45,6 +45,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public pnlCoin() {
         initComponents();
+        jugadores = null;
         HORA_APAGADO = getFechaHoraApagado();
     }
 
@@ -199,6 +200,7 @@ public class pnlCoin extends javax.swing.JFrame {
         return fechaActual.getTime();
     }
 
+    //FIXME: rompe al tratar de agregar la thread iniciada a un arreglo de threads
     public void inicializarJugadores(int numeroDeJugadores) {
         int player = 0;
         while (true) {
@@ -212,7 +214,12 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         }
     }
-
+    /**
+     * Instancia los threads y los añade a un listado para controlar su estado 
+     * y asignar automaticamente nuevas jugadas
+     *
+     * @author fernando
+     */
     private void jugar() {
         //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
         if (CREDITOS_DISPONIBLES <= 0) {
@@ -241,7 +248,6 @@ public class pnlCoin extends javax.swing.JFrame {
     /**
      * Permite elegir en que monitor mostrar la interfaz y ajusta
      * automaticamente las dimensiones en relacion a la cantidad de monitores
-     * TESTING: Esta hardcodeado a segundo monitor
      *
      * @author fernando
      * @param screen
@@ -253,7 +259,7 @@ public class pnlCoin extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 
-        //TESTING: Obtiene tamaños de monitor
+        //TESTING: Muestra tamaños de monitor, usualmente sumatoria de todas las pantallas conectadas
         for (GraphicsDevice curGs : gd) {
             DisplayMode dm = curGs.getDisplayMode();
             System.out.println("Detected Borders: " + dm.getWidth() + " x " + dm.getHeight());
