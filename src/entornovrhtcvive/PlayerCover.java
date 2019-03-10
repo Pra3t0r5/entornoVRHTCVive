@@ -17,11 +17,12 @@ import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
  * @author ernes
  */
 public class PlayerCover extends javax.swing.JFrame {
+
     //Estimado basado en botones ready y dimensiones de pantalla original, formato: x0, y0, x1, y1
-    public static final int[] READYPLAYER1_COVER = {1000 , 205, 1200 , 285};
-    public static final int[] READYPLAYER2_COVER = {1000 , 276, 1200 , 356};
-    public static final int[] READYPLAYER3_COVER = {1000 , 355, 1200 , 435};
-    public static final int[] READYPLAYER4_COVER = {1000 , 433, 1200 , 513};
+    public static final int[] READYPLAYER1_COVER = {1000, 205, 1200, 285};
+    public static final int[] READYPLAYER2_COVER = {1000, 276, 1200, 356};
+    public static final int[] READYPLAYER3_COVER = {1000, 355, 1200, 435};
+    public static final int[] READYPLAYER4_COVER = {1000, 433, 1200, 513};
 
     private int player;
 
@@ -146,6 +147,7 @@ public class PlayerCover extends javax.swing.JFrame {
 
         jLabel1.setText("JUGADORES BLOQUEADOS");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
         jLabel2.setText("INGRESE COINS PARA HABILITAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,20 +155,20 @@ public class PlayerCover extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(467, Short.MAX_VALUE))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
 
         pack();
