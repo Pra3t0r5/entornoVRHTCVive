@@ -5,12 +5,12 @@
  */
 package entornovrhtcvive;
 
-import static entornovrhtcvive.EntornoVRHTCVive.pantallaInterfaz;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import static entornovrhtcvive.EntornoVRHTCVive.PANTALLAS_CONECTADAS;
 
 /**
  *
@@ -50,19 +50,19 @@ public class PlayerCover extends javax.swing.JFrame {
     public void blqReadyOfPlayer() {
         switch (player) {
             case 0: //cover for all players (initial)
-                this.showOnScreenPnlBlq(pantallaInterfaz, this);
+                this.showOnScreenPnlBlq(PANTALLAS_CONECTADAS, this);
                 break;
             case 1: //cover for player 1
-                this.showOnScreenPnlBlq(pantallaInterfaz, this);
+                this.showOnScreenPnlBlq(PANTALLAS_CONECTADAS, this);
                 break;
             case 2: //cover for player 2
-                this.showOnScreenPnlBlq(pantallaInterfaz, this);
+                this.showOnScreenPnlBlq(PANTALLAS_CONECTADAS, this);
                 break;
             case 3: //cover for player 3
-                this.showOnScreenPnlBlq(pantallaInterfaz, this);
+                this.showOnScreenPnlBlq(PANTALLAS_CONECTADAS, this);
                 break;
             case 4: //cover for player 4
-                this.showOnScreenPnlBlq(pantallaInterfaz, this);
+                this.showOnScreenPnlBlq(PANTALLAS_CONECTADAS, this);
                 break;
         }
     }

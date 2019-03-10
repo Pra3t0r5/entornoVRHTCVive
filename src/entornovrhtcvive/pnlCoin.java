@@ -5,6 +5,7 @@
  */
 package entornovrhtcvive;
 
+import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.Frame;
@@ -12,9 +13,13 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -28,13 +33,15 @@ public class pnlCoin extends javax.swing.JFrame {
     private final Date HORA_APAGADO;
     private final long MIN_DE_JUEGO_MILISEC = 600000; //10 Minutos
     private int CANT_VECES_PULSADO_APAGAR = 0;
-    
+    private ArrayList<Jugador> jugadores = null;
+
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
     }
 
-    public static void addCREDITOS_DISPONIBLES() {
-        CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;        
+    public void addCREDITOS_DISPONIBLES() {
+        CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
+        this.jugar();
     }
 
     public pnlCoin() {
@@ -52,6 +59,7 @@ public class pnlCoin extends javax.swing.JFrame {
         btnApagarVR = new javax.swing.JButton();
         btnServicio = new javax.swing.JButton();
         txtFieldPasswordServicio = new javax.swing.JPasswordField();
+        coinListener = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -90,39 +98,60 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         });
 
+        coinListener.setBorder(null);
+        coinListener.setEnabled(false);
+        coinListener.setFocusable(false);
+        coinListener.setMaximumSize(new java.awt.Dimension(0, 0));
+        coinListener.setMinimumSize(new java.awt.Dimension(0, 0));
+        coinListener.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                coinListenerStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtFieldPasswordServicio)
-                    .addComponent(btnApagarVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitulo)
-                    .addComponent(lblValorJuego))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFieldPasswordServicio)
+                            .addComponent(btnApagarVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTitulo)
+                            .addComponent(lblValorJuego)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(280, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
+                .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPaseTarjeta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblValorJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblPaseTarjeta))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFieldPasswordServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblValorJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 339, Short.MAX_VALUE))
         );
@@ -147,16 +176,20 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            this.lblValorJuego.setText("CREDITOS DISPONIBLES = "+CREDITOS_DISPONIBLES);
-            this.addCREDITOS_DISPONIBLES();            
-            this.jugar();
+            System.out.println("Status: Credito de Servicio detectado.");
+            this.lblValorJuego.setText("CREDITOS DISPONIBLES = " + CREDITOS_DISPONIBLES);
+            this.addCREDITOS_DISPONIBLES();
         }
     }//GEN-LAST:event_btnServicioActionPerformed
 
     private void lblValorJuegoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblValorJuegoPropertyChange
         System.out.println(this.lblValorJuego.getText());
-//        this.jugar();
     }//GEN-LAST:event_lblValorJuegoPropertyChange
+
+    private void coinListenerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coinListenerStateChanged
+        System.out.println("Status: Credito recibido.");
+        this.addCREDITOS_DISPONIBLES();
+    }//GEN-LAST:event_coinListenerStateChanged
 
     private Date getFechaHoraApagado() {
         Calendar fechaActual = Calendar.getInstance();
@@ -167,6 +200,19 @@ public class pnlCoin extends javax.swing.JFrame {
         return fechaActual.getTime();
     }
 
+    public void inicializarJugadores(int numeroDeJugadores) {
+        int player = 0;
+        while (true) {
+            player++;
+            Jugador jugador = new Jugador(player);
+            jugador.start();
+            jugadores.add(jugador);
+            if (player == numeroDeJugadores) {
+                break;
+            }
+        }
+    }
+
     private void jugar() {
         //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
         if (CREDITOS_DISPONIBLES <= 0) {
@@ -174,28 +220,28 @@ public class pnlCoin extends javax.swing.JFrame {
             lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
             JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
         } else {
-            try {
-                Runtime.getRuntime().exec("cmd.exe /K \"C:\\activarPlacaDeRed.bat\""); //Activa la placa de red
-                this.setState(Frame.ICONIFIED);
-                java.util.Timer timer = new java.util.Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
+            while (CREDITOS_DISPONIBLES != 0) {
+                for (Jugador jugador : jugadores) {
+                    if (!jugador.isJugando()) {
                         try {
-                            Runtime.getRuntime().exec("cmd.exe /K shutdown /f /r /t 00"); // Programa un reinicio
-                        } catch (IOException ex) {
-                            System.out.println(ex);
+                            jugador.temporizarJuego();
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (AWTException ex) {
+                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                }, MIN_DE_JUEGO_MILISEC);
-            } catch (IOException ex) {
-                System.out.println(ex);
+                }
+                System.out.println("Status: Todos los jugadores estan jugando, esperando 10 segundos antes de reintentar");
+                try {
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
-    
-    
-    
+
     /**
      * Permite elegir en que monitor mostrar la interfaz y ajusta
      * automaticamente las dimensiones en relacion a la cantidad de monitores
@@ -217,7 +263,7 @@ public class pnlCoin extends javax.swing.JFrame {
             System.out.println("Detected Borders: " + dm.getWidth() + " x " + dm.getHeight());
             System.out.println("Detected Dimensions: " + screenSize);
         }
-        
+
         //Seleccion de dimensiones iniciales dependiente del monitor seleccionado
         switch (screen) {
             case 0:
@@ -238,7 +284,7 @@ public class pnlCoin extends javax.swing.JFrame {
                 System.out.println("Warning: No hay una configuracion disponible para mas de dos pantallas!\nN° de pantallas seleccionadas: " + screen);
                 break;
         }
-        
+
         //Fijacion final de las dimensiones de acuerdo a la configuracion de pantallas presente
         if (screen > -1 && screen < gd.length) {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
@@ -255,14 +301,15 @@ public class pnlCoin extends javax.swing.JFrame {
         }
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagarVR;
     private javax.swing.JButton btnServicio;
+    public static javax.swing.JCheckBox coinListener;
     public static javax.swing.JLabel lblPaseTarjeta;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
 
-   
 }

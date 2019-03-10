@@ -11,7 +11,8 @@ package entornovrhtcvive;
  */
 public class EntornoVRHTCVive {
 
-    public static final int pantallaInterfaz = 0; //{0,1,2...}
+    public static final int PANTALLAS_CONECTADAS = 0; //{0,1,2...}
+    public static final int NUMERO_JUGADORES = 4;
 
     public static void main(String[] args) {
         System.out.println("//////////////////Iniciado Servidor VR//////////////////");
@@ -20,7 +21,7 @@ public class EntornoVRHTCVive {
         //Inicio el entorno grafico
         pnlCoin panelCoin = new pnlCoin();
         panelCoin.setLocationRelativeTo(null);
-        panelCoin.showOnScreen(pantallaInterfaz, panelCoin);
+        panelCoin.showOnScreen(PANTALLAS_CONECTADAS, panelCoin);
         panelCoin.setVisible(true);
 
         //Instancio el Manager del Concentrador de la Placa de Tarjetas
@@ -29,8 +30,8 @@ public class EntornoVRHTCVive {
         threadConcentrador.start();
 
         //Instancio Jugadores para controlar sus tiempos de juego por separado
-    }
+        panelCoin.inicializarJugadores(NUMERO_JUGADORES);
 
-    
+    }
 
 }
