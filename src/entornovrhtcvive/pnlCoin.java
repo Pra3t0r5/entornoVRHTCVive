@@ -11,6 +11,7 @@ import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,12 +31,13 @@ public class pnlCoin extends javax.swing.JFrame {
     public static int CREDITOS_DISPONIBLES = 0;
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
+    private final long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
     private final ArrayList<JugadorThread> jugadores;
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
     }
- 
+
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
         this.jugar();
@@ -239,15 +241,7 @@ public class pnlCoin extends javax.swing.JFrame {
         } else {
             while (CREDITOS_DISPONIBLES != 0) {
                 jugadores.stream().filter((jugador) -> (!jugador.isJugando())).forEachOrdered((jugador) -> {
-                    try {
-                        HidePnlCoin();
-                        jugador.iniciarJuego();
-                        ShowPnlCoin();
-                        //TODO: Ver donde meter listener para agregar 
-                        CREDITOS_DISPONIBLES--;
-                    } catch (InterruptedException | AWTException ex) {
-                        Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    lanzarPartidaDeJugador(jugador);
                 });
                 System.out.println("Status: Todos los jugadores estan jugando, esperando 10 segundos antes de reintentar");
                 try {
@@ -336,4 +330,18 @@ public class pnlCoin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
 
+    private void lanzarPartidaDeJugador(JugadorThread jugador) {
+        try {
+            HidePnlCoin();
+            jugador.iniciarJuego();
+            ShowPnlCoin();
+            //TODO: Ver donde meter listener para agregar 
+            CREDITOS_DISPONIBLES--;
+        } catch (InterruptedException | AWTException ex) {
+            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    
 }
