@@ -35,7 +35,7 @@ public class pnlCoin extends javax.swing.JFrame {
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
     }
-
+ 
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
         this.jugar();
@@ -241,8 +241,10 @@ public class pnlCoin extends javax.swing.JFrame {
                 jugadores.stream().filter((jugador) -> (!jugador.isJugando())).forEachOrdered((jugador) -> {
                     try {
                         HidePnlCoin();
-                        jugador.temporizarJuego();
+                        jugador.iniciarJuego();
                         ShowPnlCoin();
+                        //TODO: Ver donde meter listener para agregar 
+                        CREDITOS_DISPONIBLES--;
                     } catch (InterruptedException | AWTException ex) {
                         Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                     }

@@ -51,7 +51,7 @@ public class ClickBot {
         }
         click(STOP);
     }
-    public static void unTickReadyOf(int player) throws AWTException{
+    public static void clickReadyOf(int player) throws AWTException{
         switch (player) {
             case 1: click(READYPLAYER1);  
                 break;
@@ -64,5 +64,9 @@ public class ClickBot {
             default: System.out.println("Error, numero de jugador invalido."); 
                 break;
         }
+    }
+    
+    public static void clickStart() throws AWTException{
+        click(START);
     }
 }

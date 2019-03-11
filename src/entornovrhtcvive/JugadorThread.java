@@ -13,7 +13,7 @@ import java.awt.AWTException;
  */
 public class JugadorThread extends Thread {
 
-    private final long TIEMPO_DE_JUEGO = 600000; //10 Minutos
+    private final long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
     private int player;
     private boolean jugando;
 
@@ -40,7 +40,7 @@ public class JugadorThread extends Thread {
 
     public void setPlayer(int player) {
         this.player = player;
-        System.out.println("Status: Thread Jugador "+player+" inicializada");
+        System.out.println("Status: Thread Jugador " + player + " inicializada");
     }
 
     public JugadorThread(int player) {
@@ -50,20 +50,20 @@ public class JugadorThread extends Thread {
     }
 
     @Override
-    public void run() {   
-         System.out.println("Status: Thread Jugador "+player+" ejecutandose");
+    public void run() {
+        System.out.println("Status: Thread Jugador " + player + " ejecutandose");
     }
 
-    public void temporizarJuego() throws InterruptedException, AWTException {
-        
+    public void iniciarJuego() throws InterruptedException, AWTException {
         this.setJugando(true);
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO / 60000 + " minutos'");
         cover.HidePnlBlqPlayer(player);
-        ClickBot.unTickReadyOf(player);
+        ClickBot.clickReadyOf(player);
+        ClickBot.clickStart();
         cover.ShowPnlBlqPlayers(player);
+    }
 
-        Thread.sleep(TIEMPO_DE_JUEGO);
-
+    public void finalizarJuego() throws InterruptedException, AWTException {
         cover.HidePnlBlqPlayer(player);
         ClickBot.stopPlayOf(player);
         cover.ShowPnlBlqPlayers(player);
