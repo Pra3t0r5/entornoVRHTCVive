@@ -11,7 +11,7 @@ import java.awt.AWTException;
  *
  * @author fernando
  */
-public class Jugador extends Thread {
+public class JugadorThread extends Thread {
 
     private final long TIEMPO_DE_JUEGO = 600000; //10 Minutos
     private int player;
@@ -43,7 +43,7 @@ public class Jugador extends Thread {
         System.out.println("Status: Thread Jugador "+player+" inicializada");
     }
 
-    public Jugador(int player) {
+    public JugadorThread(int player) {
         this.setPlayer(player);
         this.setCover(new PlayerCover(this.player));
         cover.ShowPnlBlqPlayers(this.player);

@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +30,7 @@ public class pnlCoin extends javax.swing.JFrame {
     public static int CREDITOS_DISPONIBLES = 0;
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
-    private final ArrayList<Jugador> jugadores;
+    private final ArrayList<JugadorThread> jugadores;
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
@@ -44,7 +43,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public pnlCoin() {
         initComponents();
-        jugadores = null;
+        jugadores = new ArrayList<JugadorThread>();
         HORA_APAGADO = getFechaHoraApagado();
     }
 
@@ -94,6 +93,12 @@ public class pnlCoin extends javax.swing.JFrame {
         btnServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnServicioActionPerformed(evt);
+            }
+        });
+
+        txtFieldPasswordServicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFieldPasswordServicioKeyPressed(evt);
             }
         });
 
@@ -158,7 +163,6 @@ public class pnlCoin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
         try {
             if (new Date().after(HORA_APAGADO)) {
@@ -190,6 +194,12 @@ public class pnlCoin extends javax.swing.JFrame {
         this.addCREDITOS_DISPONIBLES();
     }//GEN-LAST:event_coinListenerStateChanged
 
+    private void txtFieldPasswordServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPasswordServicioKeyPressed
+        if (evt.getKeyCode() == evt.VK_1) {
+            addCREDITOS_DISPONIBLES();
+        }
+    }//GEN-LAST:event_txtFieldPasswordServicioKeyPressed
+
     private Date getFechaHoraApagado() {
         Calendar fechaActual = Calendar.getInstance();
         fechaActual.set(Calendar.HOUR_OF_DAY, 22);
@@ -204,7 +214,7 @@ public class pnlCoin extends javax.swing.JFrame {
         int player = 0;
         while (true) {
             player++;
-            Jugador jugador = new Jugador(player);
+            JugadorThread jugador = new JugadorThread(player);
             jugador.start();
             jugadores.add(jugador);
 
@@ -213,9 +223,10 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         }
     }
+
     /**
-     * Instancia los threads y los añade a un listado para controlar su estado 
-     * y asignar automaticamente nuevas jugadas
+     * Instancia los threads y los añade a un listado para controlar su estado y
+     * asignar automaticamente nuevas jugadas
      *
      * @author fernando
      */
@@ -229,7 +240,9 @@ public class pnlCoin extends javax.swing.JFrame {
             while (CREDITOS_DISPONIBLES != 0) {
                 jugadores.stream().filter((jugador) -> (!jugador.isJugando())).forEachOrdered((jugador) -> {
                     try {
+                        HidePnlCoin();
                         jugador.temporizarJuego();
+                        ShowPnlCoin();
                     } catch (InterruptedException | AWTException ex) {
                         Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -242,6 +255,14 @@ public class pnlCoin extends javax.swing.JFrame {
                 }
             }
         }
+    }
+
+    public void HidePnlCoin() {
+        this.setVisible(false);
+    }
+
+    public void ShowPnlCoin() {
+        this.setVisible(true);
     }
 
     /**
