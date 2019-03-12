@@ -6,6 +6,10 @@
 package entornovrhtcvive;
 
 import java.awt.AWTException;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -49,9 +53,28 @@ public class JugadorThread extends Thread {
         cover.ShowPnlBlqPlayers(this.player);
     }
 
+    
     @Override
     public void run() {
-        System.out.println("Status: Thread Jugador " + player + " ejecutandose");
+        try {
+            System.out.println("Status: Thread Jugador " + player + " ejecutandose");
+            iniciarJuego();
+            System.out.println("en 10 segundos " + player + " corta jugada");
+            final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+            executor.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    try {                        
+                        finalizarJuego();
+                    } catch (InterruptedException | AWTException ex) {
+                        Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }, 10, TimeUnit.SECONDS);
+        } catch (InterruptedException | AWTException ex) {
+            Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void iniciarJuego() throws InterruptedException, AWTException {

@@ -40,7 +40,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
-        this.jugar();
+        jugar();
     }
 
     public pnlCoin() {
@@ -146,20 +146,17 @@ public class pnlCoin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPaseTarjeta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblValorJuego))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFieldPasswordServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblValorJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 339, Short.MAX_VALUE))
+                .addGap(0, 399, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,56 +206,6 @@ public class pnlCoin extends javax.swing.JFrame {
         fechaActual.set(Calendar.SECOND, 0);
 
         return fechaActual.getTime();
-    }
-
-    //FIXME: rompe al tratar de agregar la thread iniciada a un arreglo de threads
-    public void inicializarJugadores(int numeroDeJugadores) {
-        int player = 0;
-        while (true) {
-            player++;
-            JugadorThread jugador = new JugadorThread(player);
-            jugador.start();
-            jugadores.add(jugador);
-
-            if (player == numeroDeJugadores) {
-                break;
-            }
-        }
-    }
-
-    /**
-     * Instancia los threads y los añade a un listado para controlar su estado y
-     * asignar automaticamente nuevas jugadas
-     *
-     * @author fernando
-     */
-    private void jugar() {
-        //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
-        if (CREDITOS_DISPONIBLES <= 0) {
-            CREDITOS_DISPONIBLES = 0;
-            lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
-            JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
-        } else {
-            while (CREDITOS_DISPONIBLES != 0) {
-                jugadores.stream().filter((jugador) -> (!jugador.isJugando())).forEachOrdered((jugador) -> {
-                    lanzarPartidaDeJugador(jugador);
-                });
-                System.out.println("Status: Todos los jugadores estan jugando, esperando 10 segundos antes de reintentar");
-                try {
-                    TimeUnit.SECONDS.sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
-
-    public void HidePnlCoin() {
-        this.setVisible(false);
-    }
-
-    public void ShowPnlCoin() {
-        this.setVisible(true);
     }
 
     /**
@@ -330,18 +277,59 @@ public class pnlCoin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
 
-    private void lanzarPartidaDeJugador(JugadorThread jugador) {
-        try {
-            HidePnlCoin();
-            jugador.iniciarJuego();
-            ShowPnlCoin();
-            //TODO: Ver donde meter listener para agregar 
-            CREDITOS_DISPONIBLES--;
-        } catch (InterruptedException | AWTException ex) {
-            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+    public void inicializarJugadores(int numeroDeJugadores) {
+        int player = 0;
+        while (true) {
+            player++;
+            JugadorThread jugador = new JugadorThread(player);
+            jugadores.add(jugador);
+
+            if (player == numeroDeJugadores) {
+                break;
+            }
         }
-        
     }
 
-    
+    /**
+     * Instancia los threads y los añade a un listado para controlar su estado y
+     * asignar automaticamente nuevas jugadas
+     *
+     * @author fernando
+     */
+    private void jugar() {
+        //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
+        if (CREDITOS_DISPONIBLES <= 0) {
+            CREDITOS_DISPONIBLES = 0;
+            lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
+            JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
+        } else {
+            while (CREDITOS_DISPONIBLES != 0) {
+
+                boolean lanzado = false;
+
+                for (JugadorThread jugador : jugadores) {
+
+                    if (!jugador.isAlive()) {
+                        CREDITOS_DISPONIBLES--;
+                        this.setVisible(false);
+                        jugador.start();
+                        this.setVisible(true);
+                        lanzado = true;
+                    }
+                    if (CREDITOS_DISPONIBLES == 0) {
+                        break;
+                    }
+                }
+                if (!lanzado) {
+                    System.out.println("Status: Todos los jugadores estan jugando, esperando 10 segundos antes de reintentar");
+                    try {
+                        TimeUnit.SECONDS.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+
+    }
 }
