@@ -20,6 +20,14 @@ public class JugadorThread extends Thread {
     private final long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
     private int player;
     private boolean jugando;
+    private boolean jugar;
+   
+    public void jugarOtraVez(boolean jugar) {
+        this.jugar = jugar;
+        if(jugar){
+            temporizar();
+        }
+    }
 
     public boolean isJugando() {
         return jugando;
@@ -55,7 +63,16 @@ public class JugadorThread extends Thread {
 
     
     @Override
-    public void run() {
+    public void run() {        
+        temporizar();
+        try {
+            Thread.currentThread().wait();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void temporizar(){
         try {
             System.out.println("Status: Thread Jugador " + player + " ejecutandose");
             iniciarJuego();
@@ -73,8 +90,7 @@ public class JugadorThread extends Thread {
             }, 10, TimeUnit.SECONDS);
         } catch (InterruptedException | AWTException ex) {
             Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        }     
     }
 
     public void iniciarJuego() throws InterruptedException, AWTException {

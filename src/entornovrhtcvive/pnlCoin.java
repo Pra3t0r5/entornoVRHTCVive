@@ -194,7 +194,7 @@ public class pnlCoin extends javax.swing.JFrame {
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
             System.out.println("Status: Credito de Servicio detectado.");
             this.addCREDITOS_DISPONIBLES();
-            this.lblValorJuego.setText("CREDITOS DISPONIBLES = " + CREDITOS_DISPONIBLES);
+            this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
         }
     }//GEN-LAST:event_btnServicioActionPerformed
 
@@ -338,7 +338,6 @@ public class pnlCoin extends javax.swing.JFrame {
                             try {
                                 //lanzo la partida y quito el jugador de la lista de listos
                                 jugador.start();
-                                JUGADORES_JUGANDO++;
                                 jugadoresListos.remove(jugador);
 
                             } catch (IllegalThreadStateException e) {
@@ -348,7 +347,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                 //...e instancio una nueva thread con los valores que necesito para mantener siempre los 4 jugadores con sus respectivos paneles...
                                 JugadorThread nuevoJugador = new JugadorThread(nro);
                                 nuevoJugador.setCover((PlayerCover) cover);
-                                //...y elimino todo lo duplicado incluida thread
+                                //...y elimino duplicados
                                 jugador.interrupt();
                                 jugadoresListos.remove(jugador);                                
                                 jugadoresListos.add(nuevoJugador);
@@ -362,7 +361,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         this.setVisible(true);
                         lanzado = true;
 
-                        if (CREDITOS_DISPONIBLES == 0 || JUGADORES_JUGANDO == jugadoresListos.size()) {
+                        if (CREDITOS_DISPONIBLES == 0) {
                             this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                             break;
                         } 
