@@ -24,9 +24,9 @@ public class Cover extends javax.swing.JFrame {
     public static final int[] READYPLAYER2_COVER = {1000, 276, 1200, 356};
     public static final int[] READYPLAYER3_COVER = {1000, 355, 1200, 435};
     public static final int[] READYPLAYER4_COVER = {1000, 433, 1200, 513};
-    
+
     private long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
-    
+
     final private int player;
 
     public boolean running;
@@ -41,29 +41,41 @@ public class Cover extends javax.swing.JFrame {
 
     public int getPlayer() {
         return player;
-    }    
+    }
 
     public Cover(int player) {
         initComponents();
         this.player = player;
         blqReadyOfPlayer();
     }
-    
+
     public void setReady() throws InterruptedException, AWTException {
         this.setRunning(true);
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO / 60000 + " minutos'");
         this.HidePnlBlqPlayer();
+        this.actualizarEstadoTexto();
         ClickBot.clickReadyOf(player);
-        ClickBot.clickStart();
         this.ShowPnlBlqPlayer();
     }
 
     public void setEnded() throws InterruptedException, AWTException {
         this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
+        this.setRunning(false);
+        this.actualizarEstadoTexto();
         this.ShowPnlBlqPlayer();
         System.out.println("El jugador '" + player + "' completo su sesion de juego");
-        this.setRunning(false);
+    }
+
+    public void actualizarEstadoTexto() {
+        if (this.isRunning()) {
+            this.jLabel1.setText("JUGADOR " + this.getPlayer() + ": Jugando");
+
+        } else {
+            this.jLabel1.setText("JUGADOR " + this.getPlayer() + ": Listo");
+            this.jLabel2.setText("Pase tarjeta para jugar.");
+
+        }
     }
 
     public void HidePnlBlqPlayer() {
@@ -156,7 +168,7 @@ public class Cover extends javax.swing.JFrame {
         } else {
             throw new RuntimeException("No Screens Found");
         }
-    }
+    }   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -171,9 +183,12 @@ public class Cover extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 600));
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("JUGADORES BLOQUEADOS");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("INGRESE COINS PARA HABILITAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,18 +198,18 @@ public class Cover extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(128, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(512, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();

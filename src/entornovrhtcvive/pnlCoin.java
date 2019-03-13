@@ -72,7 +72,7 @@ public class pnlCoin extends javax.swing.JFrame {
         } else {
             if (CREDITOS_DISPONIBLES != 0) {
                 int juegosLanzados = 0;
-                for (Cover cover : covers) {                    
+                for (Cover cover : covers) {
                     if (!cover.isRunning()) {
                         try {
                             juegosLanzados++;
@@ -80,8 +80,8 @@ public class pnlCoin extends javax.swing.JFrame {
                             this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                             //I have no idea why this makes it work. But hey, it works!
                             final int jugador = cover.getPlayer();
-                            
-                            System.out.println("Status: Jugador " + jugador + " lanza partida");
+
+                            System.out.println("Status: Jugador " + jugador + " lanza partida");                            
                             cover.setReady();
                             iniciarJuego();
                             System.out.println("en 10 segundos " + jugador + " corta jugada");
@@ -101,7 +101,6 @@ public class pnlCoin extends javax.swing.JFrame {
                         } catch (InterruptedException | AWTException ex) {
                             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
                     }
                     if (CREDITOS_DISPONIBLES == 0) {
                         this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
@@ -110,7 +109,7 @@ public class pnlCoin extends javax.swing.JFrame {
                     if (juegosLanzados == 4) {
                         this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                         break;
-                    }  
+                    }
                 }
             }
         }
@@ -155,7 +154,7 @@ public class pnlCoin extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 600));
 
-        lblValorJuego.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblValorJuego.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblValorJuego.setText("1 CREDITO = 1 JUEGO");
         lblValorJuego.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -163,10 +162,10 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         });
 
-        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblTitulo.setText("SISTEMA DE REALIDAD VIRTUAL DE CRUCIJUEGOS");
 
-        lblPaseTarjeta.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblPaseTarjeta.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
 
         btnApagarVR.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -222,48 +221,47 @@ public class pnlCoin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFieldPasswordServicio)
                             .addComponent(btnApagarVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTitulo)
-                                    .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblValorJuego)
-                                .addGap(18, 18, 18)))
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                            .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblValorJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtFieldPasswordServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTitulo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblValorJuego)))
-                        .addGap(0, 6, Short.MAX_VALUE)))
-                .addGap(393, 393, 393))
+                        .addContainerGap()
+                        .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jButton1)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblValorJuego))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtFieldPasswordServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,7 +363,7 @@ public class pnlCoin extends javax.swing.JFrame {
         if (screen > -1 && screen < gd.length) {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
 
-            frame.setBounds(x0 / gd.length, y0 + y0 / 2, x1, y1);
+            frame.setBounds(x0 / gd.length, y0 + y0 / 2, x1, 600);
             frame.setSize(x1 / gd.length, y1);
         } else if (gd.length > 0) {
             frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());

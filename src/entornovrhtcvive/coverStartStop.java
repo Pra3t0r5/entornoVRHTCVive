@@ -38,7 +38,7 @@ public class coverStartStop extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         
         //estimated static placeholders
-        int x0 = 0, x1 = screenSize.width, y0 = screenSize.height, y1 = screenSize.height;
+        int x0 = 0, x1 = screenSize.width, y0 = 700, y1 = screenSize.height;
      
         if (screen > -1 && screen < gd.length) {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
@@ -95,7 +95,7 @@ public class coverStartStop extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
