@@ -5,6 +5,7 @@
  */
 package entornovrhtcvive;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -14,8 +15,7 @@ import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
 import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalTime;
 import javax.swing.Timer;
 
 /**
@@ -63,20 +63,21 @@ public class Cover extends javax.swing.JFrame {
         this.actualizarEstadoTexto();//COUNTDOWN
         ClickBot.clickReadyOf(player);
         this.ShowPnlBlqPlayer();
-        
+
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
-            
-                    
-            
+
+            LocalTime time = LocalTime.of(0, 5, 0);//            Date time = java.util.Calendar.getInstance().setTime(new Date();
+
             long i = TIEMPO_DE_JUEGO;
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Date time = java.util.Calendar.getInstance().getTime();
-                
-                i--;
-                jLabel2.setText(String.valueOf(i));
+                System.out.println(time);
+                time.minusSeconds(1);
+                int minutos = time.getMinute();
+                int segundos = time.getSecond();
+                jLabel2.setText(minutos + ":" + segundos);
             }
         };
         contador = new Timer(1000, listener);
