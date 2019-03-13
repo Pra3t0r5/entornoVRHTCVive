@@ -12,6 +12,11 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
 import java.awt.AWTException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.Date;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,6 +35,8 @@ public class Cover extends javax.swing.JFrame {
     final private int player;
 
     public boolean running;
+
+    Timer contador;
 
     public boolean isRunning() {
         return running;
@@ -53,12 +60,31 @@ public class Cover extends javax.swing.JFrame {
         this.setRunning(true);
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO / 60000 + " minutos'");
         this.HidePnlBlqPlayer();
-        this.actualizarEstadoTexto();
+        this.actualizarEstadoTexto();//COUNTDOWN
         ClickBot.clickReadyOf(player);
         this.ShowPnlBlqPlayer();
+        
+        ActionListener listener = new ActionListener() {
+            java.util.Timer my = new java.util.Timer();
+            
+                    
+            
+            long i = TIEMPO_DE_JUEGO;
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Date time = java.util.Calendar.getInstance().getTime();
+                
+                i--;
+                jLabel2.setText(String.valueOf(i));
+            }
+        };
+        contador = new Timer(1000, listener);
+        contador.start();
     }
 
     public void setEnded() throws InterruptedException, AWTException {
+        contador.stop();
         this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
         this.setRunning(false);
@@ -168,7 +194,7 @@ public class Cover extends javax.swing.JFrame {
         } else {
             throw new RuntimeException("No Screens Found");
         }
-    }   
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
