@@ -74,12 +74,13 @@ public class pnlCoin extends javax.swing.JFrame {
                 int juegosLanzados = 0;
                 for (Cover cover : covers) {                    
                     if (!cover.isRunning()) {
-                        juegosLanzados++;
-                        CREDITOS_DISPONIBLES--;
-                        this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                        //I have no idea why this makes it work. But hey, it works!
-                        final int jugador = cover.getPlayer();
                         try {
+                            juegosLanzados++;
+                            CREDITOS_DISPONIBLES--;
+                            this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                            //I have no idea why this makes it work. But hey, it works!
+                            final int jugador = cover.getPlayer();
+                            
                             System.out.println("Status: Jugador " + jugador + " lanza partida");
                             cover.setReady();
                             iniciarJuego();
@@ -98,8 +99,9 @@ public class pnlCoin extends javax.swing.JFrame {
                                 }
                             }, 10, TimeUnit.SECONDS);
                         } catch (InterruptedException | AWTException ex) {
-                            Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
                     }
                     if (CREDITOS_DISPONIBLES == 0) {
                         this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
