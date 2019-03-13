@@ -37,6 +37,7 @@ public class Cover extends javax.swing.JFrame {
     public boolean running;
 
     Timer contador;
+    Timer contadorPreparacion;
 
     public boolean isRunning() {
         return running;
@@ -57,6 +58,7 @@ public class Cover extends javax.swing.JFrame {
     }
 
     public void setReady() throws InterruptedException, AWTException {
+        contadorPreparacion.stop();
         this.setRunning(true);
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO / 60000 + " minutos'");
         this.HidePnlBlqPlayer();
@@ -74,7 +76,7 @@ public class Cover extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 System.out.println(time);
-                time.minusSeconds(1);
+                time = time.minusSeconds(1);
                 int minutos = time.getMinute();
                 int segundos = time.getSecond();
                 jLabel2.setText(minutos + ":" + segundos);
@@ -117,6 +119,26 @@ public class Cover extends javax.swing.JFrame {
         }
     }
 
+    public void mostrarTiempoPreparacion() {
+
+        this.jLabel1.setText("Lanzamiento en:");
+        ActionListener listener = new ActionListener() {
+            java.util.Timer my = new java.util.Timer();
+            LocalTime time = LocalTime.of(0, 0, 5);
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println(time);
+                time = time.minusSeconds(1);
+                int minutos = time.getMinute();
+                int segundos = time.getSecond();
+                jLabel2.setText(minutos + ":" + segundos);
+            }
+        };
+        contadorPreparacion = new Timer(1000, listener);
+        contadorPreparacion.start();
+    }
+
     //TODO: revisar formas dinamicas
     public void blqReadyOfPlayer() {
         switch (player) {
@@ -150,10 +172,10 @@ public class Cover extends javax.swing.JFrame {
                 break;
             case 1: //Dimensions&Bounds of READYPLAYER1 blqPanel
                 jLabel1.setText("Jugador 1");
-                x0 = READYPLAYER1_COVER[0];
-                y0 = READYPLAYER1_COVER[1];
-                x1 = READYPLAYER1_COVER[2];
-                y1 = READYPLAYER1_COVER[3];
+                x0 = 0;//READYPLAYER1_COVER[0];
+                y0 = 0;//READYPLAYER1_COVER[1];
+                x1 = 200;//READYPLAYER1_COVER[2];
+                y1 = 200;//READYPLAYER1_COVER[3];
                 break;
             case 2: //Dimensions&Bounds of READYPLAYER2 blqPanel
                 jLabel1.setText("Jugador 2");
@@ -214,7 +236,7 @@ public class Cover extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("JUGADORES BLOQUEADOS");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("INGRESE COINS PARA HABILITAR");
 
@@ -225,7 +247,7 @@ public class Cover extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -236,7 +258,7 @@ public class Cover extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();

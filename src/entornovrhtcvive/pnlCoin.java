@@ -33,8 +33,11 @@ public class pnlCoin extends javax.swing.JFrame {
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
     private final long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
+    public final long TIEMPO_DE_JUEGO_SEGUNDOS = 10;
+    private final long TIEMPO_DE_PREPARACION_SEGUNDOS = 5;
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
+    
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
@@ -74,33 +77,40 @@ public class pnlCoin extends javax.swing.JFrame {
                 int juegosLanzados = 0;
                 for (Cover cover : covers) {
                     if (!cover.isRunning()) {
-                        try {
-                            juegosLanzados++;
-                            CREDITOS_DISPONIBLES--;
-                            this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                            //I have no idea why this makes it work. But hey, it works!
-                            final int jugador = cover.getPlayer();
-
-                            System.out.println("Status: Jugador " + jugador + " lanza partida");                            
-                            cover.setReady();
-                            iniciarJuego();
-                            System.out.println("en 10 segundos " + jugador + " corta jugada");
-
-                            final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                            executor.schedule(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        cover.setEnded();
-                                        finalizarJuego();
-                                    } catch (InterruptedException | AWTException ex) {
-                                        Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
+                        juegosLanzados++;
+                        CREDITOS_DISPONIBLES--;
+                        pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                        //I have no idea why this makes it work. But hey, it works!
+                        final int jugador = cover.getPlayer();
+                        System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
+                        cover.mostrarTiempoPreparacion();
+                        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+                        executor.schedule(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    System.out.println("Status: Jugador " + jugador + " lanza partida");
+                                    cover.setReady();
+                                    iniciarJuego();
+                                    System.out.println("en 10 segundos " + jugador + " corta jugada");
+                                    
+                                    final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+                                    executor.schedule(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                cover.setEnded();
+                                                finalizarJuego();
+                                            } catch (InterruptedException | AWTException ex) {
+                                                Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
+                                    }, TIEMPO_DE_JUEGO_SEGUNDOS, TimeUnit.SECONDS);
+                                } catch (InterruptedException | AWTException ex) {
+                                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                            }, 10, TimeUnit.SECONDS);
-                        } catch (InterruptedException | AWTException ex) {
-                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                            }
+                        }, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
                     }
                     if (CREDITOS_DISPONIBLES == 0) {
                         this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
@@ -221,7 +231,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFieldPasswordServicio)
                             .addComponent(btnApagarVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -383,7 +393,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     public static javax.swing.JLabel lblPaseTarjeta;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblValorJuego;
+    public static javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
 
