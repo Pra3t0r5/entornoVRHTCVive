@@ -29,28 +29,13 @@ public class ClickBot {
         bot.mouseMove(button[0], button[1]);
         bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         try {
-            Thread.sleep(10);
+            Thread.sleep(20);
         } catch (InterruptedException ex) {
             Logger.getLogger(ClickBot.class.getName()).log(Level.SEVERE, null, ex);
         }
         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-    }
+    }    
     
-    public static void stopPlayOf(int player) throws AWTException{
-        switch (player) {
-            case 1: click(READYPLAYER1);  
-                break;
-            case 2: click(READYPLAYER2);  
-                break;
-            case 3: click(READYPLAYER3);  
-                break;
-            case 4: click(READYPLAYER4);  
-                break;
-            default: System.out.println("Error, numero de jugador invalido."); 
-                break;
-        }
-        click(STOP);
-    }
     public static void clickReadyOf(int player) throws AWTException{
         switch (player) {
             case 1: click(READYPLAYER1);  
@@ -64,9 +49,11 @@ public class ClickBot {
             default: System.out.println("Error, numero de jugador invalido."); 
                 break;
         }
-    }
-    
+    }    
     public static void clickStart() throws AWTException{
         click(START);
+    }
+    public static void clickStop() throws AWTException{
+        click(STOP);
     }
 }

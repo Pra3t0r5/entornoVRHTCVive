@@ -30,8 +30,8 @@ public class EntornoVRHTCVive {
         Thread threadConcentrador = new Thread(concentradorManager);
         threadConcentrador.start();
 
-        //Instancio Jugadores para controlar sus tiempos de juego por separado
-        panelCoin.inicializarJugadores(NUMERO_JUGADORES);
+        //Instancio Covers para controlar partidas y sus tiempos de juego por separado
+        panelCoin.inicializarCovers(NUMERO_JUGADORES);
 
     }
 

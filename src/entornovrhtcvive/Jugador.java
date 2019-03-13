@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author fernando
  */
-public class JugadorThread extends Thread {
+public class Jugador {
 
     private final long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
     private int player;
@@ -55,20 +55,19 @@ public class JugadorThread extends Thread {
         System.out.println("Status: Thread Jugador " + player + " inicializada");
     }
 
-    public JugadorThread(int player) {
+    public Jugador(int player) {
         this.setPlayer(player);
         this.setCover(new PlayerCover(this.player));
         cover.ShowPnlBlqPlayers(this.player);
     }
 
     
-    @Override
     public void run() {        
         temporizar();
         try {
             Thread.currentThread().wait();
         } catch (InterruptedException ex) {
-            Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -84,12 +83,12 @@ public class JugadorThread extends Thread {
                     try {                        
                         finalizarJuego();
                     } catch (InterruptedException | AWTException ex) {
-                        Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }, 10, TimeUnit.SECONDS);
         } catch (InterruptedException | AWTException ex) {
-            Logger.getLogger(JugadorThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
         }     
     }
 
