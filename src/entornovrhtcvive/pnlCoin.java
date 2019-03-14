@@ -139,11 +139,13 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void iniciarJuego() {
         coverStarStop.Hide();
+        pausaPreventiva();
         try {
             ClickBot.clickStart();
         } catch (AWTException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pausaPreventiva();
         coverStarStop.Show();
     }
 
@@ -167,7 +169,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public void pausaPreventiva() {
         try {
-            Thread.sleep(20);
+            Thread.sleep(100);
         } catch (InterruptedException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -17,6 +17,8 @@ import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
@@ -61,7 +63,9 @@ public class Cover extends javax.swing.JFrame {
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
         this.HidePnlBlqPlayer();
         this.actualizarEstadoTexto();//COUNTDOWN
+        pausaPreventiva();
         ClickBot.clickReadyOf(player);
+        pausaPreventiva();
         this.ShowPnlBlqPlayer();
 
         ActionListener listener = new ActionListener() {
@@ -80,6 +84,14 @@ public class Cover extends javax.swing.JFrame {
         };
         contador = new Timer(1000, listener);
         contador.start();
+    }
+    
+    public void pausaPreventiva() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Cover.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setEnded() throws InterruptedException, AWTException {
