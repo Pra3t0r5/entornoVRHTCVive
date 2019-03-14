@@ -5,13 +5,14 @@
  */
 package entornovrhtcvive;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
+import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
+import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +30,6 @@ public class Cover extends javax.swing.JFrame {
     public static final int[] READYPLAYER2_COVER = {1000, 276, 1200, 356};
     public static final int[] READYPLAYER3_COVER = {1000, 355, 1200, 435};
     public static final int[] READYPLAYER4_COVER = {1000, 433, 1200, 513};
-
-    private long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
 
     final private int player;
 
@@ -59,8 +58,7 @@ public class Cover extends javax.swing.JFrame {
 
     public void setReady() throws InterruptedException, AWTException {
         contadorPreparacion.stop();
-        this.setRunning(true);
-        System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO / 60000 + " minutos'");
+        System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
         this.HidePnlBlqPlayer();
         this.actualizarEstadoTexto();//COUNTDOWN
         ClickBot.clickReadyOf(player);
@@ -69,9 +67,7 @@ public class Cover extends javax.swing.JFrame {
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
 
-            LocalTime time = LocalTime.of(0, 5, 0);//            Date time = java.util.Calendar.getInstance().setTime(new Date();
-
-            long i = TIEMPO_DE_JUEGO;
+            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);// 
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -79,7 +75,7 @@ public class Cover extends javax.swing.JFrame {
                 time = time.minusSeconds(1);
                 int minutos = time.getMinute();
                 int segundos = time.getSecond();
-                jLabel2.setText(minutos + ":" + segundos);
+                lblTemporizador.setText(minutos + ":" + segundos);
             }
         };
         contador = new Timer(1000, listener);
@@ -98,11 +94,11 @@ public class Cover extends javax.swing.JFrame {
 
     public void actualizarEstadoTexto() {
         if (this.isRunning()) {
-            this.jLabel1.setText("JUGADOR " + this.getPlayer() + ": Jugando");
+            this.lblEstadoJugador.setText("JUGADOR " + this.getPlayer() + ": Jugando");
 
         } else {
-            this.jLabel1.setText("JUGADOR " + this.getPlayer() + ": Listo");
-            this.jLabel2.setText("Pase tarjeta para jugar.");
+            this.lblEstadoJugador.setText("JUGADOR " + this.getPlayer() + ": Listo");
+            this.lblTemporizador.setText("Pase tarjeta para jugar.");
 
         }
     }
@@ -121,10 +117,10 @@ public class Cover extends javax.swing.JFrame {
 
     public void mostrarTiempoPreparacion() {
 
-        this.jLabel1.setText("Lanzamiento en:");
+        this.lblEstadoJugador.setText("Lanzamiento en:");
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
-            LocalTime time = LocalTime.of(0, 0, 5);
+            LocalTime time = LocalTime.of(0, 0, TIEMPO_DE_PREPARACION_SEGUNDOS);
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -132,7 +128,7 @@ public class Cover extends javax.swing.JFrame {
                 time = time.minusSeconds(1);
                 int minutos = time.getMinute();
                 int segundos = time.getSecond();
-                jLabel2.setText(minutos + ":" + segundos);
+                lblTemporizador.setText(minutos + ":" + segundos);
             }
         };
         contadorPreparacion = new Timer(1000, listener);
@@ -171,28 +167,28 @@ public class Cover extends javax.swing.JFrame {
             case 0: // Dimensions&Bounds of big pannel               
                 break;
             case 1: //Dimensions&Bounds of READYPLAYER1 blqPanel
-                jLabel1.setText("JUGADOR 1");
-                x0 = 0;//READYPLAYER1_COVER[0];
-                y0 = 0;//READYPLAYER1_COVER[1];
-                x1 = 200;//READYPLAYER1_COVER[2];
-                y1 = 200;//READYPLAYER1_COVER[3];
+                lblEstadoJugador.setText("JUGADOR 1");
+                x0 = READYPLAYER1_COVER[0];
+                y0 = READYPLAYER1_COVER[1];
+                x1 = READYPLAYER1_COVER[2];
+                y1 = READYPLAYER1_COVER[3];
                 break;
             case 2: //Dimensions&Bounds of READYPLAYER2 blqPanel
-                jLabel1.setText("JUGADOR 2");
+                lblEstadoJugador.setText("JUGADOR 2");
                 x0 = READYPLAYER2_COVER[0];
                 y0 = READYPLAYER2_COVER[1];
                 x1 = READYPLAYER2_COVER[2];
                 y1 = READYPLAYER2_COVER[3];
                 break;
             case 3: //Dimensions&Bounds of READYPLAYER3 blqPanel
-                jLabel1.setText("JUGADOR 3");
+                lblEstadoJugador.setText("JUGADOR 3");
                 x0 = READYPLAYER3_COVER[0];
                 y0 = READYPLAYER3_COVER[1];
                 x1 = READYPLAYER3_COVER[2];
                 y1 = READYPLAYER3_COVER[3];
                 break;
             case 4: //Dimensions&Bounds of READYPLAYER4 blqPanel
-                jLabel1.setText("JUGADOR 4");
+                lblEstadoJugador.setText("JUGADOR 4");
                 x0 = READYPLAYER4_COVER[0];
                 y0 = READYPLAYER4_COVER[1];
                 x1 = READYPLAYER4_COVER[2];
@@ -207,7 +203,7 @@ public class Cover extends javax.swing.JFrame {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
 
             frame.setBounds(x0, y0, x1, y1);
-            frame.setSize(200, 100); //FIXME: valores estimativos
+            frame.setSize(200, 80); //FIXME: valores estimativos
 
         } else if (gd.length > 0) {
             frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
@@ -223,8 +219,8 @@ public class Cover extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblEstadoJugador = new javax.swing.JLabel();
+        lblTemporizador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -232,13 +228,12 @@ public class Cover extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 600));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("JUGADORES BLOQUEADOS");
+        lblEstadoJugador.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblEstadoJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEstadoJugador.setText("JUGADORES BLOQUEADOS");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Pase tarjeta para jugar.");
+        lblTemporizador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTemporizador.setText("Pase tarjeta para jugar.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -247,17 +242,17 @@ public class Cover extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblEstadoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblEstadoJugador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblTemporizador)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -266,7 +261,7 @@ public class Cover extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblEstadoJugador;
+    private javax.swing.JLabel lblTemporizador;
     // End of variables declaration//GEN-END:variables
 }

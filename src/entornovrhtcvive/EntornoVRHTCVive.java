@@ -5,8 +5,6 @@
  */
 package entornovrhtcvive;
 
-import java.awt.Color;
-
 /**
  * 
  * @author fernando
@@ -15,6 +13,9 @@ public class EntornoVRHTCVive {
 
     public static final int PANTALLA_SELECCIONADA = 0; //{0,1,2...}
     public static final int NUMERO_JUGADORES = 4;
+    public static final int TIEMPO_DE_JUEGO_MINUTOS = 10;
+    public static final int TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
+    
 
     public static void main(String[] args) {
         System.out.println("//////////////////Iniciado Servidor VR//////////////////");

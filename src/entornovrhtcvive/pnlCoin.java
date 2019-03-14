@@ -5,6 +5,8 @@
  */
 package entornovrhtcvive;
 
+import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
+import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -33,12 +35,12 @@ public class pnlCoin extends javax.swing.JFrame {
     public static int CREDITOS_DISPONIBLES = 0;
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
-    private final long TIEMPO_DE_JUEGO = 5000;//600000; //10 Minutos
-    public final long TIEMPO_DE_JUEGO_SEGUNDOS = 10;
-    private final long TIEMPO_DE_PREPARACION_SEGUNDOS = 5;
+    private static final long TIEMPO_DE_JUEGO_MILISEGUNDOS = 600000; //10 Minutos    
+    public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
+    private int proximoJugador;
+
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
-    
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
@@ -49,7 +51,7 @@ public class pnlCoin extends javax.swing.JFrame {
     }
 
     public pnlCoin() {
-        initComponents();        
+        initComponents();
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
@@ -78,30 +80,38 @@ public class pnlCoin extends javax.swing.JFrame {
                 int juegosLanzados = 0;
                 for (Cover cover : covers) {
                     if (!cover.isRunning()) {
+                        cover.setRunning(true);//lo saque de dentro de Set ready porque altera los schedulers
                         juegosLanzados++;
                         CREDITOS_DISPONIBLES--;
                         pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                         //I have no idea why this makes it work. But hey, it works!
                         final int jugador = cover.getPlayer();
+                        proximoJugador = getProximoJugador(jugador);
                         System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
+
+                        coverStarStop.lblTutoYSiguienteJugador.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\". Proximo Jugador: " + proximoJugador);
+
                         cover.mostrarTiempoPreparacion();
-                        
-                        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);                        
+
+                        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
                         executor.schedule(new Runnable() {
                             @Override
                             public void run() {
                                 try {
                                     System.out.println("Status: Jugador " + jugador + " lanza partida");
                                     cover.setReady();
+                                    //pausa preventiva para registrar clicks sin arrastrar
+                                    pausaPreventiva();
                                     iniciarJuego();
-                                    System.out.println("en 10 segundos " + jugador + " corta jugada");
-                                    
+                                    System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
+
                                     final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
                                     executor.schedule(new Runnable() {
                                         @Override
                                         public void run() {
                                             try {
                                                 cover.setEnded();
+                                                pausaPreventiva();
                                                 finalizarJuego();
                                             } catch (InterruptedException | AWTException ex) {
                                                 Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,6 +155,22 @@ public class pnlCoin extends javax.swing.JFrame {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
         coverStarStop.Show();
+    }
+
+    private int getProximoJugador(int ultimoJugador) {
+        if (ultimoJugador != 4) {
+            return ultimoJugador + 1;
+        } else {
+            return 1;
+        }
+    }
+
+    public void pausaPreventiva() {
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 

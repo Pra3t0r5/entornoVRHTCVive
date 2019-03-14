@@ -16,10 +16,13 @@ import javax.swing.JFrame;
  * @author fernando
  */
 public class coverStartStop extends javax.swing.JFrame {   
+
+    private String proximoJugador;
    
     public coverStartStop(int screen) {
         initComponents();
         initialize(screen, this);
+        this.lblTutoYSiguienteJugador.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");
         this.Show();
     }
     
@@ -61,7 +64,7 @@ public class coverStartStop extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTutoYSiguienteJugador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -73,9 +76,9 @@ public class coverStartStop extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SISTEMA AUTOMATIZADO");
 
-        jLabel4.setFont(new java.awt.Font("Lato Medium", 2, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");
+        lblTutoYSiguienteJugador.setFont(new java.awt.Font("Lato Medium", 2, 14)); // NOI18N
+        lblTutoYSiguienteJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTutoYSiguienteJugador.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\".");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +88,7 @@ public class coverStartStop extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE))
+                    .addComponent(lblTutoYSiguienteJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,7 +97,7 @@ public class coverStartStop extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(lblTutoYSiguienteJugador)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -104,6 +107,6 @@ public class coverStartStop extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel lblTutoYSiguienteJugador;
     // End of variables declaration//GEN-END:variables
 }

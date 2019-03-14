@@ -67,8 +67,11 @@
           <Font name="Lato Medium" size="14" style="2"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque &quot;Jugar&quot;"/>
+        <Property name="text" type="java.lang.String" value="Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque &quot;Jugar&quot;."/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
