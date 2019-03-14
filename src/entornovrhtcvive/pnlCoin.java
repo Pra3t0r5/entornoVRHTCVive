@@ -384,14 +384,14 @@ public class pnlCoin extends javax.swing.JFrame {
                 x0 = 0;
                 y0 = screenSize.height - screenSize.height / 2;
                 x1 = screenSize.width;
-                y1 = y0 / 3;
+                y1 = 680;//y0 / 3;
                 System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
                 break;
             case 1:
                 x0 = screenSize.width;
                 y0 = screenSize.height - screenSize.height / 2;
                 x1 = screenSize.width;
-                y1 = y0 / 2;
+                y1 = 680;//y0 / 2;
                 System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
                 break;
             default:
