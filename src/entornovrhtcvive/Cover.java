@@ -171,28 +171,28 @@ public class Cover extends javax.swing.JFrame {
             case 0: // Dimensions&Bounds of big pannel               
                 break;
             case 1: //Dimensions&Bounds of READYPLAYER1 blqPanel
-                jLabel1.setText("Jugador 1");
+                jLabel1.setText("JUGADOR 1");
                 x0 = 0;//READYPLAYER1_COVER[0];
                 y0 = 0;//READYPLAYER1_COVER[1];
                 x1 = 200;//READYPLAYER1_COVER[2];
                 y1 = 200;//READYPLAYER1_COVER[3];
                 break;
             case 2: //Dimensions&Bounds of READYPLAYER2 blqPanel
-                jLabel1.setText("Jugador 2");
+                jLabel1.setText("JUGADOR 2");
                 x0 = READYPLAYER2_COVER[0];
                 y0 = READYPLAYER2_COVER[1];
                 x1 = READYPLAYER2_COVER[2];
                 y1 = READYPLAYER2_COVER[3];
                 break;
             case 3: //Dimensions&Bounds of READYPLAYER3 blqPanel
-                jLabel1.setText("Jugador 3");
+                jLabel1.setText("JUGADOR 3");
                 x0 = READYPLAYER3_COVER[0];
                 y0 = READYPLAYER3_COVER[1];
                 x1 = READYPLAYER3_COVER[2];
                 y1 = READYPLAYER3_COVER[3];
                 break;
             case 4: //Dimensions&Bounds of READYPLAYER4 blqPanel
-                jLabel1.setText("Jugador 4");
+                jLabel1.setText("JUGADOR 4");
                 x0 = READYPLAYER4_COVER[0];
                 y0 = READYPLAYER4_COVER[1];
                 x1 = READYPLAYER4_COVER[2];
@@ -238,7 +238,7 @@ public class Cover extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("INGRESE COINS PARA HABILITAR");
+        jLabel2.setText("Pase tarjeta para jugar.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

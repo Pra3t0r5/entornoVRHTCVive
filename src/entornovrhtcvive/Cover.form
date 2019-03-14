@@ -67,7 +67,7 @@
           <Font name="Dialog" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="INGRESE COINS PARA HABILITAR"/>
+        <Property name="text" type="java.lang.String" value="Pase tarjeta para jugar."/>
       </Properties>
     </Component>
   </SubComponents>
