@@ -6,6 +6,7 @@
 package entornovrhtcvive;
 
 import java.awt.AWTException;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
@@ -25,7 +26,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ernes
+ * @author fernando
  */
 public class pnlCoin extends javax.swing.JFrame {
 
@@ -48,7 +49,7 @@ public class pnlCoin extends javax.swing.JFrame {
     }
 
     public pnlCoin() {
-        initComponents();
+        initComponents();        
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
@@ -84,7 +85,8 @@ public class pnlCoin extends javax.swing.JFrame {
                         final int jugador = cover.getPlayer();
                         System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
                         cover.mostrarTiempoPreparacion();
-                        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+                        
+                        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);                        
                         executor.schedule(new Runnable() {
                             @Override
                             public void run() {

@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author ernes
+ * @author fernando
  */
 public class coverStartStop extends javax.swing.JFrame {   
    

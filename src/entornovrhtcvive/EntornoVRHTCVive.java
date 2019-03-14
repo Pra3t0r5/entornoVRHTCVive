@@ -5,9 +5,11 @@
  */
 package entornovrhtcvive;
 
+import java.awt.Color;
+
 /**
- *
- * @author ernes
+ * 
+ * @author fernando
  */
 public class EntornoVRHTCVive {
 

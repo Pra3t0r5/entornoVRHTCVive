@@ -20,7 +20,7 @@ import javax.swing.Timer;
 
 /**
  *
- * @author ernes
+ * @author fernando
  */
 public class Cover extends javax.swing.JFrame {
 
