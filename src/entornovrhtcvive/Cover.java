@@ -28,10 +28,10 @@ import javax.swing.Timer;
 public class Cover extends javax.swing.JFrame {
 
     //Estimado basado en botones ready y dimensiones de pantalla original, formato: x0, y0, x1, y1
-    public static final int[] READYPLAYER1_COVER = {1000, 205, 1200, 285};
-    public static final int[] READYPLAYER2_COVER = {1000, 276, 1200, 356};
-    public static final int[] READYPLAYER3_COVER = {1000, 355, 1200, 435};
-    public static final int[] READYPLAYER4_COVER = {1000, 433, 1200, 513};
+    public static final int[] READYPLAYER1_COVER = {1015, 213, 1174, 288};
+    public static final int[] READYPLAYER2_COVER = {1015, 293, 1174, 369};
+    public static final int[] READYPLAYER3_COVER = {1015, 375, 1174, 451};
+    public static final int[] READYPLAYER4_COVER = {1015, 456, 1174, 533};
 
     final private int player;
 
@@ -85,7 +85,7 @@ public class Cover extends javax.swing.JFrame {
         contador = new Timer(1000, listener);
         contador.start();
     }
-    
+
     public void pausaPreventiva() {
         try {
             Thread.sleep(100);
@@ -170,9 +170,6 @@ public class Cover extends javax.swing.JFrame {
 
     //Inicializa 1 panel de bloqueo de READY PLAYER para un hilo Jugador
     public void showOnScreenPnlBlq(int screen, JFrame frame) {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice[] gd = ge.getScreenDevices();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 
         switch (player) {
@@ -211,20 +208,9 @@ public class Cover extends javax.swing.JFrame {
                 break;
         }
 
-        if (screen > -1 && screen < gd.length) {
-            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
+        frame.setBounds(x0, y0, x1, y1);
+        frame.setSize(159, 75); //FIXME: valores estimativos
 
-            frame.setBounds(x0, y0, x1, y1);
-            frame.setSize(200, 80); //FIXME: valores estimativos
-
-        } else if (gd.length > 0) {
-            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
-
-            frame.setBounds(x0, y0, x1, y1);
-            frame.setSize(screenSize.width / 4, screenSize.height);
-        } else {
-            throw new RuntimeException("No Screens Found");
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -240,10 +226,11 @@ public class Cover extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 600));
 
-        lblEstadoJugador.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblEstadoJugador.setFont(new java.awt.Font("Liberation Sans Narrow", 1, 14)); // NOI18N
         lblEstadoJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEstadoJugador.setText("JUGADORES BLOQUEADOS");
 
+        lblTemporizador.setFont(new java.awt.Font("Liberation Sans", 1, 10)); // NOI18N
         lblTemporizador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTemporizador.setText("Pase tarjeta para jugar.");
 
@@ -254,8 +241,8 @@ public class Cover extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEstadoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEstadoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -265,7 +252,7 @@ public class Cover extends javax.swing.JFrame {
                 .addComponent(lblEstadoJugador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTemporizador)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();

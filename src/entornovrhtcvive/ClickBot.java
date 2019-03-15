@@ -17,12 +17,12 @@ import java.util.logging.Logger;
  */
 public class ClickBot {
     //Coordenadas hardcodeadas para pantalla original
-    public static final int[] START = {446 , 711};
-    public static final int[] STOP = {594 , 712};
-    public static final int[] READYPLAYER1 = {1091 , 245};
-    public static final int[] READYPLAYER2 = {1091 , 316};
-    public static final int[] READYPLAYER3 = {1091 , 395};
-    public static final int[] READYPLAYER4 = {1091 , 473};
+    public static final int[] START = {446 , 740};
+    public static final int[] STOP = {590 , 740};
+    public static final int[] READYPLAYER1 = {1091 , 255};
+    public static final int[] READYPLAYER2 = {1091 , 336};
+    public static final int[] READYPLAYER3 = {1091 , 411};
+    public static final int[] READYPLAYER4 = {1091 , 490};
 
     public static void click(int[] button) throws AWTException {
         Robot bot = new Robot();
