@@ -5,6 +5,7 @@
  */
 package entornovrhtcvive;
 
+import static entornovrhtcvive.ClickBot.TIEMPO_ENTRE_CLICKS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
@@ -92,9 +93,9 @@ public class pnlCoin extends javax.swing.JFrame {
                         public void run() {
                             try {
                                 System.out.println("Status: Jugador " + jugador + " lanza partida");
+
                                 cover.setReady();
-                                //pausa preventiva para registrar clicks sin arrastrar
-                                
+
                                 iniciarJuego();
                                 System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
@@ -104,7 +105,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                     public void run() {
                                         try {
                                             cover.setEnded();
-                                            
+
                                             finalizarJuego();
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,12 +118,17 @@ public class pnlCoin extends javax.swing.JFrame {
                         }
                     }, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
                 }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ClickBot.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 if (CREDITOS_DISPONIBLES == 0) {
-                    this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     break;
                 }
                 if (juegosLanzados == 4) {
-                    this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     break;
                 }
             }
@@ -131,7 +137,6 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void iniciarJuego() {
         coverStarStop.Hide();
-       
         try {
             ClickBot.clickStart();
         } catch (AWTException ex) {
@@ -362,10 +367,10 @@ public class pnlCoin extends javax.swing.JFrame {
         x0 = 0;
         y0 = 600;
         x1 = 1280;
-        y1 = 133; 
+        y1 = 133;
         System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
         //BOUNDS:0x600;1280x133
-        
+
         frame.setBounds(x0, y0, x1, y1);
         frame.setSize(x1, y1);
     }
@@ -379,5 +384,5 @@ public class pnlCoin extends javax.swing.JFrame {
     public static javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
-  
+
 }
