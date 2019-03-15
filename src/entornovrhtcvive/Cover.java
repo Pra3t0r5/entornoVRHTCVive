@@ -63,9 +63,9 @@ public class Cover extends javax.swing.JFrame {
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
         this.HidePnlBlqPlayer();
         this.actualizarEstadoTexto();//COUNTDOWN
-        pausaPreventiva();
+        
         ClickBot.clickReadyOf(player);
-        pausaPreventiva();
+        
         this.ShowPnlBlqPlayer();
 
         ActionListener listener = new ActionListener() {

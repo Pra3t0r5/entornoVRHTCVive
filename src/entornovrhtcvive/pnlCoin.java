@@ -94,7 +94,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                 System.out.println("Status: Jugador " + jugador + " lanza partida");
                                 cover.setReady();
                                 //pausa preventiva para registrar clicks sin arrastrar
-                                pausaPreventiva();
+                                
                                 iniciarJuego();
                                 System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
@@ -104,7 +104,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                     public void run() {
                                         try {
                                             cover.setEnded();
-                                            pausaPreventiva();
+                                            
                                             finalizarJuego();
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,7 +131,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void iniciarJuego() {
         coverStarStop.Hide();
-        pausaPreventiva();
+       
         try {
             ClickBot.clickStart();
         } catch (AWTException ex) {
