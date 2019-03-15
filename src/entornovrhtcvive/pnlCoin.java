@@ -8,12 +8,6 @@ package entornovrhtcvive;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.DisplayMode;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,63 +69,61 @@ public class pnlCoin extends javax.swing.JFrame {
             CREDITOS_DISPONIBLES = 0;
             lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
             JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (CREDITOS_DISPONIBLES != 0) {
-                int juegosLanzados = 0;
-                for (Cover cover : covers) {
-                    if (!cover.isRunning()) {
-                        cover.setRunning(true);//lo saque de dentro de Set ready porque altera los schedulers
-                        juegosLanzados++;
-                        CREDITOS_DISPONIBLES--;
-                        pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                        //I have no idea why this makes it work. But hey, it works!
-                        final int jugador = cover.getPlayer();
-                        proximoJugador = getProximoJugador(jugador);
-                        System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
+        } else if (CREDITOS_DISPONIBLES != 0) {
+            int juegosLanzados = 0;
+            for (Cover cover : covers) {
+                if (!cover.isRunning()) {
+                    cover.setRunning(true);//lo saque de dentro de Set ready porque altera los schedulers
+                    juegosLanzados++;
+                    CREDITOS_DISPONIBLES--;
+                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    //I have no idea why this makes it work. But hey, it works!
+                    final int jugador = cover.getPlayer();
+                    proximoJugador = getProximoJugador(jugador);
+                    System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
 
-                        coverStarStop.lblTutoYSiguienteJugador.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\". Proximo Jugador: " + proximoJugador);
+                    coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\". Proximo Jugador: " + proximoJugador);
 
-                        cover.mostrarTiempoPreparacion();
+                    cover.mostrarTiempoPreparacion();
 
-                        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                        executor.schedule(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    System.out.println("Status: Jugador " + jugador + " lanza partida");
-                                    cover.setReady();
-                                    //pausa preventiva para registrar clicks sin arrastrar
-                                    pausaPreventiva();
-                                    iniciarJuego();
-                                    System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
+                    final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+                    executor.schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                System.out.println("Status: Jugador " + jugador + " lanza partida");
+                                cover.setReady();
+                                //pausa preventiva para registrar clicks sin arrastrar
+                                
+                                iniciarJuego();
+                                System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
-                                    final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                                    executor.schedule(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                cover.setEnded();
-                                                pausaPreventiva();
-                                                finalizarJuego();
-                                            } catch (InterruptedException | AWTException ex) {
-                                                Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
+                                final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+                                executor.schedule(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            cover.setEnded();
+                                            
+                                            finalizarJuego();
+                                        } catch (InterruptedException | AWTException ex) {
+                                            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                                         }
-                                    }, TIEMPO_DE_JUEGO_SEGUNDOS, TimeUnit.SECONDS);
-                                } catch (InterruptedException | AWTException ex) {
-                                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                    }
+                                }, TIEMPO_DE_JUEGO_SEGUNDOS, TimeUnit.SECONDS);
+                            } catch (InterruptedException | AWTException ex) {
+                                Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        }, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
-                    }
-                    if (CREDITOS_DISPONIBLES == 0) {
-                        this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                        break;
-                    }
-                    if (juegosLanzados == 4) {
-                        this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                        break;
-                    }
+                        }
+                    }, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
+                }
+                if (CREDITOS_DISPONIBLES == 0) {
+                    this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    break;
+                }
+                if (juegosLanzados == 4) {
+                    this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    break;
                 }
             }
         }
@@ -139,13 +131,12 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void iniciarJuego() {
         coverStarStop.Hide();
-        pausaPreventiva();
+       
         try {
             ClickBot.clickStart();
         } catch (AWTException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        pausaPreventiva();
         coverStarStop.Show();
     }
 
@@ -366,56 +357,18 @@ public class pnlCoin extends javax.swing.JFrame {
      * @param frame
      */
     public static void showOnScreen(int screen, JFrame frame) {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice[] gd = ge.getScreenDevices();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 
-        //TESTING: Muestra tamaños de monitor, usualmente sumatoria de todas las pantallas conectadas
-        for (GraphicsDevice curGs : gd) {
-            DisplayMode dm = curGs.getDisplayMode();
-            System.out.println("Detected Borders: " + dm.getWidth() + " x " + dm.getHeight());
-            System.out.println("Detected Dimensions: " + screenSize);
-        }
-
-        //Seleccion de dimensiones iniciales dependiente del monitor seleccionado
-        switch (screen) {
-            case 0:
-                x0 = 0;
-                y0 = screenSize.height - screenSize.height / 2;
-                x1 = screenSize.width;
-                y1 = 680;//y0 / 3;
-                System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
-                break;
-            case 1:
-                x0 = screenSize.width;
-                y0 = screenSize.height - screenSize.height / 2;
-                x1 = screenSize.width;
-                y1 = 680;//y0 / 2;
-                System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
-                break;
-            default:
-                System.out.println("Warning: No hay una configuracion disponible para mas de dos pantallas!\nN° de pantallas seleccionadas: " + screen);
-                break;
-        }
-
-        //Fijacion final de las dimensiones de acuerdo a la configuracion de pantallas presente
-        if (screen > -1 && screen < gd.length) {
-            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
-
-            frame.setBounds(x0 / gd.length, y0 + y0 / 2, x1, 600);
-            frame.setSize(x1 / gd.length, y1);
-        } else if (gd.length > 0) {
-            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
-
-            frame.setBounds(x0, y0, x1, y1);
-            frame.setSize(screenSize.width - screenSize.width / 4, screenSize.height);
-        } else {
-            throw new RuntimeException("No se encontraron pantallas!");
-        }
+        x0 = 0;
+        y0 = 600;
+        x1 = 1280;
+        y1 = 133; 
+        System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+        //BOUNDS:0x600;1280x133
+        
+        frame.setBounds(x0, y0, x1, y1);
+        frame.setSize(x1, y1);
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagarVR;
     private javax.swing.JButton btnServicio;
@@ -426,95 +379,5 @@ public class pnlCoin extends javax.swing.JFrame {
     public static javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
-
-    /*public void inicializarJugadores(int numeroDeJugadores) {
-        int player = 0;
-        while (true) {
-            player++;
-            JugadorThread jugador = new JugadorThread(player);
-            jugadores.add(jugador);
-
-            if (player == numeroDeJugadores) {
-                break;
-            }
-        }
-    }
-     */
-    /**
-     * Instancia los threads y los añade a un listado para controlar su estado y
-     * asignar automaticamente nuevas jugadas
-     *
-     * @author fernando
-     */
-    /*private void jugar() {
-        //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
-        if (CREDITOS_DISPONIBLES <= 0) {
-            CREDITOS_DISPONIBLES = 0;
-            lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
-            JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
-        } else {
-            while (CREDITOS_DISPONIBLES != 0) {
-
-                boolean lanzado = false;
-                explorarJugadoresListos(jugadores);
-                
-                if (!jugadoresListos.isEmpty()) {
-                    for (JugadorThread jugador : jugadores) {
-                        
-                        //reviso si el jugador esta listo
-                        if (jugadoresListos.contains(jugador)) {
-                            CREDITOS_DISPONIBLES--;
-                            this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                            this.setVisible(false);
-                            try {
-                                //lanzo la partida y quito el jugador de la lista de listos
-                                jugador.start();
-                                jugadoresListos.remove(jugador);
-
-                            } catch (IllegalThreadStateException e) {
-                                //el thread ya fue usado asi que rescato los valores..
-                                int nro = jugador.getPlayer();
-                                JFrame cover = jugador.getCover();
-                                //...e instancio una nueva thread con los valores que necesito para mantener siempre los 4 jugadores con sus respectivos paneles...
-                                JugadorThread nuevoJugador = new JugadorThread(nro);
-                                nuevoJugador.setCover((PlayerCover) cover);
-                                //...y elimino duplicados
-                                jugador.interrupt();
-                                jugadoresListos.remove(jugador);                                
-                                jugadoresListos.add(nuevoJugador);
-
-                                System.out.println("Status: ThreadJugador " + nro + " Restarteado");
-                                nuevoJugador.start();
-                                JUGADORES_JUGANDO++;
-                                jugadoresListos.remove(nuevoJugador);
-                            }
-                        }
-                        this.setVisible(true);
-                        lanzado = true;
-
-                        if (CREDITOS_DISPONIBLES == 0) {
-                            this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                            break;
-                        } 
-                    }
-                }
-                if (!lanzado) {
-                    System.out.println("Status: Todos los jugadores estan jugando, esperando 10 segundos antes de reintentar");
-                    try {
-                        TimeUnit.SECONDS.sleep(10);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }
-    }
-
-    private void explorarJugadoresListos(ArrayList<JugadorThread> jugadores) {
-        for (JugadorThread jugador : jugadores) {
-            if (!jugador.isAlive()) {
-                jugadoresListos.add(jugador);                
-            }
-        }
-    }*/
+  
 }
