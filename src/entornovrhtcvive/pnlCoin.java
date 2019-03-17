@@ -5,7 +5,7 @@
  */
 package entornovrhtcvive;
 
-import static entornovrhtcvive.ClickBot.TIEMPO_ENTRE_CLICKS;
+import static entornovrhtcvive.EntornoVRHTCVive.NUMERO_JUGADORES;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
@@ -30,10 +30,10 @@ public class pnlCoin extends javax.swing.JFrame {
     public static int CREDITOS_DISPONIBLES = 0;
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
-    private static final long TIEMPO_DE_JUEGO_MILISEGUNDOS = 600000; //10 Minutos    
     public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
+    public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 150;
     private int proximoJugador;
-    private int juegosLanzadosTotal=0;
+    private int juegosLanzadosTotal = 0;
 
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
@@ -60,13 +60,12 @@ public class pnlCoin extends javax.swing.JFrame {
             try {
                 covers.add(cover);
             } catch (Exception ex) {
-                System.out.println("ex:" + ex);
+                System.out.println("Excepcion:" + ex);
             }
         }
     }
 
     private void jugar() {
-        //FIXME: bandera para que no pueda pasar la tarjeta multiples veces y romper
         if (CREDITOS_DISPONIBLES <= 0) {
             CREDITOS_DISPONIBLES = 0;
             lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
@@ -75,19 +74,20 @@ public class pnlCoin extends javax.swing.JFrame {
             int juegosLanzados = 0;
             for (Cover cover : covers) {
                 if (!cover.isRunning()) {
-                    cover.setRunning(true);//lo saque de dentro de Set ready porque altera los schedulers
+
+                    cover.setRunning(true);//extraida de setReady porque altera los schedulers
+
                     juegosLanzados++;
                     juegosLanzadosTotal++;
                     CREDITOS_DISPONIBLES--;
-                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                    pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
-                    //I have no idea why this makes it work. But hey, it works!
                     final int jugador = cover.getPlayer();
                     proximoJugador = getProximoJugador(jugador);
-                    System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
 
+                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
                     coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\". Proximo Jugador: " + proximoJugador);
-
+                    System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
+                    
                     cover.mostrarTiempoPreparacion();
 
                     final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
@@ -95,8 +95,6 @@ public class pnlCoin extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                System.out.println("Status: Jugador " + jugador + " lanza partida");
-
                                 cover.setReady();
 
                                 iniciarJuego();
@@ -108,7 +106,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                     public void run() {
                                         try {
                                             cover.setEnded();
-
+                                            
                                             finalizarJuego();
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,18 +120,13 @@ public class pnlCoin extends javax.swing.JFrame {
                     }, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
                 }
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(TIEMPO_DE_DISTANCIAMIENTO_MILISEG);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(ClickBot.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                if (CREDITOS_DISPONIBLES == 0) {
-                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                if (CREDITOS_DISPONIBLES == 0 || NUMERO_JUGADORES == juegosLanzados) {
                     break;
-                }
-                if (juegosLanzados == 4) {
-                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                    break;
-                }
+                }                
             }
         }
     }
@@ -145,6 +138,7 @@ public class pnlCoin extends javax.swing.JFrame {
         } catch (AWTException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ClickBot.syncMainThread();
         coverStarStop.Show();
     }
 
@@ -155,6 +149,7 @@ public class pnlCoin extends javax.swing.JFrame {
         } catch (AWTException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ClickBot.syncMainThread();
         coverStarStop.Show();
     }
 
@@ -163,14 +158,6 @@ public class pnlCoin extends javax.swing.JFrame {
             return ultimoJugador + 1;
         } else {
             return 1;
-        }
-    }
-
-    public void pausaPreventiva() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -187,6 +174,7 @@ public class pnlCoin extends javax.swing.JFrame {
         coinListener = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         lblCantJugadasTotal = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -250,6 +238,10 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Carlito", 1, 12)); // NOI18N
+        jLabel1.setText("Jugadores Habilitados");
+        jLabel1.setName("lblJugadoresHabilitados"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,14 +249,17 @@ public class pnlCoin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel1))
                             .addComponent(txtFieldPasswordServicio)
                             .addComponent(btnApagarVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -277,40 +272,40 @@ public class pnlCoin extends javax.swing.JFrame {
                         .addComponent(lblValorJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(lblCantJugadasTotal)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPaseTarjeta))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(lblCantJugadasTotal))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblValorJuego))))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFieldPasswordServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblValorJuego)
-                        .addContainerGap(35, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCantJugadasTotal)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel1)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -392,6 +387,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private javax.swing.JButton btnServicio;
     public static javax.swing.JCheckBox coinListener;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private static javax.swing.JLabel lblCantJugadasTotal;
     public static javax.swing.JLabel lblPaseTarjeta;
     private javax.swing.JLabel lblTitulo;

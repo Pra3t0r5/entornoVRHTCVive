@@ -5,10 +5,6 @@
  */
 package entornovrhtcvive;
 
-import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
 import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
@@ -62,7 +58,7 @@ public class Cover extends javax.swing.JFrame {
         contadorPreparacion.stop();
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
         this.HidePnlBlqPlayer();
-        this.actualizarEstadoTexto();//COUNTDOWN
+        this.actualizarEstadoTexto();
         
         ClickBot.clickReadyOf(player);
         
