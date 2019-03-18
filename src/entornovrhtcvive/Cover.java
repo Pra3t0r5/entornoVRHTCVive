@@ -67,7 +67,7 @@ public class Cover extends javax.swing.JFrame {
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
 
-            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);// 
+            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -90,7 +90,7 @@ public class Cover extends javax.swing.JFrame {
         }
     }
 
-    public void setEnded() throws InterruptedException, AWTException {
+     public void setEnded() throws InterruptedException, AWTException {
         contador.stop();
         this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
@@ -99,6 +99,13 @@ public class Cover extends javax.swing.JFrame {
         this.actualizarEstadoTexto();
         this.ShowPnlBlqPlayer();
         System.out.println("El jugador '" + player + "' completo su sesion de juego");
+    }
+
+    public void unTickReady() throws InterruptedException, AWTException {
+        this.HidePnlBlqPlayer();
+        ClickBot.clickReadyOf(player);
+        ClickBot.syncMainThread();
+        this.ShowPnlBlqPlayer();
     }
 
     public void actualizarEstadoTexto() {
