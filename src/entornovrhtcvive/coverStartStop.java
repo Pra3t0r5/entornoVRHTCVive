@@ -17,8 +17,6 @@ import javax.swing.JFrame;
  */
 public class coverStartStop extends javax.swing.JFrame {
 
-    private String proximoJugador;
-
     public coverStartStop(int screen) {
         initComponents();
         initialize(screen, this);

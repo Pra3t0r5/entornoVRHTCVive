@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  * @author fernando
  */
 public class ClickBot {
+
     public static final int[] START = {446, 740};
     public static final int[] STOP = {590, 740};
     public static final int[] READYPLAYER1 = {1091, 255};
@@ -27,9 +28,11 @@ public class ClickBot {
     public static final int TIEMPO_ENTRE_CLICKS = 40;
 
     /**
-     * Ejecuta un click completo en las coordenadas recibidas. La accion toma tiempo y es lanzada en hilos paralelos al que lo llama.
+     * Ejecuta un click completo en las coordenadas recibidas. La accion toma
+     * tiempo y es lanzada en hilos paralelos al que lo llama.
+     *
      * @param button
-     * @throws AWTException 
+     * @throws AWTException
      */
     public static void click(int[] button) throws AWTException {
         Robot bot = new Robot();
@@ -84,14 +87,15 @@ public class ClickBot {
     public static void clickStop() throws AWTException {
         click(STOP);
     }
-    
+
     /**
-     * Las acciones del ClickBot toman tiempo y se ejecutan de forma paralela al hilo primario
-     * por lo que dicho hilo debe esperar a que las acciones del bot se completen
+     * Las acciones del ClickBot toman tiempo y se ejecutan de forma paralela al
+     * hilo primario por lo que dicho hilo debe esperar a que las acciones del
+     * bot se completen
      */
     public static void syncMainThread() {
         try {
-            Thread.sleep(TIEMPO_ENTRE_CLICKS+10);
+            Thread.sleep(TIEMPO_ENTRE_CLICKS + 10);
         } catch (InterruptedException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }

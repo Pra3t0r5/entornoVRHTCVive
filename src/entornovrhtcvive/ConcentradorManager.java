@@ -55,9 +55,9 @@ public class ConcentradorManager implements Runnable {
                 if (modifiedSentence.equals("COIN")) {
                     pnlCoin.lblValorJuego.setText("CREDITOS: " + pnlCoin.CREDITOS_DISPONIBLES);
                     System.out.println("Status: Pase de tarjeta detectado");
-                    if (pnlCoin.coinListener.isSelected()) {                        
+                    if (pnlCoin.coinListener.isSelected()) {
                         pnlCoin.coinListener.setSelected(false);
-                    }else{
+                    } else {
                         pnlCoin.coinListener.setSelected(true);
                     }
                 }

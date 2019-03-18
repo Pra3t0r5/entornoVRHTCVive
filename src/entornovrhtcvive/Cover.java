@@ -28,11 +28,10 @@ public class Cover extends javax.swing.JFrame {
     public static final int[] READYPLAYER2_COVER = {1015, 293, 1174, 369};
     public static final int[] READYPLAYER3_COVER = {1015, 375, 1174, 451};
     public static final int[] READYPLAYER4_COVER = {1015, 456, 1174, 533};
+    public static final int[] COVER_DIMENSIONS = {159, 75};
 
     final private int player;
-
     public boolean running;
-
     Timer contador;
     Timer contadorPreparacion;
 
@@ -59,9 +58,9 @@ public class Cover extends javax.swing.JFrame {
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
         this.HidePnlBlqPlayer();
         this.actualizarEstadoTexto();
-        
+
         ClickBot.clickReadyOf(player);
-        
+
         this.ShowPnlBlqPlayer();
 
         ActionListener listener = new ActionListener() {
@@ -103,11 +102,9 @@ public class Cover extends javax.swing.JFrame {
     public void actualizarEstadoTexto() {
         if (this.isRunning()) {
             this.lblEstadoJugador.setText("JUGADOR " + this.getPlayer() + ": Jugando");
-
         } else {
             this.lblEstadoJugador.setText("JUGADOR " + this.getPlayer() + ": Listo");
             this.lblTemporizador.setText("Pase tarjeta para jugar.");
-
         }
     }
 
@@ -124,7 +121,6 @@ public class Cover extends javax.swing.JFrame {
     }
 
     public void mostrarTiempoPreparacion() {
-
         this.lblEstadoJugador.setText("Lanzamiento en:");
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
@@ -203,10 +199,8 @@ public class Cover extends javax.swing.JFrame {
                 System.out.println("Error: Numero de jugadores incorrecto. Numero ingresado: " + player);
                 break;
         }
-
         frame.setBounds(x0, y0, x1, y1);
-        frame.setSize(159, 75); //FIXME: valores estimativos
-
+        frame.setSize(COVER_DIMENSIONS[0], COVER_DIMENSIONS[1]);
     }
 
     @SuppressWarnings("unchecked")
