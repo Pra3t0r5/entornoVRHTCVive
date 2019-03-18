@@ -75,7 +75,7 @@ public class pnlCoin extends javax.swing.JFrame {
                             }
                         });
                     } else {
-                        JOptionPane.showMessageDialog(null, "Para habilitar/inhabilitar jugadores, no tiene que haber partidas en curso.");
+                        JOptionPane.showMessageDialog(null, "No pueden haber personas jugando.");
                         cmbJugadoresHabilitados.setSelectedIndex(NUMERO_JUGADORES-1);
                     }
                 }
