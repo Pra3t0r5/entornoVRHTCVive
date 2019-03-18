@@ -33,7 +33,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
     public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
-    public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 172;
+    public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 650;
     private int proximoJugador;
     private int juegosLanzadosTotal = 0;
 
@@ -127,9 +127,12 @@ public class pnlCoin extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
+                                cover.HidePnlBlqPlayer();
                                 cover.setReady();
                                 iniciarJuego();
                                 cover.unTickReady();
+                                cover.ShowPnlBlqPlayer();
+                                
 
                                 System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
@@ -138,9 +141,11 @@ public class pnlCoin extends javax.swing.JFrame {
                                     @Override
                                     public void run() {
                                         try {
+                                            cover.HidePnlBlqPlayer();
                                             cover.setEnded();
                                             finalizarJuego();
                                             cover.unTickReady();
+                                            cover.ShowPnlBlqPlayer();
 
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class

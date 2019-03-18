@@ -13,8 +13,6 @@ import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
@@ -56,18 +54,18 @@ public class Cover extends javax.swing.JFrame {
     public void setReady() throws InterruptedException, AWTException {
         contadorPreparacion.stop();
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
-        this.HidePnlBlqPlayer();
+        //this.HidePnlBlqPlayer();
         this.actualizarEstadoTexto();
 
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
 
-        this.ShowPnlBlqPlayer();
+        //this.ShowPnlBlqPlayer();
 
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
 
-            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);
+            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);// 
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -82,30 +80,22 @@ public class Cover extends javax.swing.JFrame {
         contador.start();
     }
 
-    public void pausaPreventiva() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Cover.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-     public void setEnded() throws InterruptedException, AWTException {
+    public void setEnded() throws InterruptedException, AWTException {
         contador.stop();
-        this.HidePnlBlqPlayer();
+        //this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
         this.setRunning(false);
         this.actualizarEstadoTexto();
-        this.ShowPnlBlqPlayer();
+        //this.ShowPnlBlqPlayer();
         System.out.println("El jugador '" + player + "' completo su sesion de juego");
     }
 
     public void unTickReady() throws InterruptedException, AWTException {
-        this.HidePnlBlqPlayer();
+        //this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
-        this.ShowPnlBlqPlayer();
+        //this.ShowPnlBlqPlayer();
     }
 
     public void actualizarEstadoTexto() {

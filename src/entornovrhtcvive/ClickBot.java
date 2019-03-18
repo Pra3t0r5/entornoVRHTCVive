@@ -25,7 +25,7 @@ public class ClickBot {
     public static final int[] READYPLAYER2 = {1091, 336};
     public static final int[] READYPLAYER3 = {1091, 411};
     public static final int[] READYPLAYER4 = {1091, 490};
-    public static final int TIEMPO_ENTRE_CLICKS = 40;
+    public static final int TIEMPO_ENTRE_CLICKS = 30;
 
     /**
      * Ejecuta un click completo en las coordenadas recibidas. La accion toma
@@ -95,7 +95,7 @@ public class ClickBot {
      */
     public static void syncMainThread() {
         try {
-            Thread.sleep(TIEMPO_ENTRE_CLICKS + 10);
+            Thread.sleep(TIEMPO_ENTRE_CLICKS + 100);
         } catch (InterruptedException ex) {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
