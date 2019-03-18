@@ -60,6 +60,7 @@ public class Cover extends javax.swing.JFrame {
         this.actualizarEstadoTexto();
 
         ClickBot.clickReadyOf(player);
+        ClickBot.syncMainThread();
 
         this.ShowPnlBlqPlayer();
 
@@ -93,6 +94,7 @@ public class Cover extends javax.swing.JFrame {
         contador.stop();
         this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
+        ClickBot.syncMainThread();
         this.setRunning(false);
         this.actualizarEstadoTexto();
         this.ShowPnlBlqPlayer();
