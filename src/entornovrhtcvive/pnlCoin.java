@@ -35,6 +35,7 @@ public class pnlCoin extends javax.swing.JFrame {
     public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
     public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 650;
     private int proximoJugador;
+    private int juegosLanzados = 0;
     private int juegosLanzadosTotal = 0;
 
     private final ArrayList<Cover> covers;
@@ -97,13 +98,15 @@ public class pnlCoin extends javax.swing.JFrame {
     }
 
     private void jugar() {
+
         if (CREDITOS_DISPONIBLES <= 0) {
             CREDITOS_DISPONIBLES = 0;
             lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
             JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
-
+        } else if (NUMERO_JUGADORES == juegosLanzados) {
+            JOptionPane.showMessageDialog(null, "Ya estan todos los puestos ocupados, espere a que se desocupen para lanzar nuevas partidas.");
         } else if (CREDITOS_DISPONIBLES != 0) {
-            int juegosLanzados = 0;
+            juegosLanzados = 0;
             for (Cover cover : covers) {
                 if (!cover.isRunning()) {
 
@@ -132,7 +135,6 @@ public class pnlCoin extends javax.swing.JFrame {
                                 iniciarJuego();
                                 cover.unTickReady();
                                 cover.ShowPnlBlqPlayer();
-                                
 
                                 System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
