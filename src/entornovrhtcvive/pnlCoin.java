@@ -431,15 +431,18 @@ public class pnlCoin extends javax.swing.JFrame {
     }//GEN-LAST:event_chkVerInterfazActionPerformed
 
     private void chkVerInterfazStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkVerInterfazStateChanged
-        if (pnlCoin.chkVerInterfaz.isSelected()) {
-            covers.forEach((cover) -> {
-                cover.setVisible(false);
-            });
-        } else {
-            covers.forEach((cover) -> {
-                cover.setVisible(true);
-            });
-        }    }//GEN-LAST:event_chkVerInterfazStateChanged
+        /*
+            if (pnlCoin.chkVerInterfaz.isSelected()) {
+                covers.forEach((cover) -> {
+                    cover.setVisible(false);
+                });
+            } else {
+                covers.forEach((cover) -> {
+                    cover.setVisible(true);
+                });
+            }
+         */
+    }//GEN-LAST:event_chkVerInterfazStateChanged
 
     private Date getFechaHoraApagado() {
         Calendar fechaActual = Calendar.getInstance();
