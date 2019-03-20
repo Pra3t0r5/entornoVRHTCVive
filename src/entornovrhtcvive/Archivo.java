@@ -31,27 +31,21 @@ public class Archivo {
     }
 
     public static String leer(Date hoy) {
-        String texto = "";
-        String texto2 = "0";
+        String linea = "";
         try {
             FileReader lector = new FileReader("juegosLanzados.txt");
             BufferedReader contenido = new BufferedReader(lector);
-            while ((texto = contenido.readLine()) != null) {
-                texto2 = texto;
-                String line = texto;
-                String[] cadena = line.split(" ");
+            while ((linea = contenido.readLine()) != null) {
+                String[] cadena = linea.split(" ");
                 Date fechaGuardada = new SimpleDateFormat("yyyy-MM-dd").parse(cadena[1]);
-
                 if (hoy.equals(fechaGuardada)) {
-                    texto2 = cadena[0];
-                } else {
-                    texto2 = "0";
+                    return cadena[0];
                 }
             }
         } catch (Exception e) {
             System.out.println("Error al leer");
         }
-        return texto2;
+        return "0";
     }
 
 }

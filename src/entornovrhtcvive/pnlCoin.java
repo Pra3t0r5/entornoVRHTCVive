@@ -321,11 +321,6 @@ public class pnlCoin extends javax.swing.JFrame {
         cmbJugadoresHabilitados.setSelectedItem(NUMERO_JUGADORES);
 
         chkVerInterfaz.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
-        chkVerInterfaz.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                chkVerInterfazStateChanged(evt);
-            }
-        });
         chkVerInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkVerInterfazActionPerformed(evt);
@@ -449,19 +444,26 @@ public class pnlCoin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJugarActionPerformed
 
     private void chkVerInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerInterfazActionPerformed
-        // TODO add your handling code here:
+        if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
+            if (pnlCoin.chkVerInterfaz.isSelected()) {
+                coverStarStop.setVisible(false);
+                covers.forEach((cover) -> {
+                    cover.setVisible(false);
+                });
+            } else {
+                coverStarStop.setVisible(true);
+                covers.forEach((cover) -> {
+                    if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
+                        cover.setVisible(true);
+                    }
+                });
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
+            chkVerInterfaz.setSelected(false);
+        }
     }//GEN-LAST:event_chkVerInterfazActionPerformed
 
-    private void chkVerInterfazStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkVerInterfazStateChanged
-        if (pnlCoin.chkVerInterfaz.isSelected()) {
-            covers.forEach((cover) -> {
-                cover.setVisible(false);
-            });
-        } else {
-            covers.forEach((cover) -> {
-                cover.setVisible(true);
-            });
-        }    }//GEN-LAST:event_chkVerInterfazStateChanged
 
     private Date getFechaHoraApagado() {
         Calendar fechaActual = Calendar.getInstance();
@@ -497,7 +499,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private javax.swing.JButton btnApagarVR;
     private javax.swing.JButton btnJugar;
     private javax.swing.JButton btnServicio;
-    public static javax.swing.JCheckBox chkVerInterfaz;
+    private static javax.swing.JCheckBox chkVerInterfaz;
     public static javax.swing.JComboBox<String> cmbJugadoresHabilitados;
     public static javax.swing.JCheckBox coinListener;
     private static javax.swing.JLabel lblCantJugadasTotal;
