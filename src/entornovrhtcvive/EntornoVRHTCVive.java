@@ -5,6 +5,11 @@
  */
 package entornovrhtcvive;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 /**
  *
  * @author fernando
@@ -17,6 +22,8 @@ public class EntornoVRHTCVive {
     public static final int TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
 
     public static void main(String[] args) {
+        
+
         System.out.println("//////////////////Iniciado Servidor VR//////////////////");
         System.out.println("/-----------Interfaz seteada a pantalla n°" + PANTALLA_SELECCIONADA + "-------------");
         System.out.println("/----------Programa seteado para " + NUMERO_JUGADORES + " Jugadores-------------");
@@ -36,5 +43,7 @@ public class EntornoVRHTCVive {
         panelCoin.inicializarCovers(NUMERO_JUGADORES);
 
     }
+
+   
 
 }

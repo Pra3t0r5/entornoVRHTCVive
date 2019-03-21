@@ -13,6 +13,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -97,7 +100,7 @@ public class pnlCoin extends javax.swing.JFrame {
         }
     }
 
-    private void jugar() {
+    private void jugar() throws ParseException {
 
         if (CREDITOS_DISPONIBLES <= 0) {
             CREDITOS_DISPONIBLES = 0;
@@ -109,11 +112,10 @@ public class pnlCoin extends javax.swing.JFrame {
             juegosLanzados = 0;
             for (Cover cover : covers) {
                 if (!cover.isRunning()) {
-
-                    cover.setRunning(true);//extraida de setReady porque altera los schedulers
-
                     juegosLanzados++;
-                    juegosLanzadosTotal++;
+                    cover.setRunning(true);//extraida de setReady porque altera los schedulers
+                    getJugadasHoy();
+
                     CREDITOS_DISPONIBLES--;
                     final int jugador = cover.getPlayer();
                     proximoJugador = getProximoJugador(jugador);
@@ -211,6 +213,22 @@ public class pnlCoin extends javax.swing.JFrame {
         }
     }
 
+    private void getJugadasHoy() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date hoy = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
+            juegosLanzadosTotal = Integer.parseInt(Archivo.leer(hoy));
+            juegosLanzadosTotal++;
+            String jugadasString = Integer.toString(juegosLanzadosTotal);
+            Archivo.escribir(jugadasString, hoy);
+        } catch (NumberFormatException ep) {
+            JOptionPane.showMessageDialog(null, "Inconsistencia en la base de datos");
+            System.out.println("Inconsistencia en la base de datos");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -423,7 +441,11 @@ public class pnlCoin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFieldPasswordServicioKeyPressed
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        jugar();
+        try {
+            jugar();
+        } catch (ParseException ex) {
+            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnJugarActionPerformed
 
     private void chkVerInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerInterfazActionPerformed
