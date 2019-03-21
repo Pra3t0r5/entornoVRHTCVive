@@ -9,6 +9,11 @@ import static entornovrhtcvive.EntornoVRHTCVive.NUMERO_JUGADORES;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
@@ -469,17 +474,66 @@ public class pnlCoin extends javax.swing.JFrame {
      * @param frame
      */
     public static void showOnScreen(int screen, JFrame frame) {
+        //TODO: ver como hacer una util para este metodo
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] gd = ge.getScreenDevices();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 
-        x0 = 0;
-        y0 = 600;
-        x1 = 1280;
-        y1 = 133;
+        //TESTING: Muestra tamaños de monitor, usualmente sumatoria de todas las pantallas conectadas
+        for (GraphicsDevice curGs : gd) {
+            DisplayMode dm = curGs.getDisplayMode();
+            System.out.println("Detected Borders: " + dm.getWidth() + " x " + dm.getHeight());
+            System.out.println("Detected Dimensions: " + screenSize);
+        }
+
+        //Seleccion de dimensiones iniciales dependiente del monitor seleccionado
+        switch (screen) {
+            case 0:
+                x0 = 0;
+                y0 = 600;
+                x1 = 1280;
+                y1 = 133;
+                System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+                break;
+            case 1:
+                x0 = screenSize.width;
+                y0 = screenSize.height - screenSize.height / 2;
+                x1 = screenSize.width;
+                y1 = y0 / 2;
+                System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+                break;
+            default:
+                x0 = 0;
+                y0 = 600;
+                x1 = 1280;
+                y1 = 133;
+                System.out.println("Warning: No hay una configuracion disponible para mas de dos pantallas!\nN° de pantallas seleccionadas: " + screen);
+                break;
+        }
+
         System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
         //BOUNDS:0x600;1280x133
 
         frame.setBounds(x0, y0, x1, y1);
         frame.setSize(x1, y1);
+
+        //Fijacion final de las dimensiones de acuerdo a la configuracion de pantallas presente
+        if (screen > -1 && screen < gd.length) {
+            frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x, frame.getY());
+
+            frame.setBounds(x0 / gd.length, y0 + y0 / 2, x1, 600);
+            frame.setSize(x1 / gd.length, y1);
+        } else if (gd.length > 0) {
+            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x, frame.getY());
+
+            frame.setBounds(x0, y0, x1, y1);
+            frame.setSize(screenSize.width - screenSize.width / 4, screenSize.height);
+        } else {
+            frame.setBounds(x0, y0, x1, y1);
+            frame.setSize(x1, y1);
+            System.out.println("Status: No se encontraron pantallas, seteando valores por defecto");
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagarVR;
