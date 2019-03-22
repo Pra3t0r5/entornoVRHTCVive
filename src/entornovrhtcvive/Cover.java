@@ -54,13 +54,10 @@ public class Cover extends javax.swing.JFrame {
     public void setReady() throws InterruptedException, AWTException {
         contadorPreparacion.stop();
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
-        //this.HidePnlBlqPlayer();
         this.actualizarEstadoTexto();
 
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
-
-        //this.ShowPnlBlqPlayer();
 
         ActionListener listener = new ActionListener() {
             java.util.Timer my = new java.util.Timer();
@@ -82,20 +79,16 @@ public class Cover extends javax.swing.JFrame {
 
     public void setEnded() throws InterruptedException, AWTException {
         contador.stop();
-        //this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
         this.setRunning(false);
         this.actualizarEstadoTexto();
-        //this.ShowPnlBlqPlayer();
         System.out.println("El jugador '" + player + "' completo su sesion de juego");
     }
 
     public void unTickReady() throws InterruptedException, AWTException {
-        //this.HidePnlBlqPlayer();
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
-        //this.ShowPnlBlqPlayer();
     }
 
     public void actualizarEstadoTexto() {

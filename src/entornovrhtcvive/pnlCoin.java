@@ -50,6 +50,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
+        pnlCoin.lblValorJuego.setText("CREDITOS: " + pnlCoin.CREDITOS_DISPONIBLES);
     }
 
     public pnlCoin() {
@@ -109,7 +110,6 @@ public class pnlCoin extends javax.swing.JFrame {
         } else if (NUMERO_JUGADORES == juegosLanzados) {
             JOptionPane.showMessageDialog(null, "Ya estan todos los puestos ocupados, espere a que se desocupen para lanzar nuevas partidas.");
         } else if (CREDITOS_DISPONIBLES != 0) {
-            juegosLanzados = 0;
             for (Cover cover : covers) {
                 if (!cover.isRunning()) {
                     juegosLanzados++;
@@ -150,6 +150,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                             finalizarJuego();
                                             cover.unTickReady();
                                             cover.ShowPnlBlqPlayer();
+                                            juegosLanzados--;
 
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class
@@ -172,7 +173,10 @@ public class pnlCoin extends javax.swing.JFrame {
                     Logger.getLogger(pnlCoin.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
-                if (CREDITOS_DISPONIBLES == 0 || NUMERO_JUGADORES == juegosLanzados) {
+                if (NUMERO_JUGADORES == juegosLanzados) {
+                    break;
+                }
+                if (CREDITOS_DISPONIBLES == 0) {
                     break;
                 }
             }
@@ -399,7 +403,8 @@ public class pnlCoin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
-        try {
+
+        /*try {
             if (new Date().after(HORA_APAGADO)) {
                 Runtime.getRuntime().exec("cmd.exe /K shutdown /f /s /t 00");
             } else if (CANT_VECES_PULSADO_APAGAR > 100) {
@@ -409,7 +414,7 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "OCURRIO UN ERROR AL INTENTAR APAGAR EL EQUIPO:\n" + ex + "\nPOR FAVOR DESCONECTE LA TERMINAL.", "ERROR EN APAGADO AUTOMATICO", JOptionPane.ERROR_MESSAGE);
-        }
+        }*/
     }//GEN-LAST:event_btnApagarVRActionPerformed
 
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
@@ -463,7 +468,6 @@ public class pnlCoin extends javax.swing.JFrame {
             chkVerInterfaz.setSelected(false);
         }
     }//GEN-LAST:event_chkVerInterfazActionPerformed
-
 
     private Date getFechaHoraApagado() {
         Calendar fechaActual = Calendar.getInstance();
