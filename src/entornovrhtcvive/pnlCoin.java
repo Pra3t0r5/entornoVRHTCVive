@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -44,6 +45,8 @@ public class pnlCoin extends javax.swing.JFrame {
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
 
+    private final ScheduledThreadPoolExecutor[] executors;
+
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
     }
@@ -57,6 +60,12 @@ public class pnlCoin extends javax.swing.JFrame {
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
+
+        executors = new ScheduledThreadPoolExecutor[4];
+        for (int i = 0; i < 4; i++) {
+            ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+            executors[i] = executor;
+        }
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {
             @Override
@@ -127,8 +136,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
                     cover.mostrarTiempoPreparacion();
 
-                    final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                    executor.schedule(new Runnable() {
+                    executors[jugador - 1].schedule(new Runnable() {
                         @Override
                         public void run() {
                             try {
@@ -150,6 +158,8 @@ public class pnlCoin extends javax.swing.JFrame {
                                             finalizarJuego();
                                             cover.unTickReady();
                                             cover.ShowPnlBlqPlayer();
+
+                                            juegosLanzados--;
 
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class
@@ -267,7 +277,7 @@ public class pnlCoin extends javax.swing.JFrame {
         lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
 
         btnApagarVR.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnApagarVR.setText("APAGAR VR");
+        btnApagarVR.setText("PARAR VR");
         btnApagarVR.setMaximumSize(new java.awt.Dimension(150, 31));
         btnApagarVR.setMinimumSize(new java.awt.Dimension(150, 31));
         btnApagarVR.addActionListener(new java.awt.event.ActionListener() {
@@ -399,7 +409,13 @@ public class pnlCoin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
-        try {
+        int ejecutor = 0;
+        while (ejecutor != NUMERO_JUGADORES) {
+            System.out.println("Status: Shutdown executor player" + (ejecutor + 1));
+            executors[ejecutor].shutdownNow();
+        }
+        /*try {
+
             if (new Date().after(HORA_APAGADO)) {
                 Runtime.getRuntime().exec("cmd.exe /K shutdown /f /s /t 00");
             } else if (CANT_VECES_PULSADO_APAGAR > 100) {
@@ -409,7 +425,7 @@ public class pnlCoin extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "OCURRIO UN ERROR AL INTENTAR APAGAR EL EQUIPO:\n" + ex + "\nPOR FAVOR DESCONECTE LA TERMINAL.", "ERROR EN APAGADO AUTOMATICO", JOptionPane.ERROR_MESSAGE);
-        }
+        }*/
     }//GEN-LAST:event_btnApagarVRActionPerformed
 
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
@@ -463,7 +479,6 @@ public class pnlCoin extends javax.swing.JFrame {
             chkVerInterfaz.setSelected(false);
         }
     }//GEN-LAST:event_chkVerInterfazActionPerformed
-
 
     private Date getFechaHoraApagado() {
         Calendar fechaActual = Calendar.getInstance();
