@@ -44,8 +44,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
-
-    private final ScheduledThreadPoolExecutor[] executors;
+    private final ArrayList<ScheduledThreadPoolExecutor> executors;
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
@@ -60,12 +59,7 @@ public class pnlCoin extends javax.swing.JFrame {
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
-
-        executors = new ScheduledThreadPoolExecutor[4];
-        for (int i = 0; i < 4; i++) {
-            ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-            executors[i] = executor;
-        }
+        executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {
             @Override
@@ -94,7 +88,6 @@ public class pnlCoin extends javax.swing.JFrame {
                 }
             }
         });
-
     }
 
     void inicializarCovers(int jugadores) {
@@ -136,7 +129,10 @@ public class pnlCoin extends javax.swing.JFrame {
 
                     cover.mostrarTiempoPreparacion();
 
-                    executors[jugador - 1].schedule(new Runnable() {
+                    ScheduledThreadPoolExecutor executorLanzamiento = new ScheduledThreadPoolExecutor(1);
+                    executors.add(executorLanzamiento);
+
+                    executorLanzamiento.schedule(new Runnable() {
                         @Override
                         public void run() {
                             try {
@@ -148,8 +144,8 @@ public class pnlCoin extends javax.swing.JFrame {
 
                                 System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
-                                final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                                executor.schedule(new Runnable() {
+                                final ScheduledThreadPoolExecutor executorFinalizacion = new ScheduledThreadPoolExecutor(1);
+                                executorFinalizacion.schedule(new Runnable() {
                                     @Override
                                     public void run() {
                                         try {
@@ -159,6 +155,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                             cover.unTickReady();
                                             cover.ShowPnlBlqPlayer();
 
+                                            executors.remove(executorLanzamiento);
                                             juegosLanzados--;
 
                                         } catch (InterruptedException | AWTException ex) {
@@ -409,23 +406,34 @@ public class pnlCoin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
-        int ejecutor = 0;
-        while (ejecutor != NUMERO_JUGADORES) {
-            System.out.println("Status: Shutdown executor player" + (ejecutor + 1));
-            executors[ejecutor].shutdownNow();
-        }
-        /*try {
-
-            if (new Date().after(HORA_APAGADO)) {
-                Runtime.getRuntime().exec("cmd.exe /K shutdown /f /s /t 00");
-            } else if (CANT_VECES_PULSADO_APAGAR > 100) {
-                JOptionPane.showMessageDialog(this, "SACA LA MANO DE AHI CARAJO!.", "ISABEL!", JOptionPane.ERROR_MESSAGE);
-            } else {
-                CANT_VECES_PULSADO_APAGAR++;
+        System.out.println("Warning: Parada de emergencia solicitada.");
+        //TODO: Funciona bien la parada siempre y cuando los contadores ya hayan sido instanciados en algun momento, buscar solucion al respecto
+        covers.forEach((cover) -> {
+            try {
+                try {
+                    cover.contadorPreparacion.stop();
+                } catch (Exception ex) {
+                    System.out.println("Excepcion Controlada (por falta de instancias que parar del contador de preparacion):" + ex);
+                }
+                try {
+                    cover.contador.stop();
+                } catch (Exception ex) {
+                    System.out.println("Excepcion Controlada (por falta de instancias que parar del contador de juego):" + ex);
+                }
+                cover.HidePnlBlqPlayer();
+                cover.setEnded();
+                finalizarJuego();
+                cover.unTickReady();
+                cover.ShowPnlBlqPlayer();
+                juegosLanzados--;
+            } catch (InterruptedException | AWTException ex) {
+                Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "OCURRIO UN ERROR AL INTENTAR APAGAR EL EQUIPO:\n" + ex + "\nPOR FAVOR DESCONECTE LA TERMINAL.", "ERROR EN APAGADO AUTOMATICO", JOptionPane.ERROR_MESSAGE);
-        }*/
+        });
+        for (ScheduledThreadPoolExecutor executor : executors) {
+            executor.shutdownNow();
+        }
+        executors.clear();
     }//GEN-LAST:event_btnApagarVRActionPerformed
 
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
@@ -446,9 +454,9 @@ public class pnlCoin extends javax.swing.JFrame {
     }//GEN-LAST:event_coinListenerStateChanged
 
     private void txtFieldPasswordServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPasswordServicioKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_1) {
+        /*if (evt.getKeyCode() == KeyEvent.VK_1) {
             addCREDITOS_DISPONIBLES();
-        }
+        }*/
     }//GEN-LAST:event_txtFieldPasswordServicioKeyPressed
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
