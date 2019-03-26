@@ -49,6 +49,8 @@ public class Cover extends javax.swing.JFrame {
         initComponents();
         this.player = player;
         blqReadyOfPlayer();
+        contador = null;
+        contadorPreparacion = null;
     }
 
     public void setReady() throws InterruptedException, AWTException {
@@ -58,26 +60,16 @@ public class Cover extends javax.swing.JFrame {
 
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
-
-        ActionListener listener = new ActionListener() {
-            java.util.Timer my = new java.util.Timer();
-
-            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);// 
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                time = time.minusSeconds(1);
-                int minutos = time.getMinute();
-                int segundos = time.getSecond();
-                lblTemporizador.setText(minutos + ":" + segundos);
-            }
-        };
-        contador = new Timer(1000, listener);
-        contador.start();
+        this.mostrarTiempoJuego();
     }
 
     public void setEnded() throws InterruptedException, AWTException {
-        contador.stop();
+
+        try {
+            contador.stop();
+        } catch(NullPointerException npe){
+            System.out.println("Excepcion controlada: (parada de emergencia) Objetos no instanciados, error: "+npe);
+        }
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
         this.setRunning(false);
@@ -85,9 +77,9 @@ public class Cover extends javax.swing.JFrame {
         System.out.println("El jugador '" + player + "' completo su sesion de juego");
     }
 
-    public void unTickReady() throws InterruptedException, AWTException {        
+    public void unTickReady() throws InterruptedException, AWTException {
         ClickBot.clickReadyOf(player);
-        ClickBot.syncMainThread();        
+        ClickBot.syncMainThread();
     }
 
     public void actualizarEstadoTexto() {
@@ -127,6 +119,24 @@ public class Cover extends javax.swing.JFrame {
         };
         contadorPreparacion = new Timer(1000, listener);
         contadorPreparacion.start();
+    }
+
+    private void mostrarTiempoJuego() {
+        ActionListener listener = new ActionListener() {
+            java.util.Timer my = new java.util.Timer();
+
+            LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);// 
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                time = time.minusSeconds(1);
+                int minutos = time.getMinute();
+                int segundos = time.getSecond();
+                lblTemporizador.setText(minutos + ":" + segundos);
+            }
+        };
+        contador = new Timer(1000, listener);
+        contador.start();
     }
 
     //TODO: revisar formas dinamicas
@@ -243,4 +253,5 @@ public class Cover extends javax.swing.JFrame {
     private javax.swing.JLabel lblEstadoJugador;
     private javax.swing.JLabel lblTemporizador;
     // End of variables declaration//GEN-END:variables
+
 }

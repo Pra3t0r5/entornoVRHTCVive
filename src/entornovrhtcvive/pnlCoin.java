@@ -11,15 +11,12 @@ import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -273,8 +270,8 @@ public class pnlCoin extends javax.swing.JFrame {
         lblPaseTarjeta.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
 
-        btnApagarVR.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnApagarVR.setText("PARAR VR");
+        btnApagarVR.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        btnApagarVR.setText("Parada de Emergencia");
         btnApagarVR.setMaximumSize(new java.awt.Dimension(150, 31));
         btnApagarVR.setMinimumSize(new java.awt.Dimension(150, 31));
         btnApagarVR.addActionListener(new java.awt.event.ActionListener() {
@@ -355,13 +352,13 @@ public class pnlCoin extends javax.swing.JFrame {
                                 .addComponent(cmbJugadoresHabilitados, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkVerInterfaz)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
                         .addComponent(lblPaseTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblValorJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnJugar, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                     .addComponent(lblCantJugadasTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -407,18 +404,16 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
         System.out.println("Warning: Parada de emergencia solicitada.");
-        //TODO: Funciona bien la parada siempre y cuando los contadores ya hayan sido instanciados en algun momento, buscar solucion al respecto
         covers.forEach((cover) -> {
             try {
                 try {
-                    cover.contadorPreparacion.stop();
-                } catch (Exception ex) {
-                    System.out.println("Excepcion Controlada (por falta de instancias que parar del contador de preparacion):" + ex);
-                }
-                try {
                     cover.contador.stop();
-                } catch (Exception ex) {
-                    System.out.println("Excepcion Controlada (por falta de instancias que parar del contador de juego):" + ex);
+                } catch (NullPointerException npe) {
+                    try {
+                        cover.contadorPreparacion.stop();
+                    } catch (Exception ex) {
+                        System.out.println("Excepcion Controlada: Objetos no instanciados, " + ex);
+                    }
                 }
                 cover.HidePnlBlqPlayer();
                 cover.setEnded();
