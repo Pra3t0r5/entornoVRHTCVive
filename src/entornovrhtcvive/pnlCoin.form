@@ -50,7 +50,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chkVerInterfaz" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblTitulo" pref="674" max="32767" attributes="0"/>
@@ -58,7 +58,7 @@
                   </Group>
                   <Component id="lblValorJuego" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnJugar" pref="197" max="32767" attributes="0"/>
                   <Component id="lblCantJugadasTotal" max="32767" attributes="0"/>
@@ -151,9 +151,9 @@
     <Component class="javax.swing.JButton" name="btnApagarVR">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="14" style="1"/>
+          <Font name="Dialog" size="10" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="APAGAR VR"/>
+        <Property name="text" type="java.lang.String" value="Parada de Emergencia"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 31]"/>
         </Property>
