@@ -49,6 +49,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
+        pnlCoin.lblValorJuego.setText("CREDITOS: " + pnlCoin.CREDITOS_DISPONIBLES);
     }
 
     public pnlCoin() {
@@ -108,7 +109,6 @@ public class pnlCoin extends javax.swing.JFrame {
         } else if (NUMERO_JUGADORES == juegosLanzados) {
             JOptionPane.showMessageDialog(null, "Ya estan todos los puestos ocupados, espere a que se desocupen para lanzar nuevas partidas.");
         } else if (CREDITOS_DISPONIBLES != 0) {
-            juegosLanzados = 0;
             for (Cover cover : covers) {
                 if (!cover.isRunning()) {
                     juegosLanzados++;
@@ -407,10 +407,10 @@ public class pnlCoin extends javax.swing.JFrame {
         covers.forEach((cover) -> {
             try {
                 try {
-                    cover.contador.stop();
+                    cover.contadorPreparacion.stop();
                 } catch (NullPointerException npe) {
                     try {
-                        cover.contadorPreparacion.stop();
+                        cover.contador.stop();
                     } catch (Exception ex) {
                         System.out.println("Excepcion Controlada: Objetos no instanciados, " + ex);
                     }

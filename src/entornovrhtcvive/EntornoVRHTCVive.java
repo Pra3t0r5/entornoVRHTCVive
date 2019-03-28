@@ -13,8 +13,8 @@ public class EntornoVRHTCVive {
 
     public static final int PANTALLA_SELECCIONADA = 0; //{0,1,2...}
     public static int NUMERO_JUGADORES = 4;
-    public static final int TIEMPO_DE_JUEGO_MINUTOS = 6;
-    public static final int TIEMPO_DE_PREPARACION_SEGUNDOS = 59;
+    public static final int TIEMPO_DE_JUEGO_MINUTOS = 7;
+    public static final int TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
 
     public static void main(String[] args) {
         

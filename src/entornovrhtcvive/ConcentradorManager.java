@@ -53,8 +53,6 @@ public class ConcentradorManager implements Runnable {
                 BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 modifiedSentence = inFromServer.readLine();
                 if (modifiedSentence.equals("COIN")) {
-                    pnlCoin.CREDITOS_DISPONIBLES++;
-                    pnlCoin.lblValorJuego.setText("CREDITOS: " + pnlCoin.CREDITOS_DISPONIBLES);
                     System.out.println("Status: Pase de tarjeta detectado");
                     if (pnlCoin.coinListener.isSelected()) {
                         pnlCoin.coinListener.setSelected(false);
