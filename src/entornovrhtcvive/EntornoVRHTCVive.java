@@ -5,6 +5,8 @@
  */
 package entornovrhtcvive;
 
+import java.util.Calendar;
+
 /**
  *
  * @author fernando
@@ -13,17 +15,18 @@ public class EntornoVRHTCVive {
 
     public static final int PANTALLA_SELECCIONADA = 0; //{0,1,2...}
     public static int NUMERO_JUGADORES = 4;
-    public static final int TIEMPO_DE_JUEGO_MINUTOS = 7;
-    public static final int TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
+    public static int TIEMPO_DE_JUEGO_MINUTOS = 7;
+    public static int TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
+    public static Calendar calendario = Calendar.getInstance();
 
     public static void main(String[] args) {
-        
 
         System.out.println("//////////////////Iniciado Servidor VR//////////////////");
         System.out.println("/-----------Interfaz seteada a pantalla n°" + PANTALLA_SELECCIONADA + "-------------");
         System.out.println("/----------Programa seteado para " + NUMERO_JUGADORES + " Jugadores-------------");
 
         //Inicio el entorno grafico
+        preconfigurarSistema();
         pnlCoin panelCoin = new pnlCoin();
         panelCoin.setLocationRelativeTo(null);
         pnlCoin.showOnScreen(PANTALLA_SELECCIONADA, panelCoin);
@@ -39,6 +42,18 @@ public class EntornoVRHTCVive {
 
     }
 
-   
+    private static void preconfigurarSistema() {
+        if ((calendario.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) || (calendario.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) || (calendario.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+            System.out.println("Status: Preconfigurando para fin de semana");
+            TIEMPO_DE_JUEGO_MINUTOS = 6;
+            TIEMPO_DE_PREPARACION_SEGUNDOS = 30;
+
+        } else {
+            System.out.println("Status: Preconfigurando para dia de semana");
+            TIEMPO_DE_JUEGO_MINUTOS = 8;
+            TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
+
+        }
+    }
 
 }
