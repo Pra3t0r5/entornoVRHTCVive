@@ -117,11 +117,11 @@ public class pnlCoin extends javax.swing.JFrame {
 
                     CREDITOS_DISPONIBLES--;
                     final int jugador = cover.getPlayer();
-                    proximoJugador = getProximoJugador(jugador);
+                    //proximoJugador = getProximoJugador(jugador);
 
                     pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
-                    coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\". Proximo Jugador: " + proximoJugador);
+                    coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
                     System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
 
                     cover.mostrarTiempoPreparacion();
@@ -210,6 +210,19 @@ public class pnlCoin extends javax.swing.JFrame {
     }
 
     private int getProximoJugador(int ultimoJugador) {
+         /*boolean siguienteEncontrado = false;
+        for (Cover cover : covers) {
+            int evaluado = cover.getPlayer();
+            if (evaluado == (ultimoJugador + 1)) {
+                if (!cover.isRunning()) {
+                    return (evaluado);
+                }
+            } else if (ultimoJugador != 4) {
+                return ultimoJugador + 1;
+            } else {
+                return 1;
+            }
+        }*/
         if (ultimoJugador != 4) {
             return ultimoJugador + 1;
         } else {
