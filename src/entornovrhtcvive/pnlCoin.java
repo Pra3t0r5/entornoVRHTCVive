@@ -11,6 +11,8 @@ import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ import javax.swing.JOptionPane;
 public class pnlCoin extends javax.swing.JFrame {
 
     public static int CREDITOS_DISPONIBLES = 0;
+    public static int CORTESIAS_DISPONIBLES = 0;
     private final Date HORA_APAGADO;
     private int CANT_VECES_PULSADO_APAGAR = 0;
     public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
@@ -113,15 +116,15 @@ public class pnlCoin extends javax.swing.JFrame {
                 if (!cover.isRunning()) {
                     juegosLanzados++;
                     cover.setRunning(true);//extraida de setReady porque altera los schedulers
-                    getJugadasHoy();
 
-                    CREDITOS_DISPONIBLES--;
+                    descontarCoins();
+
                     final int jugador = cover.getPlayer();
                     //proximoJugador = getProximoJugador(jugador);
 
                     pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
-                    coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
+                    //coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
                     System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
 
                     cover.mostrarTiempoPreparacion();
@@ -214,7 +217,7 @@ public class pnlCoin extends javax.swing.JFrame {
     }
 
     private int getProximoJugador(int ultimoJugador) {
-         /*boolean siguienteEncontrado = false;
+        /*boolean siguienteEncontrado = false;
         for (Cover cover : covers) {
             int evaluado = cover.getPlayer();
             if (evaluado == (ultimoJugador + 1)) {
@@ -232,6 +235,16 @@ public class pnlCoin extends javax.swing.JFrame {
         } else {
             return 1;
         }
+    }
+
+    private void descontarCoins() {
+        //registra partidas adicionales solo si no son cortesias
+        if (CORTESIAS_DISPONIBLES == 0) {
+            getJugadasHoy();
+        } else {
+            CORTESIAS_DISPONIBLES--;
+        }
+        CREDITOS_DISPONIBLES--;
     }
 
     private void getJugadasHoy() {
@@ -257,7 +270,7 @@ public class pnlCoin extends javax.swing.JFrame {
         lblValorJuego = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         lblPaseTarjeta = new javax.swing.JLabel();
-        btnApagarVR = new javax.swing.JButton();
+        btnParadaVR = new javax.swing.JButton();
         btnServicio = new javax.swing.JButton();
         txtFieldPasswordServicio = new javax.swing.JPasswordField();
         coinListener = new javax.swing.JCheckBox();
@@ -287,13 +300,13 @@ public class pnlCoin extends javax.swing.JFrame {
         lblPaseTarjeta.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
 
-        btnApagarVR.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        btnApagarVR.setText("Parada de Emergencia");
-        btnApagarVR.setMaximumSize(new java.awt.Dimension(150, 31));
-        btnApagarVR.setMinimumSize(new java.awt.Dimension(150, 31));
-        btnApagarVR.addActionListener(new java.awt.event.ActionListener() {
+        btnParadaVR.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        btnParadaVR.setText("Parada de Emergencia");
+        btnParadaVR.setMaximumSize(new java.awt.Dimension(150, 31));
+        btnParadaVR.setMinimumSize(new java.awt.Dimension(150, 31));
+        btnParadaVR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApagarVRActionPerformed(evt);
+                btnParadaVRActionPerformed(evt);
             }
         });
 
@@ -360,7 +373,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFieldPasswordServicio)
-                            .addComponent(btnApagarVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnParadaVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -408,7 +421,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(btnServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnApagarVR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnParadaVR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblJugadoresHabilitados)
@@ -419,40 +432,57 @@ public class pnlCoin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnApagarVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVRActionPerformed
-
+    private void btnParadaVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParadaVRActionPerformed
         System.out.println("Warning: Parada de emergencia solicitada.");
-        covers.forEach((cover) -> {
-            try {
+
+        int response = JOptionPane.showConfirmDialog(null, "Parar todas las partidas? Se reiniciara el Servidor.", "Atencion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+            System.out.println("Warning: Parada de emergencia cancelada.");
+        } else if (response == JOptionPane.YES_OPTION) {
+            System.out.println("Warning: Parada de emergencia confirmada.");
+            covers.forEach((cover) -> {
                 try {
-                    cover.contadorPreparacion.stop();
-                } catch (NullPointerException npe) {
                     try {
-                        cover.contador.stop();
-                    } catch (Exception ex) {
-                        System.out.println("Excepcion Controlada: Objetos no instanciados, " + ex);
+                        cover.contadorPreparacion.stop();
+                    } catch (NullPointerException npe) {
+                        try {
+                            cover.contador.stop();
+                        } catch (Exception ex) {
+                            System.out.println("Excepcion Controlada: Objetos no instanciados, " + ex);
+                        }
                     }
+                    cover.HidePnlBlqPlayer();
+                    cover.setEnded();
+                    finalizarJuego();
+                    cover.unTickReady();
+                    cover.ShowPnlBlqPlayer();
+                    juegosLanzados--;
+                } catch (InterruptedException | AWTException ex) {
+                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                cover.HidePnlBlqPlayer();
-                cover.setEnded();
-                finalizarJuego();
-                cover.unTickReady();
-                cover.ShowPnlBlqPlayer();
-                juegosLanzados--;
-            } catch (InterruptedException | AWTException ex) {
+            });
+            for (ScheduledThreadPoolExecutor executor : executors) {
+                executor.shutdownNow();
+            }
+            executors.clear();
+            try {
+                Runtime.getRuntime().exec("cmd.exe /K shutdown /r /f /s /t 00");
+            } catch (IOException ex) {
                 Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-        for (ScheduledThreadPoolExecutor executor : executors) {
-            executor.shutdownNow();
+        } else if (response == JOptionPane.CLOSED_OPTION) {
+            System.out.println("JOptionPane closed");
         }
-        executors.clear();
-    }//GEN-LAST:event_btnApagarVRActionPerformed
+
+
+    }//GEN-LAST:event_btnParadaVRActionPerformed
 
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            System.out.println("Status: Credito de Servicio detectado.");
+            System.out.println("Status: Credito de Servicio/Cortesia detectado.");
             this.addCREDITOS_DISPONIBLES();
+            CORTESIAS_DISPONIBLES++;
             this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
         }
     }//GEN-LAST:event_btnServicioActionPerformed
@@ -467,9 +497,9 @@ public class pnlCoin extends javax.swing.JFrame {
     }//GEN-LAST:event_coinListenerStateChanged
 
     private void txtFieldPasswordServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPasswordServicioKeyPressed
-        /*if (evt.getKeyCode() == KeyEvent.VK_1) {
+        if (evt.getKeyCode() == KeyEvent.VK_1) {
             addCREDITOS_DISPONIBLES();
-        }*/
+        }
     }//GEN-LAST:event_txtFieldPasswordServicioKeyPressed
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
@@ -532,8 +562,8 @@ public class pnlCoin extends javax.swing.JFrame {
         frame.setSize(x1, y1);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApagarVR;
     private javax.swing.JButton btnJugar;
+    private javax.swing.JButton btnParadaVR;
     private javax.swing.JButton btnServicio;
     private static javax.swing.JCheckBox chkVerInterfaz;
     public static javax.swing.JComboBox<String> cmbJugadoresHabilitados;
@@ -545,5 +575,4 @@ public class pnlCoin extends javax.swing.JFrame {
     public static javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
-
 }

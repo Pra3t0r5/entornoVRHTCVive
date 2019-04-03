@@ -5,6 +5,7 @@
  */
 package entornovrhtcvive;
 
+import static entornovrhtcvive.EntornoVRHTCVive.NUMERO_VERSION;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -20,7 +21,8 @@ public class coverStartStop extends javax.swing.JFrame {
     public coverStartStop(int screen) {
         initComponents();
         initialize(screen, this);
-        this.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");
+        this.jLabel1.setText("SISTEMA AUTOMATIZADO v"+NUMERO_VERSION);
+        this.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\".");
         this.Show();
     }
 
