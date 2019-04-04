@@ -44,7 +44,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
-    private final ArrayList<ScheduledThreadPoolExecutor> executors;
+    private final ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
 
     public int getCREDITOS_DISPONIBLES() {
         return CREDITOS_DISPONIBLES;
@@ -52,7 +52,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
-        pnlCoin.lblValorJuego.setText("CREDITOS: " + pnlCoin.CREDITOS_DISPONIBLES);
+        pnlCoin.lblValorJuego.setText("CREDITOS = " + pnlCoin.CREDITOS_DISPONIBLES);
     }
 
     public pnlCoin() {
@@ -60,7 +60,7 @@ public class pnlCoin extends javax.swing.JFrame {
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
-        executors = new ArrayList<ScheduledThreadPoolExecutor>();
+        scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {
             @Override
@@ -130,7 +130,9 @@ public class pnlCoin extends javax.swing.JFrame {
                     cover.mostrarTiempoPreparacion();
 
                     ScheduledThreadPoolExecutor executorLanzamiento = new ScheduledThreadPoolExecutor(1);
-                    executors.add(executorLanzamiento);
+                    executorLanzamiento.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
+
+                    scheduled_executors.add(executorLanzamiento);
 
                     executorLanzamiento.schedule(new Runnable() {
                         @Override
@@ -145,26 +147,38 @@ public class pnlCoin extends javax.swing.JFrame {
                                 System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
 
                                 final ScheduledThreadPoolExecutor executorFinalizacion = new ScheduledThreadPoolExecutor(1);
+                                executorFinalizacion.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
+
+                                scheduled_executors.add(executorFinalizacion);
+
                                 executorFinalizacion.schedule(new Runnable() {
                                     @Override
                                     public void run() {
                                         try {
+
                                             cover.HidePnlBlqPlayer();
                                             cover.setEnded();
                                             finalizarJuego();
                                             cover.unTickReady();
                                             cover.ShowPnlBlqPlayer();
                                             juegosLanzados--;
+                                            scheduled_executors.remove(executorFinalizacion);
+                                            executorFinalizacion.shutdownNow();
+                                            executorFinalizacion.purge();
 
-                                            executors.remove(executorLanzamiento);
-                                            juegosLanzados--;
-
+                                            //juegosLanzados--; //por que esta dos veces?
+                                            //Thread.currentThread().interrupt(); //intento #1 de finalizacion de thread
+                                            // scheduled_executors.remove(executorLanzamiento); #2 
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class
                                                     .getName()).log(Level.SEVERE, null, ex);
                                         }
                                     }
                                 }, TIEMPO_DE_JUEGO_SEGUNDOS, TimeUnit.SECONDS);
+
+                                scheduled_executors.remove(executorLanzamiento);
+                                executorLanzamiento.shutdownNow();
+                                executorLanzamiento.purge();
 
                             } catch (InterruptedException | AWTException ex) {
                                 Logger.getLogger(pnlCoin.class
@@ -462,10 +476,12 @@ public class pnlCoin extends javax.swing.JFrame {
                     Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
-            for (ScheduledThreadPoolExecutor executor : executors) {
+            for (ScheduledThreadPoolExecutor executor : scheduled_executors) {
                 executor.shutdownNow();
+                executor.purge();
+
             }
-            executors.clear();
+            scheduled_executors.clear();
             try {
                 Runtime.getRuntime().exec("cmd.exe /K shutdown /r /f /s /t 00");
             } catch (IOException ex) {

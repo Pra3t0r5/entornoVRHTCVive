@@ -50,7 +50,7 @@ public class EntornoVRHTCVive {
 
         } else {
             System.out.println("Status: Preconfigurando para dia de semana");
-            TIEMPO_DE_JUEGO_MINUTOS = 8;
+            TIEMPO_DE_JUEGO_MINUTOS = 1;
             TIEMPO_DE_PREPARACION_SEGUNDOS = 10;
 
         }

@@ -216,7 +216,7 @@ public class Cover extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 600));
 
-        lblEstadoJugador.setFont(new java.awt.Font("Liberation Sans Narrow", 1, 14)); // NOI18N
+        lblEstadoJugador.setFont(new java.awt.Font("Liberation Sans Narrow", 1, 13)); // NOI18N
         lblEstadoJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEstadoJugador.setText("JUGADORES BLOQUEADOS");
 
@@ -242,7 +242,7 @@ public class Cover extends javax.swing.JFrame {
                 .addComponent(lblEstadoJugador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTemporizador)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
