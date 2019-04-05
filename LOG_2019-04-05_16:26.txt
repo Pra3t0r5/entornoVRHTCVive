@@ -1,0 +1,50 @@
+[Fri Apr 05 16:26:50 ART 2019] //////////////////Iniciado Servidor VR v20190306//////////////////
+[Fri Apr 05 16:26:50 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Fri Apr 05 16:26:50 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Fri Apr 05 16:26:50 ART 2019] CONFIG: 4 Jugadores
+[Fri Apr 05 16:26:50 ART 2019] CONFIG: Preconfigurando para fin de semana
+[Fri Apr 05 16:26:50 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Fri Apr 05 16:26:50 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:26:50 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:26:50 ART 2019] CONFIG: Tiempo de Juego = 6min
+[Fri Apr 05 16:26:50 ART 2019] CONFIG: Tiempo de Preparacion = 20seg
+[Fri Apr 05 16:26:55 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Fri Apr 05 16:26:55 ART 2019] STATUS: CREDITOS DISPONIBLES = 1
+[Fri Apr 05 16:26:55 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Fri Apr 05 16:26:55 ART 2019] STATUS: CREDITOS DISPONIBLES = 2
+[Fri Apr 05 16:26:55 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Fri Apr 05 16:26:55 ART 2019] STATUS: CREDITOS DISPONIBLES = 3
+[Fri Apr 05 16:26:55 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Fri Apr 05 16:26:55 ART 2019] STATUS: CREDITOS DISPONIBLES = 4
+[Fri Apr 05 16:26:56 ART 2019] CORTESIAS DISPONIBLES = 3
+[Fri Apr 05 16:26:56 ART 2019] STATUS: El Jugador 1 entra en FASE DE PREPARACION.
+[Fri Apr 05 16:26:57 ART 2019] CORTESIAS DISPONIBLES = 2
+[Fri Apr 05 16:26:57 ART 2019] STATUS: El Jugador 2 entra en FASE DE PREPARACION.
+[Fri Apr 05 16:26:58 ART 2019] CORTESIAS DISPONIBLES = 1
+[Fri Apr 05 16:26:58 ART 2019] STATUS: El Jugador 3 entra en FASE DE PREPARACION.
+[Fri Apr 05 16:26:58 ART 2019] CORTESIAS DISPONIBLES = 0
+[Fri Apr 05 16:26:58 ART 2019] STATUS: El Jugador 4 entra en FASE DE PREPARACION.
+[Fri Apr 05 16:27:00 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:27:00 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:27:05 ART 2019] WARNING: Parada de emergencia solicitada.
+[Fri Apr 05 16:27:06 ART 2019] WARNING: Parada de emergencia confirmada.
+[Fri Apr 05 16:27:06 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Fri Apr 05 16:27:07 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Fri Apr 05 16:27:07 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Fri Apr 05 16:27:08 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Fri Apr 05 16:27:10 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:27:10 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:27:20 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:27:20 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:27:30 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:27:30 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:27:40 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:27:40 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:27:50 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:27:50 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:28:00 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:28:00 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:28:10 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:28:10 ART 2019] STATUS: Reintentando en 10 segundos...
+[Fri Apr 05 16:28:20 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Fri Apr 05 16:28:20 ART 2019] STATUS: Reintentando en 10 segundos...

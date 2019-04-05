@@ -122,9 +122,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="1 CREDITO = 1 JUEGO"/>
       </Properties>
-      <Events>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="lblValorJuegoPropertyChange"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>

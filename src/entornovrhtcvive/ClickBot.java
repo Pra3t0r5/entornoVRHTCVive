@@ -59,6 +59,7 @@ public class ClickBot {
         try {
             Thread.sleep(TIEMPO_ENTRE_CLICKS);
         } catch (InterruptedException ex) {
+            System.out.println("EXCEPCION: " + ex);
             Logger.getLogger(ClickBot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -78,7 +79,7 @@ public class ClickBot {
                 click(READYPLAYER4);
                 break;
             default:
-                System.out.println("Error, numero de jugador invalido.");
+                System.out.println("ERROR: numero de jugador invalido.");
                 break;
         }
     }
@@ -100,6 +101,7 @@ public class ClickBot {
         try {
             Thread.sleep(TIEMPO_ENTRE_CLICKS + 100);
         } catch (InterruptedException ex) {
+            System.out.println("EXCEPCION: " + ex);
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

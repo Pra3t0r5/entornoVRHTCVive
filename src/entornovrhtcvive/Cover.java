@@ -65,7 +65,6 @@ public class Cover extends javax.swing.JFrame {
      */
     public void setReady() throws InterruptedException, AWTException {
         contadorPreparacion.stop();
-        System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
         this.actualizarEstadoTexto();
 
         ClickBot.clickReadyOf(player);
@@ -85,13 +84,12 @@ public class Cover extends javax.swing.JFrame {
         try {
             contador.stop();
         } catch (NullPointerException npe) {
-            System.out.println("Excepcion controlada: (parada de emergencia) Objetos no instanciados, error: " + npe);
+            System.out.println("EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: " + npe);
         }
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
         this.setRunning(false);
         this.actualizarEstadoTexto();
-        System.out.println("El jugador '" + player + "' completo su sesion de juego");
     }
 
     public void unTickReady() throws InterruptedException, AWTException {
@@ -211,7 +209,7 @@ public class Cover extends javax.swing.JFrame {
                 y1 = READYPLAYER4_COVER[3];
                 break;
             default:
-                System.out.println("Error: Numero de jugadores incorrecto. Numero ingresado: " + player);
+                System.out.println("ERROR: Numero de jugadores incorrecto. Numero ingresado: " + player);
                 break;
         }
         frame.setBounds(x0, y0, x1, y1);

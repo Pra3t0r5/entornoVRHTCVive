@@ -33,15 +33,15 @@ public class ConcentradorManager implements Runnable {
             conectadoPlacaDeTarjetas = true;
             pnlCoin.lblPaseTarjeta.setText("SISTEMA ONLINE - POR FAVOR PASE LA TARJETA");
         } catch (IOException ex) {
-            System.out.println("Ocurrio un error al conectarse al Socket de la placa de tarjetas: " + ex);
-            System.out.println("Reintentando en 10 segundos...");
+            System.out.println("EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: " + ex);
+            System.out.println("STATUS: Reintentando en 10 segundos...");
             conectadoPlacaDeTarjetas = false;
             pnlCoin.lblPaseTarjeta.setText("SISTEMA FUERA DE SERVICIO - POR FAVOR ESPERE");
             pnlCoin.lblPaseTarjeta.setForeground(Color.RED);
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException ex1) {
-                System.out.println("Ocurrio un error al generar la espera de 10 segundos: " + ex1);
+                System.out.println("EXCEPCION CONTROLADA: Ocurrio un error al generar la espera de 10 segundos: " + ex1);
             }
             conectarSocketPlacaTarjetas();
         }
@@ -55,7 +55,7 @@ public class ConcentradorManager implements Runnable {
                 BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 modifiedSentence = inFromServer.readLine();
                 if (modifiedSentence.equals("COIN")) {
-                    System.out.println("Status: Pase de tarjeta detectado");
+                    System.out.println("STATUS: Pase de tarjeta detectado.");
 
                     if (pnlCoin.coinListener.isSelected()) {
                         pnlCoin.coinListener.setSelected(false);
@@ -66,12 +66,12 @@ public class ConcentradorManager implements Runnable {
                 }
             }
         } catch (SocketException se) {
-            System.out.println("La conexion fue reseteada! Se intentara una reconexion: " + se);
+            System.out.println("WARNING: La conexion fue reseteada! Se intentara una reconexion: " + se);
             conectadoPlacaDeTarjetas = false;
             pnlCoin.lblPaseTarjeta.setText("SISTEMA FUERA DE SERVICIO - POR FAVOR ESPERE");
             conectarSocketPlacaTarjetas();
         } catch (Exception ex) {
-            System.out.println("Ocurrio un error no contemplado durante el pase de tarjetas: " + ex);
+            System.out.println("WARNING: Ocurrio un error no contemplado durante el pase de tarjetas: " + ex);
             conectadoPlacaDeTarjetas = false;
             pnlCoin.lblPaseTarjeta.setText("SISTEMA FUERA DE SERVICIO - POR FAVOR ESPERE");
             conectarSocketPlacaTarjetas();

@@ -7,6 +7,7 @@ package entornovrhtcvive;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -25,25 +26,24 @@ public class Logger {
     private PrintStream logFile;
 
     /**
-     * Se encarga excluisvamente de registrar toda consola a un log externo, puede revertirse a consola con un comando.
+     * Se encarga excluisvamente de registrar toda consola a un log externo,
+     * puede revertirse a consola con un comando.
      */
     public Logger() {
 
         logFile = null;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date hoy;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        Date hoy;          
         try {
+      
             hoy = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
-            String hoyString = new SimpleDateFormat("yyyy-MM-dd").format(hoy);
+            String hoyString = new SimpleDateFormat("yyyy-MM-dd_HH:mm").format(hoy);
             try {
-                logFile = new PrintStream(new File("Log" + hoyString + ".txt"));
+                logFile = new printStreamWithDate(new File("LOG_" + hoyString + ".txt"));
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //para cambiar a modo consola
             console = System.out;
-            //setea salida en logFile
         } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,6 +55,19 @@ public class Logger {
 
     public void modoConsola() {
         System.setOut(console);
+    }
+
+    public class printStreamWithDate extends PrintStream {
+
+        public printStreamWithDate(File out) throws FileNotFoundException {
+            super(out);
+        }
+
+        @Override
+        public void println(String string) {
+            Date date = new Date();
+            super.println("[" + date.toString() + "] " + string);
+        }
     }
 
 }

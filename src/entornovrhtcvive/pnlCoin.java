@@ -54,6 +54,7 @@ public class pnlCoin extends javax.swing.JFrame {
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
         pnlCoin.lblValorJuego.setText("CREDITOS = " + pnlCoin.CREDITOS_DISPONIBLES);
+        System.out.println("STATUS: CREDITOS DISPONIBLES = "+CREDITOS_DISPONIBLES);
     }
 
     /**
@@ -79,6 +80,7 @@ public class pnlCoin extends javax.swing.JFrame {
                     }
                     if (!jugadoresJugando) {
                         int nroJugadoresHabilitados = Integer.valueOf((String) cmbJugadoresHabilitados.getSelectedItem());
+                        System.out.println("STATUS: Se cambio el numero de jugadores habilitados de '" + NUMERO_JUGADORES + "' a '" + nroJugadoresHabilitados + "'.");
                         NUMERO_JUGADORES = nroJugadoresHabilitados;
                         covers.stream().forEach((cover) -> {
                             if (cover.getPlayer() > nroJugadoresHabilitados) {
@@ -89,6 +91,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         });
                     } else {
                         JOptionPane.showMessageDialog(null, "No pueden haber personas jugando.");
+                        System.out.println("STATUS: Se intento cambiar numero de jugadores habilitados mientras habian jugadores en partida.");
                         cmbJugadoresHabilitados.setSelectedIndex(NUMERO_JUGADORES - 1);
                     }
                 }
@@ -110,7 +113,7 @@ public class pnlCoin extends javax.swing.JFrame {
             try {
                 covers.add(cover);
             } catch (Exception ex) {
-                System.out.println("Excepcion:" + ex);
+                System.out.println("EXCEPCION: " + ex);
             }
         }
     }
@@ -129,8 +132,10 @@ public class pnlCoin extends javax.swing.JFrame {
         if (CREDITOS_DISPONIBLES <= 0) {
             CREDITOS_DISPONIBLES = 0;
             lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
+            System.out.println("STATUS: Se intento jugar sin creditos disponibles.");
             JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
         } else if (NUMERO_JUGADORES == juegosLanzados) {
+            System.out.println("STATUS: Se intento jugar con todos los jugadores ocupados en partidas.");
             JOptionPane.showMessageDialog(null, "Ya estan todos los puestos ocupados, espere a que se desocupen para lanzar nuevas partidas.");
         } else if (CREDITOS_DISPONIBLES != 0) {
             for (Cover cover : covers) {
@@ -146,7 +151,7 @@ public class pnlCoin extends javax.swing.JFrame {
                     pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
                     //coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
-                    System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
+                    System.out.println("STATUS: El Jugador " + jugador + " entra en FASE DE PREPARACION.");
                     bloquearBotonJugar(true);
                     cover.mostrarTiempoPreparacion();
 
@@ -159,6 +164,8 @@ public class pnlCoin extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
+                                System.out.println("STATUS: jugador " + jugador + " entra en FASE DE LANZAMIENTO.");
+
                                 bloquearBotonJugar(false);
                                 cover.HidePnlBlqPlayer();
                                 cover.setReady();
@@ -166,7 +173,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                 cover.unTickReady();
                                 cover.ShowPnlBlqPlayer();
 
-                                System.out.println("Status: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos " + jugador + " corta jugada.");
+                                System.out.println("STATUS: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos el jugador " + jugador + " entra en FASE DE DETENCION.");
 
                                 final ScheduledThreadPoolExecutor executorFinalizacion = new ScheduledThreadPoolExecutor(1);
                                 executorFinalizacion.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
@@ -177,6 +184,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                     @Override
                                     public void run() {
                                         try {
+                                            System.out.println("STATUS: jugador " + jugador + " entra en FASE DE DETENCION.");
 
                                             cover.HidePnlBlqPlayer();
                                             cover.setEnded();
@@ -188,7 +196,10 @@ public class pnlCoin extends javax.swing.JFrame {
                                             executorFinalizacion.shutdownNow();
                                             executorFinalizacion.purge();
 
+                                            System.out.println("STATUS: jugador " + jugador + " listo para nueva FASE DE PREPARACION.");
+
                                         } catch (InterruptedException | AWTException ex) {
+                                            System.out.println("EXCEPCION: " + ex);
                                             Logger.getLogger(pnlCoin.class
                                                     .getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -200,6 +211,7 @@ public class pnlCoin extends javax.swing.JFrame {
                                 executorLanzamiento.purge();
 
                             } catch (InterruptedException | AWTException ex) {
+                                System.out.println("EXCEPCION: " + ex);
                                 Logger.getLogger(pnlCoin.class
                                         .getName()).log(Level.SEVERE, null, ex);
                             }
@@ -210,6 +222,7 @@ public class pnlCoin extends javax.swing.JFrame {
                     Thread.sleep(TIEMPO_DE_DISTANCIAMIENTO_MILISEG);
 
                 } catch (InterruptedException ex) {
+                    System.out.println("EXCEPCION: " + ex);
                     Logger.getLogger(pnlCoin.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
@@ -233,6 +246,7 @@ public class pnlCoin extends javax.swing.JFrame {
             ClickBot.clickStart();
 
         } catch (AWTException ex) {
+            System.out.println("EXCEPCION: " + ex);
             Logger.getLogger(pnlCoin.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
@@ -249,6 +263,7 @@ public class pnlCoin extends javax.swing.JFrame {
             ClickBot.clickStop();
 
         } catch (AWTException ex) {
+            System.out.println("EXCEPCION: " + ex);
             Logger.getLogger(pnlCoin.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
@@ -280,6 +295,7 @@ public class pnlCoin extends javax.swing.JFrame {
             getJugadasHoy();
         } else {
             CORTESIAS_DISPONIBLES--;
+            System.out.println("CORTESIAS DISPONIBLES = " + CORTESIAS_DISPONIBLES);
         }
         CREDITOS_DISPONIBLES--;
     }
@@ -316,7 +332,7 @@ public class pnlCoin extends javax.swing.JFrame {
             Archivo.escribir(jugadasString, hoy);
         } catch (NumberFormatException ep) {
             JOptionPane.showMessageDialog(null, "Inconsistencia en la base de datos");
-            System.out.println("Inconsistencia en la base de datos");
+            System.out.println("ERROR: Inconsistencia en la base de datos");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
         }
@@ -346,11 +362,6 @@ public class pnlCoin extends javax.swing.JFrame {
 
         lblValorJuego.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblValorJuego.setText("1 CREDITO = 1 JUEGO");
-        lblValorJuego.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                lblValorJuegoPropertyChange(evt);
-            }
-        });
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblTitulo.setText("SISTEMA DE REALIDAD VIRTUAL DE CRUCIJUEGOS");
@@ -497,14 +508,14 @@ public class pnlCoin extends javax.swing.JFrame {
      * @param evt
      */
     private void btnParadaVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParadaVRActionPerformed
-        System.out.println("Warning: Parada de emergencia solicitada.");
+        System.out.println("WARNING: Parada de emergencia solicitada.");
 
         int response = JOptionPane.showConfirmDialog(null, "Parar todas las partidas?", "Atencion",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {
-            System.out.println("Warning: Parada de emergencia cancelada.");
+            System.out.println("WARNING: Parada de emergencia cancelada.");
         } else if (response == JOptionPane.YES_OPTION) {
-            System.out.println("Warning: Parada de emergencia confirmada.");
+            System.out.println("WARNING: Parada de emergencia confirmada.");
             covers.forEach((cover) -> {
                 try {
                     try {
@@ -513,7 +524,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         try {
                             cover.contador.stop();
                         } catch (Exception ex) {
-                            System.out.println("Excepcion Controlada: Objetos no instanciados, " + ex);
+                            System.out.println("EXCEPCION CONTROLADA: Objetos no instanciados, " + ex);
                         }
                     }
                     cover.HidePnlBlqPlayer();
@@ -532,13 +543,14 @@ public class pnlCoin extends javax.swing.JFrame {
 
             }
             scheduled_executors.clear();
+            bloquearBotonJugar(false);
             /*try {
                 Runtime.getRuntime().exec("cmd.exe /K shutdown /r /f /s /t 00");
             } catch (IOException ex) {
                 Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
             }*/
         } else if (response == JOptionPane.CLOSED_OPTION) {
-            System.out.println("Warning: Parada de emergencia anulada.");
+            System.out.println("WARNING: Parada de emergencia anulada.");
         }
 
 
@@ -551,16 +563,15 @@ public class pnlCoin extends javax.swing.JFrame {
      */
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            System.out.println("Status: Credito de Servicio/Cortesia detectado.");
+            System.out.println("STATUS: Credito de Servicio/Cortesia detectado.");
             this.addCREDITOS_DISPONIBLES();
             CORTESIAS_DISPONIBLES++;
             this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+        } else {
+            JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
+            System.out.println("WARNING: Se intento asignar coins de cortesia sin contraseña correcta.");
         }
     }//GEN-LAST:event_btnServicioActionPerformed
-
-    private void lblValorJuegoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblValorJuegoPropertyChange
-        System.out.println(this.lblValorJuego.getText());
-    }//GEN-LAST:event_lblValorJuegoPropertyChange
     /**
      * Checkbox oculto que cumple la funcion de listener de creditos enviados
      * desde el ConcentradorManager. Dinamiza feedback.
@@ -568,7 +579,7 @@ public class pnlCoin extends javax.swing.JFrame {
      * @param evt
      */
     private void coinListenerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coinListenerStateChanged
-        System.out.println("Status: Credito recibido.");
+        System.out.println("STATUS: Credito recibido.");
         this.addCREDITOS_DISPONIBLES();
     }//GEN-LAST:event_coinListenerStateChanged
     /**
@@ -577,9 +588,9 @@ public class pnlCoin extends javax.swing.JFrame {
      * @param evt
      */
     private void txtFieldPasswordServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPasswordServicioKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_1) {
+        /* if (evt.getKeyCode() == KeyEvent.VK_1) {
             addCREDITOS_DISPONIBLES();
-        }
+        }*/
     }//GEN-LAST:event_txtFieldPasswordServicioKeyPressed
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
@@ -599,11 +610,13 @@ public class pnlCoin extends javax.swing.JFrame {
     private void chkVerInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerInterfazActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
             if (pnlCoin.chkVerInterfaz.isSelected()) {
+                System.out.println("WARNING: Interfaz desactivada.");
                 coverStarStop.setVisible(false);
                 covers.forEach((cover) -> {
                     cover.setVisible(false);
                 });
             } else {
+                System.out.println("WARNING: Interfaz activada.");
                 coverStarStop.setVisible(true);
                 covers.forEach((cover) -> {
                     if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
@@ -642,7 +655,7 @@ public class pnlCoin extends javax.swing.JFrame {
         y0 = 600;
         x1 = 1280;
         y1 = 133;
-        System.out.println("Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+        System.out.println("CONFIG: Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
         //BOUNDS:0x600;1280x133
 
         frame.setBounds(x0, y0, x1, y1);
