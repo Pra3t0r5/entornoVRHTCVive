@@ -25,6 +25,9 @@ public class EntornoVRHTCVive {
     public static Calendar calendario = Calendar.getInstance();
 
     public static void main(String[] args) {
+        
+        Logger logger = new Logger();
+        logger.modoLogFile();
 
         System.out.println("//////////////////Iniciado Servidor VR v" + NUMERO_VERSION + "//////////////////");
         System.out.println("/-----------Interfaz seteada a pantalla n°" + PANTALLA_SELECCIONADA + "-------------");
@@ -46,17 +49,19 @@ public class EntornoVRHTCVive {
         panelCoin.inicializarCovers(NUMERO_JUGADORES);
     }
 
+    /**
+     * Configura el sistema instanciado para trabajar con tiempos de juego
+     * dependientes de la demanda
+     */
     private static void preconfigurarSistema() {
         if ((calendario.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) || (calendario.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) || (calendario.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
             System.out.println("Status: Preconfigurando para fin de semana");
             TIEMPO_DE_JUEGO_MINUTOS = 6;
             TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
-
         } else {
             System.out.println("Status: Preconfigurando para dia de semana");
             TIEMPO_DE_JUEGO_MINUTOS = 8;
             TIEMPO_DE_PREPARACION_SEGUNDOS = 10;
-
         }
     }
 

@@ -1,0 +1,52 @@
+//////////////////Iniciado Servidor VR v20190305//////////////////
+/-----------Interfaz seteada a pantalla n°0-------------
+/----------Programa seteado para 4 Jugadores-------------
+Status: Preconfigurando para fin de semana
+1 CREDITO = 1 JUEGO
+Selected Bounds: 0x600, 1280x133
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+Status: Credito de Servicio/Cortesia detectado.
+CREDITOS = 1
+Status: Credito de Servicio/Cortesia detectado.
+CREDITOS = 2
+Status: Credito de Servicio/Cortesia detectado.
+CREDITOS = 3
+Status: Credito de Servicio/Cortesia detectado.
+CREDITOS = 4
+CREDITOS = 3
+Status: El Jugador 1 se esta preparando.
+CREDITOS = 2
+Status: El Jugador 2 se esta preparando.
+CREDITOS = 1
+Status: El Jugador 3 se esta preparando.
+CREDITOS = 0
+Status: El Jugador 4 se esta preparando.
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+El jugador '1' inicia juego de: '6 minutos'
+Status: En 6 minutos 1 corta jugada.
+El jugador '2' inicia juego de: '6 minutos'
+Status: En 6 minutos 2 corta jugada.
+El jugador '3' inicia juego de: '6 minutos'
+Status: En 6 minutos 3 corta jugada.
+El jugador '4' inicia juego de: '6 minutos'
+Status: En 6 minutos 4 corta jugada.
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
+Warning: Parada de emergencia solicitada.
+Warning: Parada de emergencia confirmada.
+El jugador '1' completo su sesion de juego
+El jugador '2' completo su sesion de juego
+El jugador '3' completo su sesion de juego
+El jugador '4' completo su sesion de juego
+Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+Reintentando en 10 segundos...
