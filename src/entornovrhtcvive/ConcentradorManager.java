@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.net.SocketException;
 
 /**
+ * genera creditos disponibles a partir de los coins traducidos por la plaqueta
+ * de hernan que a su vez fueron detectados del lector de tarjetas
  *
  * @author ernes
  */
@@ -54,13 +56,13 @@ public class ConcentradorManager implements Runnable {
                 modifiedSentence = inFromServer.readLine();
                 if (modifiedSentence.equals("COIN")) {
                     System.out.println("Status: Pase de tarjeta detectado");
-                    
+
                     if (pnlCoin.coinListener.isSelected()) {
                         pnlCoin.coinListener.setSelected(false);
                     } else {
                         pnlCoin.coinListener.setSelected(true);
                     }
-                    
+
                 }
             }
         } catch (SocketException se) {

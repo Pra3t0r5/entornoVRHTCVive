@@ -6,13 +6,11 @@
 package entornovrhtcvive;
 
 import static entornovrhtcvive.EntornoVRHTCVive.NUMERO_VERSION;
-import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
+ * oculta los botones de lanzamiento y detencion de partidas para los jugadores
+ * ocultados por los covers, que son seleccionados por el clickbot
  *
  * @author fernando
  */
@@ -21,7 +19,7 @@ public class coverStartStop extends javax.swing.JFrame {
     public coverStartStop(int screen) {
         initComponents();
         initialize(screen, this);
-        this.jLabel1.setText("SISTEMA AUTOMATIZADO v"+NUMERO_VERSION);
+        this.jLabel1.setText("SISTEMA AUTOMATIZADO v" + NUMERO_VERSION);
         this.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\".");
         this.Show();
     }

@@ -14,6 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Bot que realiza clicks en la interfaz ocultada, automatizandola. Toda accion
+ * toma tiempo, por lo que el hilo primario usar esperas para sincronizarse a
+ * dichas demoras.
  *
  * @author fernando
  */

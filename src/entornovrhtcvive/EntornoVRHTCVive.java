@@ -8,12 +8,16 @@ package entornovrhtcvive;
 import java.util.Calendar;
 
 /**
+ * Programa de automatizacion de lanzamiento de partidas a base de coins
+ * detectados. Utiliza principios de simulacion de interaccion humana sobre una
+ * interfaz ocultada. Esta clase almacena las variables que configuran el
+ * comportamiento del resto del sistema
  *
  * @author fernando
  */
 public class EntornoVRHTCVive {
 
-    public static final String NUMERO_VERSION = "20190303";
+    public static final String NUMERO_VERSION = "20190305";
     public static final int PANTALLA_SELECCIONADA = 0; //{0,1,2...}
     public static int NUMERO_JUGADORES = 4;
     public static int TIEMPO_DE_JUEGO_MINUTOS = 8;
@@ -22,7 +26,7 @@ public class EntornoVRHTCVive {
 
     public static void main(String[] args) {
 
-        System.out.println("//////////////////Iniciado Servidor VR v"+NUMERO_VERSION+"//////////////////");        
+        System.out.println("//////////////////Iniciado Servidor VR v" + NUMERO_VERSION + "//////////////////");
         System.out.println("/-----------Interfaz seteada a pantalla n°" + PANTALLA_SELECCIONADA + "-------------");
         System.out.println("/----------Programa seteado para " + NUMERO_JUGADORES + " Jugadores-------------");
 
@@ -50,7 +54,7 @@ public class EntornoVRHTCVive {
 
         } else {
             System.out.println("Status: Preconfigurando para dia de semana");
-            TIEMPO_DE_JUEGO_MINUTOS = 1;
+            TIEMPO_DE_JUEGO_MINUTOS = 8;
             TIEMPO_DE_PREPARACION_SEGUNDOS = 10;
 
         }

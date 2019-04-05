@@ -6,6 +6,9 @@
 package entornovrhtcvive;
 
 /**
+ * utiliza un archivo externo para persistir la cantidad de partidas lanzadas
+ * entre reinicios del sistema y estrictamente solo durante una jornada laboral,
+ * caso contrario de lo ultimo, reinicia el conteo total de dichas partidas
  *
  * @author julieta
  */

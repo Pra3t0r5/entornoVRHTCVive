@@ -16,6 +16,9 @@ import java.time.LocalTime;
 import javax.swing.Timer;
 
 /**
+ * Restringe el uso de la interfaz ocultada y muestra feedback de tiempos de las
+ * 3 fases de ejecucion de partidas (mas explicidatemnte los botones de Ready to
+ * Play de los jugadores)
  *
  * @author fernando
  */
@@ -53,6 +56,13 @@ public class Cover extends javax.swing.JFrame {
         contadorPreparacion = null;
     }
 
+    /**
+     * Simula la interaccion humana al marcar un Jugador como listo para
+     * lanzarse a partida. Ademas Muestra el tiempo restante en partida.
+     *
+     * @throws InterruptedException
+     * @throws AWTException
+     */
     public void setReady() throws InterruptedException, AWTException {
         contadorPreparacion.stop();
         System.out.println("El jugador '" + player + "' inicia juego de: '" + TIEMPO_DE_JUEGO_MINUTOS + " minutos'");
@@ -63,12 +73,19 @@ public class Cover extends javax.swing.JFrame {
         this.mostrarTiempoJuego();
     }
 
+    /**
+     * Simula la interaccion humana al marcar un Jugador como listo para salir
+     * de partida
+     *
+     * @throws InterruptedException
+     * @throws AWTException
+     */
     public void setEnded() throws InterruptedException, AWTException {
 
         try {
             contador.stop();
-        } catch(NullPointerException npe){
-            System.out.println("Excepcion controlada: (parada de emergencia) Objetos no instanciados, error: "+npe);
+        } catch (NullPointerException npe) {
+            System.out.println("Excepcion controlada: (parada de emergencia) Objetos no instanciados, error: " + npe);
         }
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();
@@ -139,7 +156,6 @@ public class Cover extends javax.swing.JFrame {
         contador.start();
     }
 
-    //TODO: revisar formas dinamicas
     public void blqReadyOfPlayer() {
         switch (player) {
             case 0: //cover for all players (initial)
@@ -160,7 +176,6 @@ public class Cover extends javax.swing.JFrame {
         }
     }
 
-    //Inicializa 1 panel de bloqueo de READY PLAYER para un hilo Jugador
     public void showOnScreenPnlBlq(int screen, JFrame frame) {
         int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 

@@ -12,7 +12,6 @@ import java.awt.AWTException;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +26,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * interfaz principal de control de las interfaces de apoyo (bloqueantes y
+ * manipulantes de la interfaz ocultada)
  *
  * @author fernando
  */
@@ -55,6 +56,10 @@ public class pnlCoin extends javax.swing.JFrame {
         pnlCoin.lblValorJuego.setText("CREDITOS = " + pnlCoin.CREDITOS_DISPONIBLES);
     }
 
+    /**
+     * inicializador y reconfigurador de covers (dependiendo de las
+     * interacciones con el control de jugadores habilitados)
+     */
     public pnlCoin() {
         initComponents();
         HORA_APAGADO = getFechaHoraApagado();
@@ -91,6 +96,13 @@ public class pnlCoin extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Dependiente de la cantidad de PC Jugadores disponibles. Inicializa las
+     * cubiertas bloqueantes de los controles de la interfaz ocultada,
+     * asistiendo a la automatizacion de cada Jugador
+     *
+     * @param jugadores
+     */
     void inicializarCovers(int jugadores) {
         for (int i = 0; i < jugadores; i++) {
             Cover cover = new Cover(i + 1);
@@ -103,6 +115,15 @@ public class pnlCoin extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo primario para el lanzamiento de partidas. Dependiendo de los
+     * CREDITOS_DISPONIBLES lanza 1 a 4 hilos paralelos de ejecucion, los cuales
+     * consisten en 3 etapas temporalmente definidas
+     * (Preparacion-Lanzamiento-Finalizacion). Permitiendo automatizacion sobre
+     * los controles de la interfaz ocultada.
+     *
+     * @throws ParseException
+     */
     private void jugar() throws ParseException {
 
         if (CREDITOS_DISPONIBLES <= 0) {
@@ -126,7 +147,7 @@ public class pnlCoin extends javax.swing.JFrame {
                     pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
                     //coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
                     System.out.println("Status: El Jugador " + jugador + " se esta preparando.");
-
+                    bloquearBotonJugar(true);
                     cover.mostrarTiempoPreparacion();
 
                     ScheduledThreadPoolExecutor executorLanzamiento = new ScheduledThreadPoolExecutor(1);
@@ -138,6 +159,7 @@ public class pnlCoin extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
+                                bloquearBotonJugar(false);
                                 cover.HidePnlBlqPlayer();
                                 cover.setReady();
                                 iniciarJuego();
@@ -166,9 +188,6 @@ public class pnlCoin extends javax.swing.JFrame {
                                             executorFinalizacion.shutdownNow();
                                             executorFinalizacion.purge();
 
-                                            //juegosLanzados--; //por que esta dos veces?
-                                            //Thread.currentThread().interrupt(); //intento #1 de finalizacion de thread
-                                            // scheduled_executors.remove(executorLanzamiento); #2 
                                         } catch (InterruptedException | AWTException ex) {
                                             Logger.getLogger(pnlCoin.class
                                                     .getName()).log(Level.SEVERE, null, ex);
@@ -204,6 +223,10 @@ public class pnlCoin extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Inicia la partida de un jugador puntual aplicando demoras de clicks
+     *
+     */
     private void iniciarJuego() {
         coverStarStop.Hide();
         try {
@@ -217,6 +240,9 @@ public class pnlCoin extends javax.swing.JFrame {
         coverStarStop.Show();
     }
 
+    /**
+     * Frena la partida de un jugador puntual aplicando demoras de clicks
+     */
     private void finalizarJuego() {
         coverStarStop.Hide();
         try {
@@ -230,20 +256,13 @@ public class pnlCoin extends javax.swing.JFrame {
         coverStarStop.Show();
     }
 
+    /**
+     * Mostraba el proximo jugador a ser lanzado de la lista, Deprecado.
+     *
+     * @param ultimoJugador
+     * @return
+     */
     private int getProximoJugador(int ultimoJugador) {
-        /*boolean siguienteEncontrado = false;
-        for (Cover cover : covers) {
-            int evaluado = cover.getPlayer();
-            if (evaluado == (ultimoJugador + 1)) {
-                if (!cover.isRunning()) {
-                    return (evaluado);
-                }
-            } else if (ultimoJugador != 4) {
-                return ultimoJugador + 1;
-            } else {
-                return 1;
-            }
-        }*/
         if (ultimoJugador != 4) {
             return ultimoJugador + 1;
         } else {
@@ -251,8 +270,12 @@ public class pnlCoin extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Logica de desconteo de creditos, permite manejar coins fuera del conteo
+     * diario de partidas lanzadas. Manteniendo consistencia de asistencia
+     * contable.
+     */
     private void descontarCoins() {
-        //registra partidas adicionales solo si no son cortesias
         if (CORTESIAS_DISPONIBLES == 0) {
             getJugadasHoy();
         } else {
@@ -261,6 +284,28 @@ public class pnlCoin extends javax.swing.JFrame {
         CREDITOS_DISPONIBLES--;
     }
 
+    /**
+     * Por cada juego lanzado, bloquea el boton de Jugar durante el tiempo de
+     * preparacion para evitar conflictos de seleccion de juego (partidas
+     * asincronas paralelas)
+     *
+     * @param bloquear
+     */
+    private void bloquearBotonJugar(boolean bloquear) {
+        if (bloquear) {
+            if (btnJugar.isEnabled()) {
+                btnJugar.setEnabled(false);
+            }
+        } else if (!btnJugar.isEnabled()) {
+            btnJugar.setEnabled(true);
+        }
+    }
+
+    /**
+     * Obtiene jugadas de un registro externo, y si el dia registrado coincide
+     * con el actual asiste la sumatoria diaria de partidas lanzadas. Caso
+     * contrario la reinicia.
+     */
     private void getJugadasHoy() {
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -275,7 +320,6 @@ public class pnlCoin extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -445,11 +489,17 @@ public class pnlCoin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Usado en caso de fallas externas a esta interfaz. Realiza una parada de
+     * emergencia anulando toda ejecucion relativa a TODOS los jugadores,
+     * permitiendo inmediatamente lanzar una nueva partida en limpio
+     *
+     * @param evt
+     */
     private void btnParadaVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParadaVRActionPerformed
         System.out.println("Warning: Parada de emergencia solicitada.");
 
-        int response = JOptionPane.showConfirmDialog(null, "Parar todas las partidas? Se reiniciara el Servidor.", "Atencion",
+        int response = JOptionPane.showConfirmDialog(null, "Parar todas las partidas?", "Atencion",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {
             System.out.println("Warning: Parada de emergencia cancelada.");
@@ -482,18 +532,23 @@ public class pnlCoin extends javax.swing.JFrame {
 
             }
             scheduled_executors.clear();
-            try {
+            /*try {
                 Runtime.getRuntime().exec("cmd.exe /K shutdown /r /f /s /t 00");
             } catch (IOException ex) {
                 Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         } else if (response == JOptionPane.CLOSED_OPTION) {
-            System.out.println("JOptionPane closed");
+            System.out.println("Warning: Parada de emergencia anulada.");
         }
 
 
     }//GEN-LAST:event_btnParadaVRActionPerformed
-
+    /**
+     * Boton que crea creditos de cortesia (no contabilizadas) con proposito de
+     * pruebas de sistemas
+     *
+     * @param evt
+     */
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
             System.out.println("Status: Credito de Servicio/Cortesia detectado.");
@@ -506,12 +561,21 @@ public class pnlCoin extends javax.swing.JFrame {
     private void lblValorJuegoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblValorJuegoPropertyChange
         System.out.println(this.lblValorJuego.getText());
     }//GEN-LAST:event_lblValorJuegoPropertyChange
-
+    /**
+     * Checkbox oculto que cumple la funcion de listener de creditos enviados
+     * desde el ConcentradorManager. Dinamiza feedback.
+     *
+     * @param evt
+     */
     private void coinListenerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coinListenerStateChanged
         System.out.println("Status: Credito recibido.");
         this.addCREDITOS_DISPONIBLES();
     }//GEN-LAST:event_coinListenerStateChanged
-
+    /**
+     * Prototipo de generacion de coins de cortesia. Deprecado.
+     *
+     * @param evt
+     */
     private void txtFieldPasswordServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPasswordServicioKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_1) {
             addCREDITOS_DISPONIBLES();
@@ -525,7 +589,13 @@ public class pnlCoin extends javax.swing.JFrame {
             Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnJugarActionPerformed
-
+    /**
+     * Permite visualizar la interfaz ocultada con propositos de servicio
+     * tecnico y pruebas del sistema. Dinamizado a la cantidad de players.
+     * Inestable.
+     *
+     * @param evt
+     */
     private void chkVerInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerInterfazActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
             if (pnlCoin.chkVerInterfaz.isSelected()) {
@@ -558,7 +628,8 @@ public class pnlCoin extends javax.swing.JFrame {
 
     /**
      * Permite elegir en que monitor mostrar la interfaz y ajusta
-     * automaticamente las dimensiones en relacion a la cantidad de monitores
+     * automaticamente las dimensiones en relacion a la cantidad de monitores.
+     * Funcionalidad original Deprecada.
      *
      * @author fernando
      * @param screen
@@ -578,7 +649,7 @@ public class pnlCoin extends javax.swing.JFrame {
         frame.setSize(x1, y1);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnJugar;
+    public static javax.swing.JButton btnJugar;
     private javax.swing.JButton btnParadaVR;
     private javax.swing.JButton btnServicio;
     private static javax.swing.JCheckBox chkVerInterfaz;
@@ -591,4 +662,5 @@ public class pnlCoin extends javax.swing.JFrame {
     public static javax.swing.JLabel lblValorJuego;
     private javax.swing.JPasswordField txtFieldPasswordServicio;
     // End of variables declaration//GEN-END:variables
+
 }
