@@ -43,6 +43,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private int juegosLanzados = 0;
     private int juegosLanzadosTotal = 0;
 
+    ClickListener juegoSeleccionado;
     private final ArrayList<Cover> covers;
     private final coverStartStop coverStarStop;
     private final ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
@@ -54,7 +55,7 @@ public class pnlCoin extends javax.swing.JFrame {
     public void addCREDITOS_DISPONIBLES() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
         pnlCoin.lblValorJuego.setText("CREDITOS = " + pnlCoin.CREDITOS_DISPONIBLES);
-        System.out.println("STATUS: CREDITOS DISPONIBLES = "+CREDITOS_DISPONIBLES);
+        System.out.println("STATUS: CREDITOS DISPONIBLES = " + CREDITOS_DISPONIBLES);
     }
 
     /**
@@ -63,6 +64,7 @@ public class pnlCoin extends javax.swing.JFrame {
      */
     public pnlCoin() {
         initComponents();
+        juegoSeleccionado = new ClickListener();
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
@@ -295,7 +297,7 @@ public class pnlCoin extends javax.swing.JFrame {
             getJugadasHoy();
         } else {
             CORTESIAS_DISPONIBLES--;
-            System.out.println("CORTESIAS DISPONIBLES = " + CORTESIAS_DISPONIBLES);
+            System.out.println("STATUS: CORTESIAS DISPONIBLES = " + CORTESIAS_DISPONIBLES);
         }
         CREDITOS_DISPONIBLES--;
     }
@@ -519,10 +521,10 @@ public class pnlCoin extends javax.swing.JFrame {
             covers.forEach((cover) -> {
                 try {
                     try {
-                        cover.contadorPreparacion.stop();
+                        cover.cuentaAtrasPreparacion.stop();
                     } catch (NullPointerException npe) {
                         try {
-                            cover.contador.stop();
+                            cover.cuentaAtrasJuego.stop();
                         } catch (Exception ex) {
                             System.out.println("EXCEPCION CONTROLADA: Objetos no instanciados, " + ex);
                         }
@@ -544,11 +546,6 @@ public class pnlCoin extends javax.swing.JFrame {
             }
             scheduled_executors.clear();
             bloquearBotonJugar(false);
-            /*try {
-                Runtime.getRuntime().exec("cmd.exe /K shutdown /r /f /s /t 00");
-            } catch (IOException ex) {
-                Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
         } else if (response == JOptionPane.CLOSED_OPTION) {
             System.out.println("WARNING: Parada de emergencia anulada.");
         }

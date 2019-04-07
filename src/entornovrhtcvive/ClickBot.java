@@ -41,20 +41,25 @@ public class ClickBot {
         Robot bot = new Robot();
         bot.mouseMove(button[0], button[1]);
 
-        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-        executor.schedule(new Runnable() {
+        final ScheduledThreadPoolExecutor clickPressExecutor = new ScheduledThreadPoolExecutor(1);
+        clickPressExecutor.schedule(new Runnable() {
             @Override
             public void run() {
                 bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-                final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                executor.schedule(new Runnable() {
+                final ScheduledThreadPoolExecutor clickReleaseExecutor = new ScheduledThreadPoolExecutor(1);
+                clickReleaseExecutor.schedule(new Runnable() {
                     @Override
                     public void run() {
                         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
                     }
                 }, 10, TimeUnit.MILLISECONDS);
+                clickReleaseExecutor.shutdownNow();
+                clickReleaseExecutor.purge();
             }
+
         }, 10, TimeUnit.MILLISECONDS);
+        clickPressExecutor.shutdownNow();
+        clickPressExecutor.purge();
 
         try {
             Thread.sleep(TIEMPO_ENTRE_CLICKS);

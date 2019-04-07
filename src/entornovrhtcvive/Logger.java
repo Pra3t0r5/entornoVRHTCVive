@@ -32,12 +32,12 @@ public class Logger {
     public Logger() {
 
         logFile = null;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         Date hoy;          
         try {
       
             hoy = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
-            String hoyString = new SimpleDateFormat("yyyy-MM-dd_HH:mm").format(hoy);
+            String hoyString = new SimpleDateFormat("yyyy-MM-dd_HH-mm").format(hoy);
             try {
                 logFile = new printStreamWithDate(new File("LOG_" + hoyString + ".txt"));
             } catch (FileNotFoundException ex) {

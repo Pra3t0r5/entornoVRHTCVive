@@ -33,8 +33,8 @@ public class Cover extends javax.swing.JFrame {
 
     final private int player;
     public boolean running;
-    Timer contador;
-    Timer contadorPreparacion;
+    Timer cuentaAtrasJuego;
+    Timer cuentaAtrasPreparacion;
 
     public boolean isRunning() {
         return running;
@@ -52,8 +52,8 @@ public class Cover extends javax.swing.JFrame {
         initComponents();
         this.player = player;
         blqReadyOfPlayer();
-        contador = null;
-        contadorPreparacion = null;
+        cuentaAtrasJuego = null;
+        cuentaAtrasPreparacion = null;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Cover extends javax.swing.JFrame {
      * @throws AWTException
      */
     public void setReady() throws InterruptedException, AWTException {
-        contadorPreparacion.stop();
+        cuentaAtrasPreparacion.stop();
         this.actualizarEstadoTexto();
 
         ClickBot.clickReadyOf(player);
@@ -82,7 +82,7 @@ public class Cover extends javax.swing.JFrame {
     public void setEnded() throws InterruptedException, AWTException {
 
         try {
-            contador.stop();
+            cuentaAtrasJuego.stop();
         } catch (NullPointerException npe) {
             System.out.println("EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: " + npe);
         }
@@ -121,7 +121,6 @@ public class Cover extends javax.swing.JFrame {
     public void mostrarTiempoPreparacion() {
         this.lblEstadoJugador.setText("Lanzamiento en:");
         ActionListener listener = new ActionListener() {
-            java.util.Timer my = new java.util.Timer();
             LocalTime time = LocalTime.of(0, 0, TIEMPO_DE_PREPARACION_SEGUNDOS);
 
             @Override
@@ -132,13 +131,12 @@ public class Cover extends javax.swing.JFrame {
                 lblTemporizador.setText(minutos + ":" + segundos);
             }
         };
-        contadorPreparacion = new Timer(1000, listener);
-        contadorPreparacion.start();
+        cuentaAtrasPreparacion = new Timer(1000, listener);
+        cuentaAtrasPreparacion.start();
     }
 
     private void mostrarTiempoJuego() {
         ActionListener listener = new ActionListener() {
-            java.util.Timer my = new java.util.Timer();
 
             LocalTime time = LocalTime.of(0, TIEMPO_DE_JUEGO_MINUTOS, 0);// 
 
@@ -150,8 +148,8 @@ public class Cover extends javax.swing.JFrame {
                 lblTemporizador.setText(minutos + ":" + segundos);
             }
         };
-        contador = new Timer(1000, listener);
-        contador.start();
+        cuentaAtrasJuego = new Timer(1000, listener);
+        cuentaAtrasJuego.start();
     }
 
     public void blqReadyOfPlayer() {
