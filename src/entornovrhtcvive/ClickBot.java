@@ -107,7 +107,7 @@ public class ClickBot {
             Thread.sleep(TIEMPO_ENTRE_CLICKS + 100);
         } catch (InterruptedException ex) {
             System.out.println("EXCEPCION: " + ex);
-            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

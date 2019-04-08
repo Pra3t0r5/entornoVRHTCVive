@@ -36,10 +36,10 @@ public class EntornoVRHTCVive {
 
         //Inicio el entorno grafico
         preconfigurarSistema();
-        pnlCoin panelCoin = new pnlCoin();
-        panelCoin.setLocationRelativeTo(null);
-        pnlCoin.showOnScreen(PANTALLA_SELECCIONADA, panelCoin);
-        panelCoin.setVisible(true);
+        PanelPrincipal pnlPpal = new PanelPrincipal();
+        pnlPpal.setLocationRelativeTo(null);
+        PanelPrincipal.showOnScreen(PANTALLA_SELECCIONADA, pnlPpal);
+        pnlPpal.setVisible(true);
 
         //Instancio el Manager del Concentrador de la Placa de Tarjetas
         ConcentradorManager concentradorManager = new ConcentradorManager();
@@ -47,7 +47,7 @@ public class EntornoVRHTCVive {
         threadConcentrador.start();
 
         //Instancio Covers para controlar partidas y sus tiempos de juego por separado
-        panelCoin.inicializarCovers(NUMERO_JUGADORES);        
+        pnlPpal.inicializarCovers(NUMERO_JUGADORES);        
         
         System.out.println("CONFIG: Tiempo de Juego = " + TIEMPO_DE_JUEGO_MINUTOS + "min");
         System.out.println("CONFIG: Tiempo de Preparacion = " + TIEMPO_DE_PREPARACION_SEGUNDOS + "seg");

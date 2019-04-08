@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
  *
  * @author fernando
  */
-public class pnlCoin extends javax.swing.JFrame {
+public class PanelPrincipal extends javax.swing.JFrame {
 
     public static int CREDITOS_DISPONIBLES = 0;
     public static int CORTESIAS_DISPONIBLES = 0;
@@ -43,18 +43,18 @@ public class pnlCoin extends javax.swing.JFrame {
     private int juegosLanzados = 0;
     private int juegosLanzadosTotal = 0;
 
-    ClickListener juegoSeleccionado;
+    SelectorJuegoListener juegoSeleccionado;
     private final ArrayList<Cover> covers;
-    private final coverStartStop coverStarStop;
+    private final CoverStartStop coverStarStop;
     private final ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
 
-    public int getCREDITOS_DISPONIBLES() {
+    public int getCreditos() {
         return CREDITOS_DISPONIBLES;
     }
 
-    public void addCREDITOS_DISPONIBLES() {
+    public void addCredito() {
         CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
-        pnlCoin.lblValorJuego.setText("CREDITOS = " + pnlCoin.CREDITOS_DISPONIBLES);
+        PanelPrincipal.lblValorJuego.setText("CREDITOS = " + PanelPrincipal.CREDITOS_DISPONIBLES);
         System.out.println("STATUS: CREDITOS DISPONIBLES = " + CREDITOS_DISPONIBLES);
     }
 
@@ -62,12 +62,12 @@ public class pnlCoin extends javax.swing.JFrame {
      * inicializador y reconfigurador de covers (dependiendo de las
      * interacciones con el control de jugadores habilitados)
      */
-    public pnlCoin() {
+    public PanelPrincipal() {
         initComponents();
-        juegoSeleccionado = new ClickListener();
+        juegoSeleccionado = new SelectorJuegoListener(this);
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
-        coverStarStop = new coverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
+        coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
         scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {
@@ -150,8 +150,8 @@ public class pnlCoin extends javax.swing.JFrame {
                     final int jugador = cover.getPlayer();
                     //proximoJugador = getProximoJugador(jugador);
 
-                    pnlCoin.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                    pnlCoin.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
+                    PanelPrincipal.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+                    PanelPrincipal.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
                     //coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
                     System.out.println("STATUS: El Jugador " + jugador + " entra en FASE DE PREPARACION.");
                     bloquearBotonJugar(true);
@@ -202,7 +202,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
                                         } catch (InterruptedException | AWTException ex) {
                                             System.out.println("EXCEPCION: " + ex);
-                                            Logger.getLogger(pnlCoin.class
+                                            Logger.getLogger(PanelPrincipal.class
                                                     .getName()).log(Level.SEVERE, null, ex);
                                         }
                                     }
@@ -214,7 +214,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
                             } catch (InterruptedException | AWTException ex) {
                                 System.out.println("EXCEPCION: " + ex);
-                                Logger.getLogger(pnlCoin.class
+                                Logger.getLogger(PanelPrincipal.class
                                         .getName()).log(Level.SEVERE, null, ex);
                             }
                         }
@@ -225,7 +225,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
                 } catch (InterruptedException ex) {
                     System.out.println("EXCEPCION: " + ex);
-                    Logger.getLogger(pnlCoin.class
+                    Logger.getLogger(PanelPrincipal.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
                 if (NUMERO_JUGADORES == juegosLanzados) {
@@ -249,7 +249,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
         } catch (AWTException ex) {
             System.out.println("EXCEPCION: " + ex);
-            Logger.getLogger(pnlCoin.class
+            Logger.getLogger(PanelPrincipal.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         ClickBot.syncMainThread();
@@ -266,7 +266,7 @@ public class pnlCoin extends javax.swing.JFrame {
 
         } catch (AWTException ex) {
             System.out.println("EXCEPCION: " + ex);
-            Logger.getLogger(pnlCoin.class
+            Logger.getLogger(PanelPrincipal.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         ClickBot.syncMainThread();
@@ -536,7 +536,7 @@ public class pnlCoin extends javax.swing.JFrame {
                     cover.ShowPnlBlqPlayer();
                     juegosLanzados--;
                 } catch (InterruptedException | AWTException ex) {
-                    Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
             for (ScheduledThreadPoolExecutor executor : scheduled_executors) {
@@ -561,7 +561,7 @@ public class pnlCoin extends javax.swing.JFrame {
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
             System.out.println("STATUS: Credito de Servicio/Cortesia detectado.");
-            this.addCREDITOS_DISPONIBLES();
+            this.addCredito();
             CORTESIAS_DISPONIBLES++;
             this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
         } else {
@@ -577,7 +577,7 @@ public class pnlCoin extends javax.swing.JFrame {
      */
     private void coinListenerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coinListenerStateChanged
         System.out.println("STATUS: Credito recibido.");
-        this.addCREDITOS_DISPONIBLES();
+        this.addCredito();
     }//GEN-LAST:event_coinListenerStateChanged
     /**
      * Prototipo de generacion de coins de cortesia. Deprecado.
@@ -594,7 +594,7 @@ public class pnlCoin extends javax.swing.JFrame {
         try {
             jugar();
         } catch (ParseException ex) {
-            Logger.getLogger(pnlCoin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnJugarActionPerformed
     /**
@@ -606,7 +606,7 @@ public class pnlCoin extends javax.swing.JFrame {
      */
     private void chkVerInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerInterfazActionPerformed
         if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            if (pnlCoin.chkVerInterfaz.isSelected()) {
+            if (PanelPrincipal.chkVerInterfaz.isSelected()) {
                 System.out.println("WARNING: Interfaz desactivada.");
                 coverStarStop.setVisible(false);
                 covers.forEach((cover) -> {
@@ -634,6 +634,11 @@ public class pnlCoin extends javax.swing.JFrame {
         fechaActual.set(Calendar.SECOND, 0);
 
         return fechaActual.getTime();
+    }
+
+    public static void setFocused(JFrame frame) {
+        frame.toFront();
+        frame.requestFocus();
     }
 
     /**

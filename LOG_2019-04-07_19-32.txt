@@ -1,0 +1,5 @@
+[Sun Apr 07 19:32:48 ART 2019] //////////////////Iniciado Servidor VR v20190306//////////////////
+[Sun Apr 07 19:32:48 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Sun Apr 07 19:32:48 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Sun Apr 07 19:32:48 ART 2019] CONFIG: 4 Jugadores
+[Sun Apr 07 19:32:48 ART 2019] CONFIG: Preconfigurando para fin de semana

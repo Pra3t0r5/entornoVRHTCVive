@@ -14,9 +14,9 @@ import javax.swing.JFrame;
  *
  * @author fernando
  */
-public class coverStartStop extends javax.swing.JFrame {
+public class CoverStartStop extends javax.swing.JFrame {
 
-    public coverStartStop(int screen) {
+    public CoverStartStop(int screen) {
         initComponents();
         initialize(screen, this);
         this.jLabel1.setText("SISTEMA AUTOMATIZADO v" + NUMERO_VERSION);
