@@ -17,12 +17,21 @@ import java.util.Calendar;
  */
 public class EntornoVRHTCVive {
 
+    public static Calendar calendario = Calendar.getInstance();
     public static final String NUMERO_VERSION = "20190306";
     public static final int PANTALLA_SELECCIONADA = 0; //{0,1,2...}
     public static int NUMERO_JUGADORES = 4;
     public static int TIEMPO_DE_JUEGO_MINUTOS = 8;
     public static int TIEMPO_DE_PREPARACION_SEGUNDOS = 20;
-    public static Calendar calendario = Calendar.getInstance();
+    public static String[] JUEGOS = {
+        "Ninguno Seleccionado",
+        "Battlefield Legends",
+        "War Zombies",
+        "Battle Alien 2",
+        "Battle Alien",
+        "A-10",
+        "BellyBots",
+        "Guns"};
 
     public static void main(String[] args) {
 
@@ -47,8 +56,8 @@ public class EntornoVRHTCVive {
         threadConcentrador.start();
 
         //Instancio Covers para controlar partidas y sus tiempos de juego por separado
-        pnlPpal.inicializarCovers(NUMERO_JUGADORES);        
-        
+        pnlPpal.inicializarCovers(NUMERO_JUGADORES);
+
         System.out.println("CONFIG: Tiempo de Juego = " + TIEMPO_DE_JUEGO_MINUTOS + "min");
         System.out.println("CONFIG: Tiempo de Preparacion = " + TIEMPO_DE_PREPARACION_SEGUNDOS + "seg");
     }

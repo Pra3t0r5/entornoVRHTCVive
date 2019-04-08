@@ -6,13 +6,12 @@
 package entornovrhtcvive;
 
 import java.awt.AWTEvent;
-import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
+import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
+import static entornovrhtcvive.EntornoVRHTCVive.JUEGOS;
 
 /**
  *
@@ -27,11 +26,13 @@ public class SelectorJuegoListener {
     public static final int[][] GAMEPORTRAIT5 = {{400, 0}, {499, 100}};
     public static final int[][] GAMEPORTRAIT6 = {{500, 0}, {599, 100}};
     public static final int[][] GAMEPORTRAIT7 = {{600, 0}, {799, 100}};
-    public static JFrame pnlPpal;
+    public static JFrame panelPrincipal;
+    public static CoverStartStop coverStartStop;
 
-    public SelectorJuegoListener(JFrame frame) {
+    public SelectorJuegoListener(JFrame pnlppal, CoverStartStop coverStarStop) {
         Toolkit.getDefaultToolkit().addAWTEventListener(new SelectorJuegoListener.mouseClickListener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
-        pnlPpal = frame;
+        panelPrincipal = pnlppal;
+        coverStartStop = coverStarStop;
     }
 
     public static class mouseClickListener implements AWTEventListener {
@@ -40,32 +41,43 @@ public class SelectorJuegoListener {
         public void eventDispatched(AWTEvent event) {
             int x = (int) MouseInfo.getPointerInfo().getLocation().getX();
             int y = (int) MouseInfo.getPointerInfo().getLocation().getY();
-            switch (getClickCoordinates(x, y)) {
+            int juegoSeleccionado = getClickCoordinates(x, y);
+            switch (juegoSeleccionado) {
+                case 0:
+                    break;
                 case 1:
-                    System.out.println("TESTING: Zona del juego 1 clickeada, Coordenadas: " + x + "x" + y);
-                    //change time to 1 launch
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                    TIEMPO_DE_JUEGO_MINUTOS = 12;
                     break;
                 case 2:
-                    System.out.println("TESTING: Zona del juego 2 clickeada, Coordenadas: " + x + "x" + y);
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                    TIEMPO_DE_JUEGO_MINUTOS = 10;
                     break;
                 case 3:
-                    System.out.println("TESTING: Zona del juego 3 clickeada, Coordenadas: " + x + "x" + y);
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " Seleccionado, Coordenadas: " + x + "x" + y);
+                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
                     break;
                 case 4:
-                    System.out.println("TESTING: Zona del juego 4 clickeada, Coordenadas: " + x + "x" + y);
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
                     break;
                 case 5:
-                    System.out.println("TESTING: Zona del juego 5 clickeada, Coordenadas: " + x + "x" + y);
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
                     break;
                 case 6:
-                    System.out.println("TESTING: Zona del juego 6 clickeada, Coordenadas: " + x + "x" + y);
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
                     break;
                 case 7:
-                    System.out.println("TESTING: Zona del juego 7 clickeada, Coordenadas: " + x + "x" + y);
+                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                    TIEMPO_DE_JUEGO_MINUTOS = 10;
                     break;
                 default:
+                    System.out.println("ERROR: Valor de selector de juego invalido.");
                     break;
             }
+            coverStartStop.showGametime(juegoSeleccionado);
         }
 
         public static int getClickCoordinates(int x, int y) {
