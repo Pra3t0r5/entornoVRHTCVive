@@ -11,7 +11,6 @@ import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
 import java.awt.AWTException;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,7 +66,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
         HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
-        juegoSeleccionado = new SelectorJuegoListener(this, this.coverStarStop);
+        juegoSeleccionado = new SelectorJuegoListener(this.coverStarStop);
         scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {
@@ -148,11 +147,9 @@ public class PanelPrincipal extends javax.swing.JFrame {
                     descontarCoins();
 
                     final int jugador = cover.getPlayer();
-                    //proximoJugador = getProximoJugador(jugador);
 
                     PanelPrincipal.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     PanelPrincipal.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
-                    //coverStarStop.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\"");//. Proximo Jugador: " + proximoJugador);
                     System.out.println("STATUS: El Jugador " + jugador + " entra en FASE DE PREPARACION.");
                     bloquearBotonJugar(true);
                     cover.mostrarTiempoPreparacion();
@@ -271,21 +268,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
         }
         ClickBot.syncMainThread();
         coverStarStop.Show();
-    }
-
-    /**
-     * Mostraba el proximo jugador a ser lanzado de la lista, Deprecado.
-     *
-     * @param ultimoJugador
-     * @return
-     */
-    private int getProximoJugador(int ultimoJugador) {
-        if (ultimoJugador != 4) {
-            return ultimoJugador + 1;
-        } else {
-            return 1;
-        }
-    }
+    } 
 
     /**
      * Logica de desconteo de creditos, permite manejar coins fuera del conteo

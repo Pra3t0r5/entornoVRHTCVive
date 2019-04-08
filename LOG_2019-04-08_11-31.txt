@@ -1,0 +1,41 @@
+[Mon Apr 08 11:31:05 ART 2019] //////////////////Iniciado Servidor VR v20190306//////////////////
+[Mon Apr 08 11:31:05 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Mon Apr 08 11:31:05 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Mon Apr 08 11:31:05 ART 2019] CONFIG: 4 Jugadores
+[Mon Apr 08 11:31:05 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 11:31:05 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Mon Apr 08 11:31:05 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:31:05 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:31:05 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Mon Apr 08 11:31:05 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Mon Apr 08 11:31:10 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 282x46
+[Mon Apr 08 11:31:10 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 11:31:15 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:31:15 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:31:24 ART 2019] TESTING: Battle Alien seleccionado, Coordenadas: 377x51
+[Mon Apr 08 11:31:24 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 11:31:25 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:31:25 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:31:35 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:31:35 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:31:40 ART 2019] TESTING: Battle Alien seleccionado, Coordenadas: 363x48
+[Mon Apr 08 11:31:40 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 11:31:42 ART 2019] TESTING: A-10 seleccionado, Coordenadas: 446x55
+[Mon Apr 08 11:31:42 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 11:31:45 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:31:45 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:31:55 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:31:55 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:32:05 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:32:05 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:32:15 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:32:15 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:32:25 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:32:25 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:32:35 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:32:35 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:32:37 ART 2019] TESTING: Guns seleccionado, Coordenadas: 693x60
+[Mon Apr 08 11:32:45 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:32:45 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 11:32:55 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 11:32:55 ART 2019] STATUS: Reintentando en 10 segundos...

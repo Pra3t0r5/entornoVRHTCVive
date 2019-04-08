@@ -48,7 +48,9 @@ public class Logger {
             java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Setea la salida de consola a un archivo externo
+     */
     public void modoLogFile() {
         System.setOut(logFile);
     }

@@ -12,6 +12,9 @@ import java.awt.event.AWTEventListener;
 import javax.swing.JFrame;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.JUEGOS;
+import java.awt.AWTException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,19 +22,19 @@ import static entornovrhtcvive.EntornoVRHTCVive.JUEGOS;
  */
 public class SelectorJuegoListener {
 
-    public static final int[][] GAMEPORTRAIT1 = {{0, 0}, {99, 100}}; //x0,y0 - x1,y1
-    public static final int[][] GAMEPORTRAIT2 = {{100, 0}, {199, 100}};
-    public static final int[][] GAMEPORTRAIT3 = {{200, 0}, {299, 100}};
-    public static final int[][] GAMEPORTRAIT4 = {{300, 0}, {399, 100}};
-    public static final int[][] GAMEPORTRAIT5 = {{400, 0}, {499, 100}};
-    public static final int[][] GAMEPORTRAIT6 = {{500, 0}, {599, 100}};
-    public static final int[][] GAMEPORTRAIT7 = {{600, 0}, {799, 100}};
-    public static JFrame panelPrincipal;
+    public static final int[][] GAMEPORTRAIT1 = {{88, 253}, {202, 440}}; //x0,y0 - x1,y1
+    public static final int[][] GAMEPORTRAIT2 = {{212, 253}, {328, 440}};
+    public static final int[][] GAMEPORTRAIT3 = {{337, 253}, {452, 440}};
+    public static final int[][] GAMEPORTRAIT4 = {{461, 253}, {577, 440}};
+    public static final int[][] GAMEPORTRAIT5 = {{586, 253}, {702, 440}};
+    public static final int[][] GAMEPORTRAIT6 = {{711, 253}, {826, 440}};
+    public static final int[][] GAMEPORTRAIT7 = {{835, 253}, {951, 440}};
     public static CoverStartStop coverStartStop;
+    private static int[] coordenadasUltimoJuegoSeleccionado = {0, 0};
+    private static int ultimoJuegoSeleccionado = 0;
 
-    public SelectorJuegoListener(JFrame pnlppal, CoverStartStop coverStarStop) {
-        Toolkit.getDefaultToolkit().addAWTEventListener(new SelectorJuegoListener.mouseClickListener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
-        panelPrincipal = pnlppal;
+    public SelectorJuegoListener(CoverStartStop coverStarStop) {
+        //Toolkit.getDefaultToolkit().addAWTEventListener(new SelectorJuegoListener.mouseClickListener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
         coverStartStop = coverStarStop;
     }
 
@@ -42,42 +45,60 @@ public class SelectorJuegoListener {
             int x = (int) MouseInfo.getPointerInfo().getLocation().getX();
             int y = (int) MouseInfo.getPointerInfo().getLocation().getY();
             int juegoSeleccionado = getClickCoordinates(x, y);
-            switch (juegoSeleccionado) {
-                case 0:
-                    break;
-                case 1:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
-                    TIEMPO_DE_JUEGO_MINUTOS = 12;
-                    break;
-                case 2:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
-                    TIEMPO_DE_JUEGO_MINUTOS = 10;
-                    break;
-                case 3:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " Seleccionado, Coordenadas: " + x + "x" + y);
-                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
-                    break;
-                case 4:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
-                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
-                    break;
-                case 5:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
-                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
-                    break;
-                case 6:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
-                    //TIEMPO_DE_JUEGO_MINUTOS = 12;
-                    break;
-                case 7:
-                    System.out.println("TESTING: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
-                    TIEMPO_DE_JUEGO_MINUTOS = 10;
-                    break;
-                default:
-                    System.out.println("ERROR: Valor de selector de juego invalido.");
-                    break;
+
+            if (PanelPrincipal.btnJugar.isEnabled()) {
+                if (juegoSeleccionado == 0) {
+                } else {
+                    switch (juegoSeleccionado) {
+                        case 1:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, cambiado tiempo de juego a: " + TIEMPO_DE_JUEGO_MINUTOS + "min.");
+                            TIEMPO_DE_JUEGO_MINUTOS = 12;
+                            break;
+                        case 2:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                            TIEMPO_DE_JUEGO_MINUTOS = 10;
+                            break;
+                        case 3:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " Seleccionado, Coordenadas: " + x + "x" + y);
+                            entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
+                            break;
+                        case 4:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                            entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
+                            break;
+                        case 5:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                            entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
+                            break;
+                        case 6:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                            entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
+                            break;
+                        case 7:
+                            System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, Coordenadas: " + x + "x" + y);
+                            TIEMPO_DE_JUEGO_MINUTOS = 10;
+                            break;
+                        default:
+                            System.out.println("ERROR: Valor de selector de juego invalido.");
+                            break;
+                    }
+                    coverStartStop.showGametime(juegoSeleccionado);
+                    coordenadasUltimoJuegoSeleccionado[0] = x;
+                    coordenadasUltimoJuegoSeleccionado[1] = y;
+                    ultimoJuegoSeleccionado = getClickCoordinates(coordenadasUltimoJuegoSeleccionado[0], coordenadasUltimoJuegoSeleccionado[1]);
+                }
+            } else {
+                if (juegoSeleccionado != ultimoJuegoSeleccionado) {
+                    try {
+                        ClickBot.click(coordenadasUltimoJuegoSeleccionado);
+                        coverStartStop.showGametime(ultimoJuegoSeleccionado);
+                        ClickBot.syncMainThread();
+                        System.out.println("WARNING: Se ha intentado realizar cambios durante un tiempo de preparacion.");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(SelectorJuegoListener.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
-            coverStartStop.showGametime(juegoSeleccionado);
         }
 
         public static int getClickCoordinates(int x, int y) {

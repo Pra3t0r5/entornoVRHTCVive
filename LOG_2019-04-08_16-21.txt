@@ -1,0 +1,34 @@
+[Mon Apr 08 16:21:51 ART 2019] //////////////////Iniciado Servidor VR v20190308//////////////////
+[Mon Apr 08 16:21:51 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Mon Apr 08 16:21:51 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: 4 Jugadores
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Mon Apr 08 16:21:51 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 16:21:51 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 270x396
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 285x415
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 285x415
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 299x427
+[Mon Apr 08 16:21:51 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 300x428
+[Mon Apr 08 16:21:59 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 16:21:59 ART 2019] STATUS: CREDITOS DISPONIBLES = 1
+[Mon Apr 08 16:21:59 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 16:21:59 ART 2019] STATUS: CREDITOS DISPONIBLES = 2
+[Mon Apr 08 16:22:01 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 16:22:01 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 16:22:08 ART 2019] STATUS: CORTESIAS DISPONIBLES = 1
+[Mon Apr 08 16:22:08 ART 2019] STATUS: El Jugador 1 entra en FASE DE PREPARACION.
+[Mon Apr 08 16:22:09 ART 2019] STATUS: CORTESIAS DISPONIBLES = 0
+[Mon Apr 08 16:22:09 ART 2019] STATUS: El Jugador 2 entra en FASE DE PREPARACION.
+[Mon Apr 08 16:22:10 ART 2019] WARNING: Se ha intentado realizar cambios durante un tiempo de preparacion.
+[Mon Apr 08 16:22:11 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 16:22:11 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 16:22:18 ART 2019] STATUS: jugador 1 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 16:22:19 ART 2019] STATUS: En 10 minutos el jugador 1 entra en FASE DE DETENCION.
+[Mon Apr 08 16:22:19 ART 2019] STATUS: jugador 2 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 16:22:19 ART 2019] STATUS: En 10 minutos el jugador 2 entra en FASE DE DETENCION.
+[Mon Apr 08 16:22:21 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 16:22:21 ART 2019] STATUS: Reintentando en 10 segundos...

@@ -1,0 +1,28 @@
+[Mon Apr 08 12:12:41 ART 2019] //////////////////Iniciado Servidor VR v20190306//////////////////
+[Mon Apr 08 12:12:41 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Mon Apr 08 12:12:41 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Mon Apr 08 12:12:41 ART 2019] CONFIG: 4 Jugadores
+[Mon Apr 08 12:12:41 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:12:41 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Mon Apr 08 12:12:41 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:12:41 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:12:41 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Mon Apr 08 12:12:41 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Mon Apr 08 12:12:51 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:12:51 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:12:59 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 12:12:59 ART 2019] STATUS: CREDITOS DISPONIBLES = 1
+[Mon Apr 08 12:12:59 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 12:12:59 ART 2019] STATUS: CREDITOS DISPONIBLES = 2
+[Mon Apr 08 12:12:59 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 12:12:59 ART 2019] STATUS: CREDITOS DISPONIBLES = 3
+[Mon Apr 08 12:12:59 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 12:12:59 ART 2019] STATUS: CREDITOS DISPONIBLES = 4
+[Mon Apr 08 12:13:01 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:13:01 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:13:04 ART 2019] TESTING: Battlefield Legends seleccionado, Coordenadas: 46x48
+[Mon Apr 08 12:13:11 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:13:11 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:13:11 ART 2019] TESTING: A-10 seleccionado, Coordenadas: 494x38
+[Mon Apr 08 12:13:14 ART 2019] TESTING: Battle Alien seleccionado, Coordenadas: 309x42
+[Mon Apr 08 12:13:16 ART 2019] TESTING: Battle Alien seleccionado, Coordenadas: 325x43

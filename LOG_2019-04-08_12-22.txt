@@ -1,0 +1,34 @@
+[Mon Apr 08 12:22:48 ART 2019] //////////////////Iniciado Servidor VR v20190306//////////////////
+[Mon Apr 08 12:22:48 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Mon Apr 08 12:22:48 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Mon Apr 08 12:22:48 ART 2019] CONFIG: 4 Jugadores
+[Mon Apr 08 12:22:48 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:22:48 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Mon Apr 08 12:22:48 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:22:48 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:22:49 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Mon Apr 08 12:22:49 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Mon Apr 08 12:22:50 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 214x43
+[Mon Apr 08 12:22:50 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:22:50 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 214x43
+[Mon Apr 08 12:22:50 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:22:58 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:22:58 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:23:01 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 214x43
+[Mon Apr 08 12:23:01 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:23:01 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 214x43
+[Mon Apr 08 12:23:01 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:23:01 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 214x43
+[Mon Apr 08 12:23:01 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:23:01 ART 2019] TESTING: Battle Alien 2 Seleccionado, Coordenadas: 214x43
+[Mon Apr 08 12:23:01 ART 2019] CONFIG: Preconfigurando para dia de semana
+[Mon Apr 08 12:23:08 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:23:08 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:23:18 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:23:18 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:23:28 ART 2019] TESTING: War Zombies seleccionado, Coordenadas: 165x40
+[Mon Apr 08 12:23:28 ART 2019] TESTING: War Zombies seleccionado, Coordenadas: 165x40
+[Mon Apr 08 12:23:28 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:23:28 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 12:23:38 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused (Connection refused)
+[Mon Apr 08 12:23:38 ART 2019] STATUS: Reintentando en 10 segundos...
