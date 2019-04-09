@@ -34,7 +34,7 @@ public class SelectorJuegoListener {
     private static int ultimoJuegoSeleccionado = 0;
 
     public SelectorJuegoListener(CoverStartStop coverStarStop) {
-        //Toolkit.getDefaultToolkit().addAWTEventListener(new SelectorJuegoListener.mouseClickListener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
+        Toolkit.getDefaultToolkit().addAWTEventListener(new SelectorJuegoListener.mouseClickListener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
         coverStartStop = coverStarStop;
     }
 
@@ -92,7 +92,6 @@ public class SelectorJuegoListener {
                     try {
                         ClickBot.click(coordenadasUltimoJuegoSeleccionado);
                         coverStartStop.showGametime(ultimoJuegoSeleccionado);
-                        ClickBot.syncMainThread();
                         System.out.println("WARNING: Se ha intentado realizar cambios durante un tiempo de preparacion.");
                     } catch (AWTException ex) {
                         Logger.getLogger(SelectorJuegoListener.class.getName()).log(Level.SEVERE, null, ex);

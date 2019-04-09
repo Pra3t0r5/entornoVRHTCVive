@@ -5,9 +5,11 @@
  */
 package entornovrhtcvive;
 
+import static entornovrhtcvive.PanelPrincipal.scheduled_executors;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.util.ArrayList;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -39,29 +41,29 @@ public class ClickBot {
      */
     public static void click(int[] button) throws AWTException {
         Robot bot = new Robot();
+        //scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
         bot.mouseMove(button[0], button[1]);
 
         final ScheduledThreadPoolExecutor clickPressExecutor = new ScheduledThreadPoolExecutor(1);
+        scheduled_executors.add(clickPressExecutor);
         clickPressExecutor.schedule(new Runnable() {
             @Override
             public void run() {
                 bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+
                 final ScheduledThreadPoolExecutor clickReleaseExecutor = new ScheduledThreadPoolExecutor(1);
+                scheduled_executors.add(clickReleaseExecutor);
                 clickReleaseExecutor.schedule(new Runnable() {
                     @Override
                     public void run() {
                         bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
                     }
                 }, 10, TimeUnit.MILLISECONDS);
-                clickReleaseExecutor.shutdownNow();
-                clickReleaseExecutor.purge();
             }
-
         }, 10, TimeUnit.MILLISECONDS);
-        clickPressExecutor.shutdownNow();
-        clickPressExecutor.purge();
 
         try {
+            //terminateExecutors();
             Thread.sleep(TIEMPO_ENTRE_CLICKS);
         } catch (InterruptedException ex) {
             System.out.println("EXCEPCION: " + ex);
@@ -109,5 +111,13 @@ public class ClickBot {
             System.out.println("EXCEPCION: " + ex);
             Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private static void terminateExecutors() {
+        for (ScheduledThreadPoolExecutor executor : scheduled_executors) {
+            executor.shutdownNow();
+            executor.purge();
+        }
+        scheduled_executors.clear();
     }
 }

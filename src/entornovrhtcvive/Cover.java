@@ -92,6 +92,12 @@ public class Cover extends javax.swing.JFrame {
         this.actualizarEstadoTexto();
     }
 
+    /**
+     * Clickea el boton Ready de la interfaz ocultada detras del cover
+     *
+     * @throws InterruptedException
+     * @throws AWTException
+     */
     public void unTickReady() throws InterruptedException, AWTException {
         ClickBot.clickReadyOf(player);
         ClickBot.syncMainThread();

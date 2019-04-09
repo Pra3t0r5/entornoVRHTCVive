@@ -33,9 +33,9 @@ public class Logger {
 
         logFile = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
-        Date hoy;          
+        Date hoy;
         try {
-      
+
             hoy = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
             String hoyString = new SimpleDateFormat("yyyy-MM-dd_HH-mm").format(hoy);
             try {
@@ -48,6 +48,7 @@ public class Logger {
             java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Setea la salida de consola a un archivo externo
      */

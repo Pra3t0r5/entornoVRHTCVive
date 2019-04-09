@@ -1,0 +1,67 @@
+[Mon Apr 08 22:02:02 ART 2019] //////////////////Iniciado Servidor VR v20190308//////////////////
+[Mon Apr 08 22:02:02 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Mon Apr 08 22:02:02 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Mon Apr 08 22:02:02 ART 2019] CONFIG: 4 Jugadores
+[Mon Apr 08 22:02:02 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Mon Apr 08 22:02:03 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Mon Apr 08 22:02:03 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Mon Apr 08 22:02:03 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Mon Apr 08 22:02:04 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:02:04 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:02:07 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 22:02:07 ART 2019] STATUS: CREDITOS DISPONIBLES = 1
+[Mon Apr 08 22:02:07 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 22:02:07 ART 2019] STATUS: CREDITOS DISPONIBLES = 2
+[Mon Apr 08 22:02:07 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 22:02:07 ART 2019] STATUS: CREDITOS DISPONIBLES = 3
+[Mon Apr 08 22:02:09 ART 2019] STATUS: CORTESIAS DISPONIBLES = 2
+[Mon Apr 08 22:02:09 ART 2019] STATUS: El Jugador 1 entra en FASE DE PREPARACION.
+[Mon Apr 08 22:02:10 ART 2019] STATUS: CORTESIAS DISPONIBLES = 1
+[Mon Apr 08 22:02:10 ART 2019] STATUS: El Jugador 2 entra en FASE DE PREPARACION.
+[Mon Apr 08 22:02:11 ART 2019] STATUS: CORTESIAS DISPONIBLES = 0
+[Mon Apr 08 22:02:11 ART 2019] STATUS: El Jugador 3 entra en FASE DE PREPARACION.
+[Mon Apr 08 22:02:15 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:02:15 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:02:18 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 22:02:18 ART 2019] STATUS: CREDITOS DISPONIBLES = 1
+[Mon Apr 08 22:02:19 ART 2019] STATUS: jugador 1 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 22:02:20 ART 2019] STATUS: En 8 minutos el jugador 1 entra en FASE DE DETENCION.
+[Mon Apr 08 22:02:20 ART 2019] STATUS: jugador 2 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 22:02:20 ART 2019] STATUS: En 8 minutos el jugador 2 entra en FASE DE DETENCION.
+[Mon Apr 08 22:02:21 ART 2019] STATUS: jugador 3 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 22:02:21 ART 2019] STATUS: En 8 minutos el jugador 3 entra en FASE DE DETENCION.
+[Mon Apr 08 22:02:26 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:02:26 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:02:28 ART 2019] WARNING: Parada de emergencia solicitada.
+[Mon Apr 08 22:02:30 ART 2019] WARNING: Parada de emergencia confirmada.
+[Mon Apr 08 22:02:31 ART 2019] EXCEPCION CONTROLADA: Objetos no instanciados, java.lang.NullPointerException
+[Mon Apr 08 22:02:31 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Mon Apr 08 22:02:37 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:02:37 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:02:44 ART 2019] STATUS: Se cambio el numero de jugadores habilitados de '4' a '3'.
+[Mon Apr 08 22:02:47 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 22:02:47 ART 2019] STATUS: CREDITOS DISPONIBLES = 2
+[Mon Apr 08 22:02:47 ART 2019] STATUS: Credito de Servicio/Cortesia detectado.
+[Mon Apr 08 22:02:47 ART 2019] STATUS: CREDITOS DISPONIBLES = 3
+[Mon Apr 08 22:02:48 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:02:48 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:02:48 ART 2019] STATUS: CORTESIAS DISPONIBLES = 2
+[Mon Apr 08 22:02:48 ART 2019] STATUS: El Jugador 1 entra en FASE DE PREPARACION.
+[Mon Apr 08 22:02:49 ART 2019] STATUS: CORTESIAS DISPONIBLES = 1
+[Mon Apr 08 22:02:49 ART 2019] STATUS: El Jugador 2 entra en FASE DE PREPARACION.
+[Mon Apr 08 22:02:50 ART 2019] STATUS: CORTESIAS DISPONIBLES = 0
+[Mon Apr 08 22:02:50 ART 2019] STATUS: El Jugador 3 entra en FASE DE PREPARACION.
+[Mon Apr 08 22:02:58 ART 2019] STATUS: jugador 1 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 22:02:59 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:02:59 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:02:59 ART 2019] STATUS: En 8 minutos el jugador 1 entra en FASE DE DETENCION.
+[Mon Apr 08 22:02:59 ART 2019] STATUS: jugador 2 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 22:03:00 ART 2019] STATUS: En 8 minutos el jugador 2 entra en FASE DE DETENCION.
+[Mon Apr 08 22:03:00 ART 2019] STATUS: jugador 3 entra en FASE DE LANZAMIENTO.
+[Mon Apr 08 22:03:00 ART 2019] STATUS: En 8 minutos el jugador 3 entra en FASE DE DETENCION.
+[Mon Apr 08 22:03:09 ART 2019] WARNING: Parada de emergencia solicitada.
+[Mon Apr 08 22:03:10 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Mon Apr 08 22:03:10 ART 2019] STATUS: Reintentando en 10 segundos...
+[Mon Apr 08 22:03:11 ART 2019] WARNING: Parada de emergencia confirmada.
+[Mon Apr 08 22:03:13 ART 2019] EXCEPCION CONTROLADA: Objetos no instanciados, java.lang.NullPointerException
+[Mon Apr 08 22:03:13 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException

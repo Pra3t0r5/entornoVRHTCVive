@@ -34,18 +34,15 @@ public class PanelPrincipal extends javax.swing.JFrame {
 
     public static int CREDITOS_DISPONIBLES = 0;
     public static int CORTESIAS_DISPONIBLES = 0;
-    private final Date HORA_APAGADO;
-    private int CANT_VECES_PULSADO_APAGAR = 0;
     public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
     public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 650;
-    private int proximoJugador;
     private int juegosLanzados = 0;
     private int juegosLanzadosTotal = 0;
 
     SelectorJuegoListener juegoSeleccionado;
     private final ArrayList<Cover> covers;
     private final CoverStartStop coverStarStop;
-    private final ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
+    public static ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
 
     public int getCreditos() {
         return CREDITOS_DISPONIBLES;
@@ -63,7 +60,6 @@ public class PanelPrincipal extends javax.swing.JFrame {
      */
     public PanelPrincipal() {
         initComponents();
-        HORA_APAGADO = getFechaHoraApagado();
         covers = new ArrayList<Cover>();
         coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
         juegoSeleccionado = new SelectorJuegoListener(this.coverStarStop);
@@ -268,7 +264,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
         }
         ClickBot.syncMainThread();
         coverStarStop.Show();
-    } 
+    }
 
     /**
      * Logica de desconteo de creditos, permite manejar coins fuera del conteo
@@ -501,25 +497,28 @@ public class PanelPrincipal extends javax.swing.JFrame {
             System.out.println("WARNING: Parada de emergencia cancelada.");
         } else if (response == JOptionPane.YES_OPTION) {
             System.out.println("WARNING: Parada de emergencia confirmada.");
+
             covers.forEach((cover) -> {
-                try {
+                if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
                     try {
-                        cover.cuentaAtrasPreparacion.stop();
-                    } catch (NullPointerException npe) {
                         try {
-                            cover.cuentaAtrasJuego.stop();
-                        } catch (Exception ex) {
-                            System.out.println("EXCEPCION CONTROLADA: Objetos no instanciados, " + ex);
+                            cover.cuentaAtrasPreparacion.stop();
+                        } catch (NullPointerException npe) {
+                            try {
+                                cover.cuentaAtrasJuego.stop();
+                            } catch (Exception ex) {
+                                System.out.println("EXCEPCION CONTROLADA: Objetos no instanciados, " + ex);
+                            }
                         }
+                        cover.HidePnlBlqPlayer();
+                        cover.setEnded();
+                        finalizarJuego();
+                        cover.unTickReady();
+                        cover.ShowPnlBlqPlayer();
+                        juegosLanzados--;
+                    } catch (InterruptedException | AWTException ex) {
+                        Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    cover.HidePnlBlqPlayer();
-                    cover.setEnded();
-                    finalizarJuego();
-                    cover.unTickReady();
-                    cover.ShowPnlBlqPlayer();
-                    juegosLanzados--;
-                } catch (InterruptedException | AWTException ex) {
-                    Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
             for (ScheduledThreadPoolExecutor executor : scheduled_executors) {
