@@ -39,10 +39,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
     private int juegosLanzados = 0;
     private int juegosLanzadosTotal = 0;
 
-    SelectorJuegoListener juegoSeleccionado;
     private final ArrayList<Cover> covers;
     private final CoverStartStop coverStarStop;
-    private final CoverGames coverGames;
     public static ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
 
     public int getCreditos() {
@@ -63,8 +61,6 @@ public class PanelPrincipal extends javax.swing.JFrame {
         initComponents();
         covers = new ArrayList<Cover>();
         coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
-        coverGames = new CoverGames();
-        juegoSeleccionado = new SelectorJuegoListener(this.coverStarStop, this.coverGames);
         scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {
@@ -149,7 +145,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
                     PanelPrincipal.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
                     PanelPrincipal.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
                     System.out.println("STATUS: El Jugador " + jugador + " entra en FASE DE PREPARACION.");
-                    bloquearBotonJugar(true);
+                    bloquearBotones(true);
                     cover.mostrarTiempoPreparacion();
 
                     ScheduledThreadPoolExecutor executorLanzamiento = new ScheduledThreadPoolExecutor(1);
@@ -163,7 +159,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
                             try {
                                 System.out.println("STATUS: jugador " + jugador + " entra en FASE DE LANZAMIENTO.");
 
-                                bloquearBotonJugar(false);
+                                bloquearBotones(false);
                                 cover.HidePnlBlqPlayer();
                                 cover.setReady();
                                 iniciarJuego();
@@ -290,13 +286,16 @@ public class PanelPrincipal extends javax.swing.JFrame {
      *
      * @param bloquear
      */
-    private void bloquearBotonJugar(boolean bloquear) {
+    private void bloquearBotones(boolean bloquear) {
         if (bloquear) {
             if (btnJugar.isEnabled()) {
                 btnJugar.setEnabled(false);
+                chkAlargarTiempoDeJuego.setEnabled(false);
             }
         } else if (!btnJugar.isEnabled()) {
             btnJugar.setEnabled(true);
+            chkAlargarTiempoDeJuego.setEnabled(true);
+
         }
     }
 
@@ -336,6 +335,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
         lblJugadoresHabilitados = new javax.swing.JLabel();
         cmbJugadoresHabilitados = new javax.swing.JComboBox<>();
         chkVerInterfaz = new javax.swing.JCheckBox();
+        chkAlargarTiempoDeJuego = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -413,6 +413,13 @@ public class PanelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        chkAlargarTiempoDeJuego.setText("Alargar Tiempo de Juego");
+        chkAlargarTiempoDeJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAlargarTiempoDeJuegoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -423,15 +430,17 @@ public class PanelPrincipal extends javax.swing.JFrame {
                     .addComponent(coinListener, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFieldPasswordServicio)
-                            .addComponent(btnParadaVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblJugadoresHabilitados)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmbJugadoresHabilitados, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkAlargarTiempoDeJuego)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFieldPasswordServicio)
+                                .addComponent(btnParadaVR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(lblJugadoresHabilitados)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbJugadoresHabilitados, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkVerInterfaz)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -478,7 +487,9 @@ public class PanelPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblJugadoresHabilitados)
                             .addComponent(cmbJugadoresHabilitados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chkAlargarTiempoDeJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -529,7 +540,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
 
             }
             scheduled_executors.clear();
-            bloquearBotonJugar(false);
+            bloquearBotones(false);
         } else if (response == JOptionPane.CLOSED_OPTION) {
             System.out.println("WARNING: Parada de emergencia anulada.");
         }
@@ -611,19 +622,14 @@ public class PanelPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chkVerInterfazActionPerformed
 
-    private Date getFechaHoraApagado() {
-        Calendar fechaActual = Calendar.getInstance();
-        fechaActual.set(Calendar.HOUR_OF_DAY, 22);
-        fechaActual.set(Calendar.MINUTE, 0);
-        fechaActual.set(Calendar.SECOND, 0);
-
-        return fechaActual.getTime();
-    }
-
-    public static void setFocused(JFrame frame) {
-        frame.toFront();
-        frame.requestFocus();
-    }
+    private void chkAlargarTiempoDeJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAlargarTiempoDeJuegoActionPerformed
+        if (chkAlargarTiempoDeJuego.isSelected()) {
+            TIEMPO_DE_JUEGO_MINUTOS = 10;
+            System.out.println("CONFIG: Se alargo el tiempo de juego a 10 Minutos");
+        } else {
+            entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
+        }
+    }//GEN-LAST:event_chkAlargarTiempoDeJuegoActionPerformed
 
     /**
      * Permite elegir en que monitor mostrar la interfaz y ajusta
@@ -651,6 +657,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
     public static javax.swing.JButton btnJugar;
     private javax.swing.JButton btnParadaVR;
     private javax.swing.JButton btnServicio;
+    private static javax.swing.JCheckBox chkAlargarTiempoDeJuego;
     private static javax.swing.JCheckBox chkVerInterfaz;
     public static javax.swing.JComboBox<String> cmbJugadoresHabilitados;
     public static javax.swing.JCheckBox coinListener;
