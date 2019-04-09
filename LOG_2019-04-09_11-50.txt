@@ -1,0 +1,206 @@
+[Tue Apr 09 11:50:46 ART 2019] //////////////////Iniciado Servidor VR v20190308//////////////////
+[Tue Apr 09 11:50:46 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Tue Apr 09 11:50:46 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Tue Apr 09 11:50:46 ART 2019] CONFIG: 4 Jugadores
+[Tue Apr 09 11:50:46 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:50:47 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Tue Apr 09 11:50:47 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Tue Apr 09 11:50:47 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Tue Apr 09 11:50:47 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 243x262
+[Tue Apr 09 11:50:47 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 243x262
+[Tue Apr 09 11:50:47 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 243x262
+[Tue Apr 09 11:50:48 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:50:48 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:50:52 ART 2019] WARNING: Parada de emergencia solicitada.
+[Tue Apr 09 11:50:54 ART 2019] WARNING: Parada de emergencia cancelada.
+[Tue Apr 09 11:50:55 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 822x332
+[Tue Apr 09 11:50:55 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:50:55 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 822x331
+[Tue Apr 09 11:50:55 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:50:59 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:50:59 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:51:01 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 824x345
+[Tue Apr 09 11:51:01 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:01 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 824x345
+[Tue Apr 09 11:51:01 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:10 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:51:10 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:51:13 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 639x293
+[Tue Apr 09 11:51:13 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:13 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 639x293
+[Tue Apr 09 11:51:13 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:18 ART 2019] WARNING: Parada de emergencia solicitada.
+[Tue Apr 09 11:51:19 ART 2019] WARNING: Parada de emergencia confirmada.
+[Tue Apr 09 11:51:19 ART 2019] EXCEPCION CONTROLADA: Objetos no instanciados, java.lang.NullPointerException
+[Tue Apr 09 11:51:19 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Tue Apr 09 11:51:20 ART 2019] EXCEPCION CONTROLADA: Objetos no instanciados, java.lang.NullPointerException
+[Tue Apr 09 11:51:20 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Tue Apr 09 11:51:20 ART 2019] EXCEPCION CONTROLADA: Objetos no instanciados, java.lang.NullPointerException
+[Tue Apr 09 11:51:20 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Tue Apr 09 11:51:21 ART 2019] EXCEPCION CONTROLADA: Objetos no instanciados, java.lang.NullPointerException
+[Tue Apr 09 11:51:21 ART 2019] EXCEPCION CONTROLADA: (parada de emergencia) Objetos no instanciados, error: java.lang.NullPointerException
+[Tue Apr 09 11:51:21 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:51:21 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 875x437
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 873x429
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 873x429
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 824x344
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 824x344
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 824x344
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 824x344
+[Tue Apr 09 11:51:23 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 660x355
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 660x355
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 660x355
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 660x355
+[Tue Apr 09 11:51:25 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 515x359
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 515x359
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 515x359
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 515x359
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 723x353
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 723x353
+[Tue Apr 09 11:51:26 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 555x363
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 555x363
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 555x363
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 555x363
+[Tue Apr 09 11:51:27 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:28 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 429x377
+[Tue Apr 09 11:51:28 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:28 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 429x377
+[Tue Apr 09 11:51:28 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 385x342
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 385x340
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 385x340
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 385x340
+[Tue Apr 09 11:51:29 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:30 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 227x347
+[Tue Apr 09 11:51:30 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 227x347
+[Tue Apr 09 11:51:30 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 227x347
+[Tue Apr 09 11:51:30 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 227x347
+[Tue Apr 09 11:51:32 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:51:32 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:51:36 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 659x349
+[Tue Apr 09 11:51:36 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 699x368
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 699x368
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 699x368
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 699x368
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:51:41 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:43 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:51:43 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:51:46 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 565x413
+[Tue Apr 09 11:51:46 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:46 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 563x404
+[Tue Apr 09 11:51:46 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:46 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 562x397
+[Tue Apr 09 11:51:46 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 510x288
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 510x288
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 510x288
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 510x288
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 682x285
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 682x285
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 682x285
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 682x285
+[Tue Apr 09 11:51:47 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 817x282
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 817x282
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 817x282
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 817x282
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 876x279
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 877x280
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 877x280
+[Tue Apr 09 11:51:48 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 877x280
+[Tue Apr 09 11:51:49 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 729x308
+[Tue Apr 09 11:51:49 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:49 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 729x308
+[Tue Apr 09 11:51:49 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 648x335
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 648x335
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 648x335
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 648x335
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 795x370
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 795x370
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 795x370
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 795x370
+[Tue Apr 09 11:51:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:51:51 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 906x383
+[Tue Apr 09 11:51:51 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 906x383
+[Tue Apr 09 11:51:51 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 906x383
+[Tue Apr 09 11:51:51 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 906x383
+[Tue Apr 09 11:51:54 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:51:54 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:52:05 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:52:05 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:52:06 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 597x350
+[Tue Apr 09 11:52:06 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:06 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 597x350
+[Tue Apr 09 11:52:06 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 773x331
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 773x331
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 773x331
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 773x331
+[Tue Apr 09 11:52:07 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:09 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 895x402
+[Tue Apr 09 11:52:09 ART 2019] CONFIG: Guns seleccionado, Coordenadas: 885x400
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 593x362
+[Tue Apr 09 11:52:11 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:52:16 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:52:16 ART 2019] STATUS: Reintentando en 10 segundos...

@@ -28,7 +28,12 @@ public class CoverStartStop extends javax.swing.JFrame {
 
     public void showGametime(int juegoSeleccionado) {
         this.jLabel4.setText("Seleccione un Juego, Pase la tarjeta tantas veces como personas desean jugar y toque \"Jugar\". Juego Seleccionado: '" + JUEGOS[juegoSeleccionado] + "' Tiempo de Asignado: " + TIEMPO_DE_JUEGO_MINUTOS + "min.");
-        this.requestFocus();
+    }
+
+    public void enfocar() {
+        if (!this.isFocusOwner()) {
+            this.requestFocus();
+        }
     }
 
     public void Hide() {

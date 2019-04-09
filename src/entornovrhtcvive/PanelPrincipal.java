@@ -42,6 +42,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
     SelectorJuegoListener juegoSeleccionado;
     private final ArrayList<Cover> covers;
     private final CoverStartStop coverStarStop;
+    private final CoverGames coverGames;
     public static ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
 
     public int getCreditos() {
@@ -62,7 +63,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
         initComponents();
         covers = new ArrayList<Cover>();
         coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
-        juegoSeleccionado = new SelectorJuegoListener(this.coverStarStop);
+        coverGames = new CoverGames();
+        juegoSeleccionado = new SelectorJuegoListener(this.coverStarStop, this.coverGames);
         scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
         cmbJugadoresHabilitados.addItemListener(new ItemListener() {

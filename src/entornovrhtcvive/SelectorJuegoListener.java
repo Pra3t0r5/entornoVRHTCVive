@@ -22,6 +22,7 @@ import java.util.logging.Logger;
  */
 public class SelectorJuegoListener {
 
+    public static final int[][] GAMEPORTRAITSAREA = {{88, 253}, {951, 440}};
     public static final int[][] GAMEPORTRAIT1 = {{88, 253}, {202, 440}}; //x0,y0 - x1,y1
     public static final int[][] GAMEPORTRAIT2 = {{212, 253}, {328, 440}};
     public static final int[][] GAMEPORTRAIT3 = {{337, 253}, {452, 440}};
@@ -30,12 +31,14 @@ public class SelectorJuegoListener {
     public static final int[][] GAMEPORTRAIT6 = {{711, 253}, {826, 440}};
     public static final int[][] GAMEPORTRAIT7 = {{835, 253}, {951, 440}};
     public static CoverStartStop coverStartStop;
-    private static int[] coordenadasUltimoJuegoSeleccionado = {0, 0};
-    private static int ultimoJuegoSeleccionado = 0;
+    public static CoverGames coverJuegos;
+    private static int[] coordenadasUltimoJuegoSeleccionado = {500, 350};
+    private static int ultimoJuegoSeleccionado = 4;
 
-    public SelectorJuegoListener(CoverStartStop coverStarStop) {
+    public SelectorJuegoListener(CoverStartStop coverStarStop, CoverGames coverGames) {
         Toolkit.getDefaultToolkit().addAWTEventListener(new SelectorJuegoListener.mouseClickListener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
         coverStartStop = coverStarStop;
+        coverJuegos = coverGames;
     }
 
     public static class mouseClickListener implements AWTEventListener {
@@ -44,11 +47,10 @@ public class SelectorJuegoListener {
         public void eventDispatched(AWTEvent event) {
             int x = (int) MouseInfo.getPointerInfo().getLocation().getX();
             int y = (int) MouseInfo.getPointerInfo().getLocation().getY();
-            int juegoSeleccionado = getClickCoordinates(x, y);
+            int juegoSeleccionado = getGameClicked(x, y);
 
             if (PanelPrincipal.btnJugar.isEnabled()) {
-                if (juegoSeleccionado == 0) {
-                } else {
+                if (juegoSeleccionado != 0) {
                     switch (juegoSeleccionado) {
                         case 1:
                             System.out.println("CONFIG: " + JUEGOS[juegoSeleccionado] + " seleccionado, cambiado tiempo de juego a: " + TIEMPO_DE_JUEGO_MINUTOS + "min.");
@@ -85,7 +87,9 @@ public class SelectorJuegoListener {
                     coverStartStop.showGametime(juegoSeleccionado);
                     coordenadasUltimoJuegoSeleccionado[0] = x;
                     coordenadasUltimoJuegoSeleccionado[1] = y;
-                    ultimoJuegoSeleccionado = getClickCoordinates(coordenadasUltimoJuegoSeleccionado[0], coordenadasUltimoJuegoSeleccionado[1]);
+                    ultimoJuegoSeleccionado = getGameClicked(coordenadasUltimoJuegoSeleccionado[0], coordenadasUltimoJuegoSeleccionado[1]);
+                } else {
+                    coverStartStop.showGametime(ultimoJuegoSeleccionado);
                 }
             } else {
                 if (juegoSeleccionado != ultimoJuegoSeleccionado) {
@@ -98,9 +102,10 @@ public class SelectorJuegoListener {
                     }
                 }
             }
+            coverStartStop.enfocar();
         }
 
-        public static int getClickCoordinates(int x, int y) {
+        public static int getGameClicked(int x, int y) {
             if (x > GAMEPORTRAIT1[0][0] && x < GAMEPORTRAIT1[1][0] && y > GAMEPORTRAIT1[0][1] && y < GAMEPORTRAIT1[1][1]) {
                 return 1;
             } else if (x > GAMEPORTRAIT2[0][0] && x < GAMEPORTRAIT2[1][0] && y > GAMEPORTRAIT2[0][1] && y < GAMEPORTRAIT2[1][1]) {

@@ -1,0 +1,35 @@
+[Tue Apr 09 11:55:59 ART 2019] //////////////////Iniciado Servidor VR v20190308//////////////////
+[Tue Apr 09 11:55:59 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Tue Apr 09 11:55:59 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Tue Apr 09 11:55:59 ART 2019] CONFIG: 4 Jugadores
+[Tue Apr 09 11:55:59 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:00 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Tue Apr 09 11:56:01 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Tue Apr 09 11:56:01 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Tue Apr 09 11:56:01 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 303x262
+[Tue Apr 09 11:56:01 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 303x262
+[Tue Apr 09 11:56:01 ART 2019] CONFIG: War Zombies seleccionado, Coordenadas: 303x262
+[Tue Apr 09 11:56:01 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:56:01 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:56:02 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 652x358
+[Tue Apr 09 11:56:02 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:02 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 652x358
+[Tue Apr 09 11:56:02 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:08 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 465x352
+[Tue Apr 09 11:56:08 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:08 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 465x352
+[Tue Apr 09 11:56:08 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:13 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:56:13 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 11:56:14 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 685x407
+[Tue Apr 09 11:56:14 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:14 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 684x369
+[Tue Apr 09 11:56:14 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:14 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 684x369
+[Tue Apr 09 11:56:14 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:22 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 554x295
+[Tue Apr 09 11:56:22 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:22 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 554x295
+[Tue Apr 09 11:56:22 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 11:56:24 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 11:56:24 ART 2019] STATUS: Reintentando en 10 segundos...

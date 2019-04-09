@@ -1,0 +1,44 @@
+[Tue Apr 09 12:10:39 ART 2019] //////////////////Iniciado Servidor VR v20190308//////////////////
+[Tue Apr 09 12:10:39 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Tue Apr 09 12:10:39 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Tue Apr 09 12:10:39 ART 2019] CONFIG: 4 Jugadores
+[Tue Apr 09 12:10:39 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 401x328
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 401x328
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 401x328
+[Tue Apr 09 12:10:40 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:41 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 12:10:41 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 12:10:50 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 498x416
+[Tue Apr 09 12:10:50 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:51 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 782x348
+[Tue Apr 09 12:10:51 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:51 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 782x348
+[Tue Apr 09 12:10:51 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:52 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 12:10:52 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 12:10:55 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 759x315
+[Tue Apr 09 12:10:55 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:55 ART 2019] CONFIG: BellyBots seleccionado, Coordenadas: 759x315
+[Tue Apr 09 12:10:55 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:56 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 670x291
+[Tue Apr 09 12:10:56 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:56 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 597x383
+[Tue Apr 09 12:10:56 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:57 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 493x325
+[Tue Apr 09 12:10:57 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:57 ART 2019] CONFIG: Battle Alien seleccionado, Coordenadas: 538x301
+[Tue Apr 09 12:10:57 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:10:57 ART 2019] CONFIG: A-10 seleccionado, Coordenadas: 606x433
+[Tue Apr 09 12:10:57 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue Apr 09 12:11:03 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 12:11:03 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 12:11:14 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue Apr 09 12:11:14 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue Apr 09 12:11:18 ART 2019] CONFIG: Battle Alien 2 Seleccionado, Coordenadas: 400x278
+[Tue Apr 09 12:11:18 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
