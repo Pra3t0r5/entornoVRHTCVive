@@ -30,30 +30,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="coinListener" alignment="0" min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="coinListener" min="-2" pref="6" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="chkAlargarTiempoDeJuego" max="32767" attributes="0"/>
+                  <Component id="txtFieldPasswordServicio" max="32767" attributes="0"/>
+                  <Component id="btnParadaVR" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnServicio" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="chkAlargarTiempoDeJuego" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtFieldPasswordServicio" max="32767" attributes="0"/>
-                              <Component id="btnParadaVR" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnServicio" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="lblJugadoresHabilitados" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cmbJugadoresHabilitados" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="lblJugadoresHabilitados" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmbJugadoresHabilitados" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chkVerInterfaz" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="8" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblTitulo" pref="674" max="32767" attributes="0"/>
@@ -61,7 +54,7 @@
                   </Group>
                   <Component id="lblValorJuego" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="8" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnJugar" pref="197" max="32767" attributes="0"/>
                   <Component id="lblCantJugadasTotal" max="32767" attributes="0"/>
@@ -94,12 +87,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtFieldPasswordServicio" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="coinListener" min="-2" pref="7" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtFieldPasswordServicio" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkVerInterfaz" alignment="1" min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="chkVerInterfaz" alignment="1" min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="coinListener" min="-2" pref="7" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Component id="btnServicio" min="-2" pref="27" max="-2" attributes="0"/>
@@ -112,7 +104,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="chkAlargarTiempoDeJuego" min="-2" pref="15" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -288,6 +280,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkAlargarTiempoDeJuego">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="10" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="EXTENDER PARTIDA"/>
       </Properties>
       <Events>

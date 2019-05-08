@@ -54,7 +54,8 @@ public class EntornoVRHTCVive {
                 /*BackgroundImageJFrame bg = new BackgroundImageJFrame();
                 //bg.add(pnlPpal);
                 
-                bg.setVisible(true);*/
+                bg.setVisible(true);*/            
+                              
 		pnlPpal.setVisible(true);
 
 		//Instancio el Manager del Concentrador de la Placa de Tarjetas
