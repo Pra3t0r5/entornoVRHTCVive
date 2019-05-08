@@ -1,0 +1,16 @@
+[Tue May 07 19:50:38 ART 2019] //////////////////Iniciado Servidor VR v20190308//////////////////
+[Tue May 07 19:50:38 ART 2019] /----------------Interfaz seteada a pantalla n°0------------------
+[Tue May 07 19:50:38 ART 2019] /---------------Programa seteado para 4 Jugadores-----------------
+[Tue May 07 19:50:38 ART 2019] CONFIG: 4 Jugadores
+[Tue May 07 19:50:38 ART 2019] CONFIG: Seteados tiempos estandar de dia de semana
+[Tue May 07 19:50:40 ART 2019] CONFIG: Selected Bounds: 0x600, 1280x133
+[Tue May 07 19:50:40 ART 2019] CONFIG: Tiempo de Juego = 8min
+[Tue May 07 19:50:40 ART 2019] CONFIG: Tiempo de Preparacion = 10seg
+[Tue May 07 19:50:41 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue May 07 19:50:41 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue May 07 19:50:52 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue May 07 19:50:52 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue May 07 19:51:03 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue May 07 19:51:03 ART 2019] STATUS: Reintentando en 10 segundos...
+[Tue May 07 19:51:14 ART 2019] EXCEPTION: Ocurrio un error al conectarse al Socket de la placa de tarjetas: java.net.ConnectException: Connection refused: connect
+[Tue May 07 19:51:14 ART 2019] STATUS: Reintentando en 10 segundos...

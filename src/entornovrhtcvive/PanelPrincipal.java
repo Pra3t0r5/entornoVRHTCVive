@@ -8,7 +8,9 @@ package entornovrhtcvive;
 import static entornovrhtcvive.EntornoVRHTCVive.NUMERO_JUGADORES;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
+import static entornovrhtcvive.VisualStyler.colorBackground;
 import java.awt.AWTException;
+import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
@@ -23,6 +25,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
 
 /**
  * interfaz principal de control de las interfaces de apoyo (bloqueantes y
@@ -32,305 +36,313 @@ import javax.swing.JOptionPane;
  */
 public class PanelPrincipal extends javax.swing.JFrame {
 
-    public static int CREDITOS_DISPONIBLES = 0;
-    public static int CORTESIAS_DISPONIBLES = 0;
-    public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
-    public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 650;
-    private int juegosLanzados = 0;
-    private int juegosLanzadosTotal = 0;
+	public static int CREDITOS_DISPONIBLES = 0;
+	public static int CORTESIAS_DISPONIBLES = 0;
+	public static final long TIEMPO_DE_JUEGO_SEGUNDOS = TIEMPO_DE_JUEGO_MINUTOS * 60;
+	public static final int TIEMPO_DE_DISTANCIAMIENTO_MILISEG = 650;
+	private int juegosLanzados = 0;
+	private int juegosLanzadosTotal = 0;
 
-    private final ArrayList<Cover> covers;
-    private final CoverStartStop coverStarStop;
-    public static ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
+	private final ArrayList<Cover> covers;
+	private final CoverStartStop coverStarStop;
+	public static ArrayList<ScheduledThreadPoolExecutor> scheduled_executors;
 
-    public int getCreditos() {
-        return CREDITOS_DISPONIBLES;
-    }
+	public int getCreditos() {
+		return CREDITOS_DISPONIBLES;
+	}
 
-    public void addCredito() {
-        CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
-        PanelPrincipal.lblValorJuego.setText("CREDITOS = " + PanelPrincipal.CREDITOS_DISPONIBLES);
-        System.out.println("STATUS: CREDITOS DISPONIBLES = " + CREDITOS_DISPONIBLES);
-    }
+	public void addCredito() {
+		CREDITOS_DISPONIBLES = CREDITOS_DISPONIBLES + 1;
+		PanelPrincipal.lblValorJuego.setText("CREDITOS = " + PanelPrincipal.CREDITOS_DISPONIBLES);
+		System.out.println("STATUS: CREDITOS DISPONIBLES = " + CREDITOS_DISPONIBLES);
+	}
 
-    /**
-     * inicializador y reconfigurador de covers (dependiendo de las
-     * interacciones con el control de jugadores habilitados)
-     */
-    public PanelPrincipal() {
-        initComponents();
-        covers = new ArrayList<Cover>();
-        coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
-        scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
+	/**
+	 * inicializador y reconfigurador de covers (dependiendo de las
+	 * interacciones con el control de jugadores habilitados)
+	 */
+	public PanelPrincipal() {
 
-        cmbJugadoresHabilitados.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent event) {
-                if (event.getStateChange() == ItemEvent.SELECTED) {
-                    boolean jugadoresJugando = false;
-                    for (Cover cover : covers) {
-                        if (cover.isRunning()) {
-                            jugadoresJugando = true;
-                        }
-                    }
-                    if (!jugadoresJugando) {
-                        int nroJugadoresHabilitados = Integer.valueOf((String) cmbJugadoresHabilitados.getSelectedItem());
-                        System.out.println("STATUS: Se cambio el numero de jugadores habilitados de '" + NUMERO_JUGADORES + "' a '" + nroJugadoresHabilitados + "'.");
-                        NUMERO_JUGADORES = nroJugadoresHabilitados;
-                        covers.stream().forEach((cover) -> {
-                            if (cover.getPlayer() > nroJugadoresHabilitados) {
-                                cover.setVisible(false);
-                            } else {
-                                cover.setVisible(true);
-                            }
-                        });
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No pueden haber personas jugando.");
-                        System.out.println("STATUS: Se intento cambiar numero de jugadores habilitados mientras habian jugadores en partida.");
-                        cmbJugadoresHabilitados.setSelectedIndex(NUMERO_JUGADORES - 1);
-                    }
-                }
-            }
-        });
-    }
+		inicializarInterfaz();
 
-    /**
-     * Dependiente de la cantidad de PC Jugadores disponibles. Inicializa las
-     * cubiertas bloqueantes de los controles de la interfaz ocultada,
-     * asistiendo a la automatizacion de cada Jugador
-     *
-     * @param jugadores
-     */
-    void inicializarCovers(int jugadores) {
-        for (int i = 0; i < jugadores; i++) {
-            Cover cover = new Cover(i + 1);
-            cover.ShowPnlBlqPlayer();
-            try {
-                covers.add(cover);
-            } catch (Exception ex) {
-                System.out.println("EXCEPCION: " + ex);
-            }
-        }
-    }
+		covers = new ArrayList<Cover>();
+		coverStarStop = new CoverStartStop(EntornoVRHTCVive.PANTALLA_SELECCIONADA);
+		scheduled_executors = new ArrayList<ScheduledThreadPoolExecutor>();
 
-    /**
-     * Metodo primario para el lanzamiento de partidas. Dependiendo de los
-     * CREDITOS_DISPONIBLES lanza 1 a 4 hilos paralelos de ejecucion, los cuales
-     * consisten en 3 etapas temporalmente definidas
-     * (Preparacion-Lanzamiento-Finalizacion). Permitiendo automatizacion sobre
-     * los controles de la interfaz ocultada.
-     *
-     * @throws ParseException
-     */
-    private void jugar() throws ParseException {
+		cmbJugadoresHabilitados.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent event) {
+				if (event.getStateChange() == ItemEvent.SELECTED) {
+					boolean jugadoresJugando = false;
+					for (Cover cover : covers) {
+						if (cover.isRunning()) {
+							jugadoresJugando = true;
+						}
+					}
+					if (!jugadoresJugando) {
+						int nroJugadoresHabilitados = Integer.valueOf((String) cmbJugadoresHabilitados.getSelectedItem());
+						System.out.println("STATUS: Se cambio el numero de jugadores habilitados de '" + NUMERO_JUGADORES + "' a '" + nroJugadoresHabilitados + "'.");
+						NUMERO_JUGADORES = nroJugadoresHabilitados;
+						covers.stream().forEach((cover) -> {
+							if (cover.getPlayer() > nroJugadoresHabilitados) {
+								cover.setVisible(false);
+							} else {
+								cover.setVisible(true);
+							}
+						});
+					} else {
+						JOptionPane.showMessageDialog(null, "No pueden haber personas jugando.");
+						System.out.println("STATUS: Se intento cambiar numero de jugadores habilitados mientras habian jugadores en partida.");
+						cmbJugadoresHabilitados.setSelectedIndex(NUMERO_JUGADORES - 1);
+					}
+				}
+			}
+		});
+	}
 
-        if (CREDITOS_DISPONIBLES <= 0) {
-            CREDITOS_DISPONIBLES = 0;
-            lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
-            System.out.println("STATUS: Se intento jugar sin creditos disponibles.");
-            JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
-        } else if (NUMERO_JUGADORES == juegosLanzados) {
-            System.out.println("STATUS: Se intento jugar con todos los jugadores ocupados en partidas.");
-            JOptionPane.showMessageDialog(null, "Ya estan todos los puestos ocupados, espere a que se desocupen para lanzar nuevas partidas.");
-        } else if (CREDITOS_DISPONIBLES != 0) {
-            for (Cover cover : covers) {
-                if (!cover.isRunning()) {
-                    juegosLanzados++;
-                    cover.setRunning(true);//extraida de setReady porque altera los schedulers
+	private void inicializarInterfaz() throws NumberFormatException {
+		initComponents();
+		this.getContentPane().setBackground(Color.decode(colorBackground));
 
-                    descontarCoins();
+	}
 
-                    final int jugador = cover.getPlayer();
+	/**
+	 * Dependiente de la cantidad de PC Jugadores disponibles. Inicializa las
+	 * cubiertas bloqueantes de los controles de la interfaz ocultada,
+	 * asistiendo a la automatizacion de cada Jugador
+	 *
+	 * @param jugadores
+	 */
+	void inicializarCovers(int jugadores) {
+		for (int i = 0; i < jugadores; i++) {
+			Cover cover = new Cover(i + 1);
+			cover.ShowPnlBlqPlayer();
+			try {
+				covers.add(cover);
+			} catch (Exception ex) {
+				System.out.println("EXCEPCION: " + ex);
+			}
+		}
+	}
 
-                    PanelPrincipal.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-                    PanelPrincipal.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
-                    System.out.println("STATUS: El Jugador " + jugador + " entra en FASE DE PREPARACION.");
-                    bloquearBotones(true);
-                    cover.mostrarTiempoPreparacion();
+	/**
+	 * Metodo primario para el lanzamiento de partidas. Dependiendo de los
+	 * CREDITOS_DISPONIBLES lanza 1 a 4 hilos paralelos de ejecucion, los cuales
+	 * consisten en 3 etapas temporalmente definidas
+	 * (Preparacion-Lanzamiento-Finalizacion). Permitiendo automatizacion sobre
+	 * los controles de la interfaz ocultada.
+	 *
+	 * @throws ParseException
+	 */
+	private void jugar() throws ParseException {
 
-                    ScheduledThreadPoolExecutor executorLanzamiento = new ScheduledThreadPoolExecutor(1);
-                    executorLanzamiento.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
+		if (CREDITOS_DISPONIBLES <= 0) {
+			CREDITOS_DISPONIBLES = 0;
+			lblPaseTarjeta.setText("POR FAVOR PASE LA TARJETA");
+			System.out.println("STATUS: Se intento jugar sin creditos disponibles.");
+			JOptionPane.showMessageDialog(this, "POR FAVOR PASE LA TARJETA PARA JUGAR", "NO HAY CREDITOS", JOptionPane.ERROR_MESSAGE);
+		} else if (NUMERO_JUGADORES == juegosLanzados) {
+			System.out.println("STATUS: Se intento jugar con todos los jugadores ocupados en partidas.");
+			JOptionPane.showMessageDialog(null, "Ya estan todos los puestos ocupados, espere a que se desocupen para lanzar nuevas partidas.");
+		} else if (CREDITOS_DISPONIBLES != 0) {
+			for (Cover cover : covers) {
+				if (!cover.isRunning()) {
+					juegosLanzados++;
+					cover.setRunning(true);//extraida de setReady porque altera los schedulers
 
-                    scheduled_executors.add(executorLanzamiento);
+					descontarCoins();
 
-                    executorLanzamiento.schedule(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                System.out.println("STATUS: jugador " + jugador + " entra en FASE DE LANZAMIENTO.");
+					final int jugador = cover.getPlayer();
 
-                                bloquearBotones(false);
-                                cover.HidePnlBlqPlayer();
-                                cover.setReady();
-                                iniciarJuego();
-                                cover.unTickReady();
-                                cover.ShowPnlBlqPlayer();
+					PanelPrincipal.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+					PanelPrincipal.lblCantJugadasTotal.setText("JUGADAS DE HOY: " + juegosLanzadosTotal);
+					System.out.println("STATUS: El Jugador " + jugador + " entra en FASE DE PREPARACION.");
+					bloquearBotones(true);
+					cover.mostrarTiempoPreparacion();
 
-                                System.out.println("STATUS: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos el jugador " + jugador + " entra en FASE DE DETENCION.");
+					ScheduledThreadPoolExecutor executorLanzamiento = new ScheduledThreadPoolExecutor(1);
+					executorLanzamiento.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
 
-                                final ScheduledThreadPoolExecutor executorFinalizacion = new ScheduledThreadPoolExecutor(1);
-                                executorFinalizacion.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
+					scheduled_executors.add(executorLanzamiento);
 
-                                scheduled_executors.add(executorFinalizacion);
+					executorLanzamiento.schedule(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								System.out.println("STATUS: jugador " + jugador + " entra en FASE DE LANZAMIENTO.");
 
-                                executorFinalizacion.schedule(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            System.out.println("STATUS: jugador " + jugador + " entra en FASE DE DETENCION.");
+								bloquearBotones(false);
+								cover.HidePnlBlqPlayer();
+								cover.setReady();
+								iniciarJuego();
+								cover.unTickReady();
+								cover.ShowPnlBlqPlayer();
 
-                                            cover.HidePnlBlqPlayer();
-                                            cover.setEnded();
-                                            finalizarJuego();
-                                            cover.unTickReady();
-                                            cover.ShowPnlBlqPlayer();
-                                            juegosLanzados--;
-                                            scheduled_executors.remove(executorFinalizacion);
-                                            executorFinalizacion.shutdownNow();
-                                            executorFinalizacion.purge();
+								System.out.println("STATUS: En " + TIEMPO_DE_JUEGO_MINUTOS + " minutos el jugador " + jugador + " entra en FASE DE DETENCION.");
 
-                                            System.out.println("STATUS: jugador " + jugador + " listo para nueva FASE DE PREPARACION.");
+								final ScheduledThreadPoolExecutor executorFinalizacion = new ScheduledThreadPoolExecutor(1);
+								executorFinalizacion.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
 
-                                        } catch (InterruptedException | AWTException ex) {
-                                            System.out.println("EXCEPCION: " + ex);
-                                            Logger.getLogger(PanelPrincipal.class
-                                                    .getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                    }
-                                }, TIEMPO_DE_JUEGO_SEGUNDOS, TimeUnit.SECONDS);
+								scheduled_executors.add(executorFinalizacion);
 
-                                scheduled_executors.remove(executorLanzamiento);
-                                executorLanzamiento.shutdownNow();
-                                executorLanzamiento.purge();
+								executorFinalizacion.schedule(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											System.out.println("STATUS: jugador " + jugador + " entra en FASE DE DETENCION.");
 
-                            } catch (InterruptedException | AWTException ex) {
-                                System.out.println("EXCEPCION: " + ex);
-                                Logger.getLogger(PanelPrincipal.class
-                                        .getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    }, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
-                }
-                try {
-                    Thread.sleep(TIEMPO_DE_DISTANCIAMIENTO_MILISEG);
+											cover.HidePnlBlqPlayer();
+											cover.setEnded();
+											finalizarJuego();
+											cover.unTickReady();
+											cover.ShowPnlBlqPlayer();
+											juegosLanzados--;
+											scheduled_executors.remove(executorFinalizacion);
+											executorFinalizacion.shutdownNow();
+											executorFinalizacion.purge();
 
-                } catch (InterruptedException ex) {
-                    System.out.println("EXCEPCION: " + ex);
-                    Logger.getLogger(PanelPrincipal.class
-                            .getName()).log(Level.SEVERE, null, ex);
-                }
-                if (NUMERO_JUGADORES == juegosLanzados) {
-                    break;
-                }
-                if (CREDITOS_DISPONIBLES == 0) {
-                    break;
-                }
-            }
-        }
-    }
+											System.out.println("STATUS: jugador " + jugador + " listo para nueva FASE DE PREPARACION.");
 
-    /**
-     * Inicia la partida de un jugador puntual aplicando demoras de clicks
-     *
-     */
-    private void iniciarJuego() {
-        coverStarStop.Hide();
-        try {
-            ClickBot.clickStart();
+										} catch (InterruptedException | AWTException ex) {
+											System.out.println("EXCEPCION: " + ex);
+											Logger.getLogger(PanelPrincipal.class
+													.getName()).log(Level.SEVERE, null, ex);
+										}
+									}
+								}, TIEMPO_DE_JUEGO_SEGUNDOS, TimeUnit.SECONDS);
 
-        } catch (AWTException ex) {
-            System.out.println("EXCEPCION: " + ex);
-            Logger.getLogger(PanelPrincipal.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-        ClickBot.syncMainThread();
-        coverStarStop.Show();
-    }
+								scheduled_executors.remove(executorLanzamiento);
+								executorLanzamiento.shutdownNow();
+								executorLanzamiento.purge();
 
-    /**
-     * Frena la partida de un jugador puntual aplicando demoras de clicks
-     */
-    private void finalizarJuego() {
-        coverStarStop.Hide();
-        try {
-            ClickBot.clickStop();
+							} catch (InterruptedException | AWTException ex) {
+								System.out.println("EXCEPCION: " + ex);
+								Logger.getLogger(PanelPrincipal.class
+										.getName()).log(Level.SEVERE, null, ex);
+							}
+						}
+					}, TIEMPO_DE_PREPARACION_SEGUNDOS, TimeUnit.SECONDS);
+				}
+				try {
+					Thread.sleep(TIEMPO_DE_DISTANCIAMIENTO_MILISEG);
 
-        } catch (AWTException ex) {
-            System.out.println("EXCEPCION: " + ex);
-            Logger.getLogger(PanelPrincipal.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-        ClickBot.syncMainThread();
-        coverStarStop.Show();
-    }
+				} catch (InterruptedException ex) {
+					System.out.println("EXCEPCION: " + ex);
+					Logger.getLogger(PanelPrincipal.class
+							.getName()).log(Level.SEVERE, null, ex);
+				}
+				if (NUMERO_JUGADORES == juegosLanzados) {
+					break;
+				}
+				if (CREDITOS_DISPONIBLES == 0) {
+					break;
+				}
+			}
+		}
+	}
 
-    /**
-     * Logica de desconteo de creditos, permite manejar coins fuera del conteo
-     * diario de partidas lanzadas. Manteniendo consistencia de asistencia
-     * contable.
-     */
-    private void descontarCoins() {
-        if (CORTESIAS_DISPONIBLES == 0) {
-            getJugadasHoy();
-        } else {
-            CORTESIAS_DISPONIBLES--;
-            System.out.println("STATUS: CORTESIAS DISPONIBLES = " + CORTESIAS_DISPONIBLES);
-        }
-        CREDITOS_DISPONIBLES--;
-    }
+	/**
+	 * Inicia la partida de un jugador puntual aplicando demoras de clicks
+	 *
+	 */
+	private void iniciarJuego() {
+		coverStarStop.Hide();
+		try {
+			ClickBot.clickStart();
 
-    /**
-     * Por cada juego lanzado, bloquea el boton de Jugar durante el tiempo de
-     * preparacion para evitar conflictos de seleccion de juego (partidas
-     * asincronas paralelas)
-     *
-     * @param bloquear
-     */
-    private void bloquearBotones(boolean bloquear) {
-        if (bloquear) {
-            if (btnJugar.isEnabled()) {
-                btnJugar.setEnabled(false);
-                chkAlargarTiempoDeJuego.setEnabled(false);
-            }
-        } else if (!btnJugar.isEnabled()) {
-            btnJugar.setEnabled(true);
-            chkAlargarTiempoDeJuego.setEnabled(true);
+		} catch (AWTException ex) {
+			System.out.println("EXCEPCION: " + ex);
+			Logger.getLogger(PanelPrincipal.class
+					.getName()).log(Level.SEVERE, null, ex);
+		}
+		ClickBot.syncMainThread();
+		coverStarStop.Show();
+	}
 
-        }
-    }
+	/**
+	 * Frena la partida de un jugador puntual aplicando demoras de clicks
+	 */
+	private void finalizarJuego() {
+		coverStarStop.Hide();
+		try {
+			ClickBot.clickStop();
 
-    /**
-     * Obtiene jugadas de un registro externo, y si el dia registrado coincide
-     * con el actual asiste la sumatoria diaria de partidas lanzadas. Caso
-     * contrario la reinicia.
-     */
-    private void getJugadasHoy() {
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date hoy = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
-            juegosLanzadosTotal = Integer.parseInt(Archivo.leer(hoy));
-            juegosLanzadosTotal++;
-            String jugadasString = Integer.toString(juegosLanzadosTotal);
-            Archivo.escribir(jugadasString, hoy);
-        } catch (NumberFormatException ep) {
-            JOptionPane.showMessageDialog(null, "Inconsistencia en la base de datos");
-            System.out.println("ERROR: Inconsistencia en la base de datos");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error");
-        }
-    }
+		} catch (AWTException ex) {
+			System.out.println("EXCEPCION: " + ex);
+			Logger.getLogger(PanelPrincipal.class
+					.getName()).log(Level.SEVERE, null, ex);
+		}
+		ClickBot.syncMainThread();
+		coverStarStop.Show();
+	}
+
+	/**
+	 * Logica de desconteo de creditos, permite manejar coins fuera del conteo
+	 * diario de partidas lanzadas. Manteniendo consistencia de asistencia
+	 * contable.
+	 */
+	private void descontarCoins() {
+		if (CORTESIAS_DISPONIBLES == 0) {
+			getJugadasHoy();
+		} else {
+			CORTESIAS_DISPONIBLES--;
+			System.out.println("STATUS: CORTESIAS DISPONIBLES = " + CORTESIAS_DISPONIBLES);
+		}
+		CREDITOS_DISPONIBLES--;
+	}
+
+	/**
+	 * Por cada juego lanzado, bloquea el boton de Jugar durante el tiempo de
+	 * preparacion para evitar conflictos de seleccion de juego (partidas
+	 * asincronas paralelas)
+	 *
+	 * @param bloquear
+	 */
+	private void bloquearBotones(boolean bloquear) {
+		if (bloquear) {
+			if (btnJugar.isEnabled()) {
+				btnJugar.setEnabled(false);
+				chkAlargarTiempoDeJuego.setEnabled(false);
+			}
+		} else if (!btnJugar.isEnabled()) {
+			btnJugar.setEnabled(true);
+			chkAlargarTiempoDeJuego.setEnabled(true);
+
+		}
+	}
+
+	/**
+	 * Obtiene jugadas de un registro externo, y si el dia registrado coincide
+	 * con el actual asiste la sumatoria diaria de partidas lanzadas. Caso
+	 * contrario la reinicia.
+	 */
+	private void getJugadasHoy() {
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date hoy = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
+			juegosLanzadosTotal = Integer.parseInt(Archivo.leer(hoy));
+			juegosLanzadosTotal++;
+			String jugadasString = Integer.toString(juegosLanzadosTotal);
+			Archivo.escribir(jugadasString, hoy);
+		} catch (NumberFormatException ep) {
+			JOptionPane.showMessageDialog(null, "Inconsistencia en la base de datos");
+			System.out.println("ERROR: Inconsistencia en la base de datos");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error");
+		}
+	}
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblValorJuego = new javax.swing.JLabel();
-        lblTitulo = new javax.swing.JLabel();
+        lblTitulo = new entornovrhtcvive.VisualStyler.mdLabel("pri");
         lblPaseTarjeta = new javax.swing.JLabel();
-        btnParadaVR = new javax.swing.JButton();
-        btnServicio = new javax.swing.JButton();
+        btnParadaVR = new entornovrhtcvive.VisualStyler.mdButton("ter");
+        btnServicio = new entornovrhtcvive.VisualStyler.mdButton("sec");
         txtFieldPasswordServicio = new javax.swing.JPasswordField();
         coinListener = new javax.swing.JCheckBox();
-        btnJugar = new javax.swing.JButton();
+        btnJugar = new entornovrhtcvive.VisualStyler.mdButton("pri");
         lblCantJugadasTotal = new javax.swing.JLabel();
         lblJugadoresHabilitados = new javax.swing.JLabel();
         cmbJugadoresHabilitados = new javax.swing.JComboBox<>();
@@ -495,164 +507,164 @@ public class PanelPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
-     * Usado en caso de fallas externas a esta interfaz. Realiza una parada de
-     * emergencia anulando toda ejecucion relativa a TODOS los jugadores,
-     * permitiendo inmediatamente lanzar una nueva partida en limpio
-     *
-     * @param evt
-     */
+	 * Usado en caso de fallas externas a esta interfaz. Realiza una parada de
+	 * emergencia anulando toda ejecucion relativa a TODOS los jugadores,
+	 * permitiendo inmediatamente lanzar una nueva partida en limpio
+	 *
+	 * @param evt
+	 */
     private void btnParadaVRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParadaVRActionPerformed
-        System.out.println("WARNING: Parada de emergencia solicitada.");
+		System.out.println("WARNING: Parada de emergencia solicitada.");
 
-        int response = JOptionPane.showConfirmDialog(null, "Parar todas las partidas?", "Atencion",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.NO_OPTION) {
-            System.out.println("WARNING: Parada de emergencia cancelada.");
-        } else if (response == JOptionPane.YES_OPTION) {
-            System.out.println("WARNING: Parada de emergencia confirmada.");
+		int response = JOptionPane.showConfirmDialog(null, "Parar todas las partidas?", "Atencion",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (response == JOptionPane.NO_OPTION) {
+			System.out.println("WARNING: Parada de emergencia cancelada.");
+		} else if (response == JOptionPane.YES_OPTION) {
+			System.out.println("WARNING: Parada de emergencia confirmada.");
 
-            covers.forEach((cover) -> {
-                if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
-                    try {
-                        try {
-                            cover.cuentaAtrasPreparacion.stop();
-                        } catch (NullPointerException npe) {
-                            try {
-                                cover.cuentaAtrasJuego.stop();
-                            } catch (Exception ex) {
-                                System.out.println("EXCEPCION CONTROLADA: Objetos no instanciados, " + ex);
-                            }
-                        }
-                        cover.HidePnlBlqPlayer();
-                        cover.setEnded();
-                        finalizarJuego();
-                        cover.unTickReady();
-                        cover.ShowPnlBlqPlayer();
-                        juegosLanzados--;
-                    } catch (InterruptedException | AWTException ex) {
-                        Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            for (ScheduledThreadPoolExecutor executor : scheduled_executors) {
-                executor.shutdownNow();
-                executor.purge();
+			covers.forEach((cover) -> {
+				if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
+					try {
+						try {
+							cover.cuentaAtrasPreparacion.stop();
+						} catch (NullPointerException npe) {
+							try {
+								cover.cuentaAtrasJuego.stop();
+							} catch (Exception ex) {
+								System.out.println("EXCEPCION CONTROLADA: Objetos no instanciados, " + ex);
+							}
+						}
+						cover.HidePnlBlqPlayer();
+						cover.setEnded();
+						finalizarJuego();
+						cover.unTickReady();
+						cover.ShowPnlBlqPlayer();
+						juegosLanzados--;
+					} catch (InterruptedException | AWTException ex) {
+						Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+					}
+				}
+			});
+			for (ScheduledThreadPoolExecutor executor : scheduled_executors) {
+				executor.shutdownNow();
+				executor.purge();
 
-            }
-            scheduled_executors.clear();
-            bloquearBotones(false);
-        } else if (response == JOptionPane.CLOSED_OPTION) {
-            System.out.println("WARNING: Parada de emergencia anulada.");
-        }
+			}
+			scheduled_executors.clear();
+			bloquearBotones(false);
+		} else if (response == JOptionPane.CLOSED_OPTION) {
+			System.out.println("WARNING: Parada de emergencia anulada.");
+		}
 
 
     }//GEN-LAST:event_btnParadaVRActionPerformed
-    /**
-     * Boton que crea creditos de cortesia (no contabilizadas) con proposito de
-     * pruebas de sistemas
-     *
-     * @param evt
-     */
+	/**
+	 * Boton que crea creditos de cortesia (no contabilizadas) con proposito de
+	 * pruebas de sistemas
+	 *
+	 * @param evt
+	 */
     private void btnServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicioActionPerformed
-        if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            System.out.println("STATUS: Credito de Servicio/Cortesia detectado.");
-            this.addCredito();
-            CORTESIAS_DISPONIBLES++;
-            this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
-        } else {
-            JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
-            System.out.println("WARNING: Se intento asignar coins de cortesia sin contraseña correcta.");
-        }
+		if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
+			System.out.println("STATUS: Credito de Servicio/Cortesia detectado.");
+			this.addCredito();
+			CORTESIAS_DISPONIBLES++;
+			this.lblValorJuego.setText("CREDITOS = " + CREDITOS_DISPONIBLES);
+		} else {
+			JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
+			System.out.println("WARNING: Se intento asignar coins de cortesia sin contraseña correcta.");
+		}
     }//GEN-LAST:event_btnServicioActionPerformed
-    /**
-     * Checkbox oculto que cumple la funcion de listener de creditos enviados
-     * desde el ConcentradorManager. Dinamiza feedback.
-     *
-     * @param evt
-     */
+	/**
+	 * Checkbox oculto que cumple la funcion de listener de creditos enviados
+	 * desde el ConcentradorManager. Dinamiza feedback.
+	 *
+	 * @param evt
+	 */
     private void coinListenerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coinListenerStateChanged
-        System.out.println("STATUS: Credito recibido.");
-        this.addCredito();
+		System.out.println("STATUS: Credito recibido.");
+		this.addCredito();
     }//GEN-LAST:event_coinListenerStateChanged
-    /**
-     * Prototipo de generacion de coins de cortesia. Deprecado.
-     *
-     * @param evt
-     */
+	/**
+	 * Prototipo de generacion de coins de cortesia. Deprecado.
+	 *
+	 * @param evt
+	 */
     private void txtFieldPasswordServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPasswordServicioKeyPressed
-        /* if (evt.getKeyCode() == KeyEvent.VK_1) {
+		/* if (evt.getKeyCode() == KeyEvent.VK_1) {
             addCREDITOS_DISPONIBLES();
         }*/
     }//GEN-LAST:event_txtFieldPasswordServicioKeyPressed
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        try {
-            jugar();
-        } catch (ParseException ex) {
-            Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		try {
+			jugar();
+		} catch (ParseException ex) {
+			Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }//GEN-LAST:event_btnJugarActionPerformed
-    /**
-     * Permite visualizar la interfaz ocultada con propositos de servicio
-     * tecnico y pruebas del sistema. Dinamizado a la cantidad de players.
-     * Inestable.
-     *
-     * @param evt
-     */
+	/**
+	 * Permite visualizar la interfaz ocultada con propositos de servicio
+	 * tecnico y pruebas del sistema. Dinamizado a la cantidad de players.
+	 * Inestable.
+	 *
+	 * @param evt
+	 */
     private void chkVerInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerInterfazActionPerformed
-        if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
-            if (PanelPrincipal.chkVerInterfaz.isSelected()) {
-                System.out.println("WARNING: Interfaz desactivada.");
-                coverStarStop.setVisible(false);
-                covers.forEach((cover) -> {
-                    cover.setVisible(false);
-                });
-            } else {
-                System.out.println("WARNING: Interfaz activada.");
-                coverStarStop.setVisible(true);
-                covers.forEach((cover) -> {
-                    if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
-                        cover.setVisible(true);
-                    }
-                });
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
-            chkVerInterfaz.setSelected(false);
-        }
+		if (new String(txtFieldPasswordServicio.getPassword()).equals("luismi")) {
+			if (PanelPrincipal.chkVerInterfaz.isSelected()) {
+				System.out.println("WARNING: Interfaz desactivada.");
+				coverStarStop.setVisible(false);
+				covers.forEach((cover) -> {
+					cover.setVisible(false);
+				});
+			} else {
+				System.out.println("WARNING: Interfaz activada.");
+				coverStarStop.setVisible(true);
+				covers.forEach((cover) -> {
+					if (cover.getPlayer() < NUMERO_JUGADORES + 1) {
+						cover.setVisible(true);
+					}
+				});
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
+			chkVerInterfaz.setSelected(false);
+		}
     }//GEN-LAST:event_chkVerInterfazActionPerformed
 
     private void chkAlargarTiempoDeJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAlargarTiempoDeJuegoActionPerformed
-        if (chkAlargarTiempoDeJuego.isSelected()) {
-            TIEMPO_DE_JUEGO_MINUTOS = 10;
-            System.out.println("CONFIG: Se alargo el tiempo de juego a 10 Minutos");
-        } else {
-            entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
-        }
+		if (chkAlargarTiempoDeJuego.isSelected()) {
+			TIEMPO_DE_JUEGO_MINUTOS = 10;
+			System.out.println("CONFIG: Se alargo el tiempo de juego a 10 Minutos");
+		} else {
+			entornovrhtcvive.EntornoVRHTCVive.configurarTiemposDeJuego();
+		}
     }//GEN-LAST:event_chkAlargarTiempoDeJuegoActionPerformed
 
-    /**
-     * Permite elegir en que monitor mostrar la interfaz y ajusta
-     * automaticamente las dimensiones en relacion a la cantidad de monitores.
-     * Funcionalidad original Deprecada.
-     *
-     * @author fernando
-     * @param screen
-     * @param frame
-     */
-    public static void showOnScreen(int screen, JFrame frame) {
-        int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
+	/**
+	 * Permite elegir en que monitor mostrar la interfaz y ajusta
+	 * automaticamente las dimensiones en relacion a la cantidad de monitores.
+	 * Funcionalidad original Deprecada.
+	 *
+	 * @author fernando
+	 * @param screen
+	 * @param frame
+	 */
+	public static void showOnScreen(int screen, JFrame frame) {
+		int x0 = 0, x1 = 0, y0 = 0, y1 = 0;
 
-        x0 = 0;
-        y0 = 600;
-        x1 = 1280;
-        y1 = 133;
-        System.out.println("CONFIG: Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
-        //BOUNDS:0x600;1280x133
+		x0 = 0;
+		y0 = 600;
+		x1 = 1280;
+		y1 = 133;
+		System.out.println("CONFIG: Selected Bounds: " + x0 + "x" + y0 + ", " + x1 + "x" + y1);
+		//BOUNDS:0x600;1280x133
 
-        frame.setBounds(x0, y0, x1, y1);
-        frame.setSize(x1, y1);
-    }
+		frame.setBounds(x0, y0, x1, y1);
+		frame.setSize(x1, y1);
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnJugar;
     private javax.swing.JButton btnParadaVR;

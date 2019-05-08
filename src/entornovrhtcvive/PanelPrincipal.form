@@ -138,6 +138,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="SISTEMA DE REALIDAD VIRTUAL DE CRUCIJUEGOS"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdLabel(&quot;pri&quot;)"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPaseTarjeta">
       <Properties>
@@ -167,6 +170,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParadaVRActionPerformed"/>
       </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdButton(&quot;ter&quot;)"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
@@ -177,6 +181,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnServicioActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdButton(&quot;sec&quot;)"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtFieldPasswordServicio">
       <Events>
@@ -215,6 +222,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJugarActionPerformed"/>
       </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdButton(&quot;pri&quot;)"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
