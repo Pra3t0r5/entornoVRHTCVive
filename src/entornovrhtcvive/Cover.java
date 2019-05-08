@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import static entornovrhtcvive.EntornoVRHTCVive.PANTALLA_SELECCIONADA;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_JUEGO_MINUTOS;
 import static entornovrhtcvive.EntornoVRHTCVive.TIEMPO_DE_PREPARACION_SEGUNDOS;
+import static entornovrhtcvive.VisualStyler.colorBackground;
 import java.awt.AWTException;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
@@ -49,7 +51,8 @@ public class Cover extends javax.swing.JFrame {
     }
 
     public Cover(int player) {
-        initComponents();
+        initComponents();        
+        setBackground(Color.decode(colorBackground));
         this.player = player;
         blqReadyOfPlayer();
         cuentaAtrasJuego = null;
@@ -224,8 +227,8 @@ public class Cover extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblEstadoJugador = new javax.swing.JLabel();
-        lblTemporizador = new javax.swing.JLabel();
+        lblEstadoJugador = new entornovrhtcvive.VisualStyler.mdLabel("con");
+        lblTemporizador = new entornovrhtcvive.VisualStyler.mdLabel("con");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -233,11 +236,11 @@ public class Cover extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(0, 600));
 
-        lblEstadoJugador.setFont(new java.awt.Font("Liberation Sans Narrow", 1, 13)); // NOI18N
+        lblEstadoJugador.setFont(entornovrhtcvive.VisualStyler.RobotoSmall);
         lblEstadoJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEstadoJugador.setText("JUGADORES BLOQUEADOS");
 
-        lblTemporizador.setFont(new java.awt.Font("Liberation Sans", 1, 10)); // NOI18N
+        lblTemporizador.setFont(entornovrhtcvive.VisualStyler.RobotoTiny);
         lblTemporizador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTemporizador.setText("Pase tarjeta para jugar.");
 
@@ -245,21 +248,15 @@ public class Cover extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEstadoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(lblEstadoJugador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+            .addComponent(lblTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblEstadoJugador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTemporizador)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(lblEstadoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblTemporizador, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

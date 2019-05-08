@@ -5,6 +5,7 @@
  */
 package entornovrhtcvive;
 
+import entornovrhtcvive.VisualStyler.*;
 import java.util.Calendar;
 
 /**
@@ -50,6 +51,10 @@ public class EntornoVRHTCVive {
 		PanelPrincipal pnlPpal = new PanelPrincipal();
 		pnlPpal.setLocationRelativeTo(null);
 		PanelPrincipal.showOnScreen(PANTALLA_SELECCIONADA, pnlPpal);
+                /*BackgroundImageJFrame bg = new BackgroundImageJFrame();
+                //bg.add(pnlPpal);
+                
+                bg.setVisible(true);*/
 		pnlPpal.setVisible(true);
 
 		//Instancio el Manager del Concentrador de la Placa de Tarjetas

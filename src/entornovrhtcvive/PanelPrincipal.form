@@ -44,8 +44,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                   <Component id="lblJugadoresHabilitados" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="cmbJugadoresHabilitados" min="-2" pref="41" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cmbJugadoresHabilitados" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -128,6 +128,7 @@
         <Property name="text" type="java.lang.String" value="1 CREDITO = 1 JUEGO"/>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdLabel(&quot;sec&quot;)"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
@@ -150,6 +151,7 @@
         <Property name="text" type="java.lang.String" value="POR FAVOR PASE LA TARJETA"/>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdLabel(&quot;sec&quot;)"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
@@ -231,6 +233,7 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdLabel(&quot;ter&quot;)"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
     </Component>
@@ -239,9 +242,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Carlito" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Jugadores Habilitados"/>
+        <Property name="text" type="java.lang.String" value="JUGADORES HAB."/>
         <Property name="name" type="java.lang.String" value="lblJugadoresHabilitados" noResource="true"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new entornovrhtcvive.VisualStyler.mdLabel(&quot;con&quot;)"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbJugadoresHabilitados">
       <Properties>
@@ -282,7 +288,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkAlargarTiempoDeJuego">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Alargar Tiempo de Juego"/>
+        <Property name="text" type="java.lang.String" value="EXTENDER PARTIDA"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkAlargarTiempoDeJuegoActionPerformed"/>
