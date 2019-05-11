@@ -335,9 +335,9 @@ public class PanelPrincipal extends javax.swing.JFrame {
             Archivo.escribir(jugadasString, hoy);
         } catch (NumberFormatException ep) {
             JOptionPane.showMessageDialog(null, "Inconsistencia en la base de datos");
-            System.out.println("ERROR: Inconsistencia en la base de datos");
+            System.out.println("ERROR: Inconsistencia en la base de datos" + ep);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error" + e);
         }
     }
 
